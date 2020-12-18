@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3">
+    <dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated"
+        generated="true"
+        ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~">
+        <source
+            path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\res" />
+        <source
+            path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\build\generated\res\rs\debug" />
+        <source
+            path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\build\generated\res\resValues\debug" />
+    </dataSet>
+    <dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main"
+        generated-set="main$Generated"
+        ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~">
+        <source
+            path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\res">
+            <file name="et_cursor"
+                path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\res\drawable\et_cursor.xml"
+                qualifiers="" type="drawable" />
+            <file name="et_login_code"
+                path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\res\drawable\et_login_code.xml"
+                qualifiers="" type="drawable" />
+            <file name="login_button_border"
+                path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\res\drawable\login_button_border.xml"
+                qualifiers="" type="drawable" />
+            <file name="login_activity"
+                path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\res\layout\login_activity.xml"
+                qualifiers="" type="layout" />
+            <file name="verify_code_layout"
+                path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\res\layout\verify_code_layout.xml"
+                qualifiers="" type="layout" />
+            <file
+                path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\res\values\attrs.xml"
+                qualifiers="">
+                <declare-styleable name="vericationCodeView">
+
+                    <attr format="integer" name="vcv_et_number" />
+
+                    <attr name="vcv_et_inputType">
+                        <enum name="number" value="0" />
+                        <enum name="numberPassword" value="1" />
+                        <enum name="text" value="2" />
+                        <enum name="textPassword" value="3" />
+                    </attr>
+
+                    <attr format="dimension|reference" name="vcv_et_width" />
+
+                    <attr format="color|reference" name="vcv_et_text_color" />
+
+                    <attr format="dimension|reference" name="vcv_et_text_size" />
+
+                    <attr format="reference" name="vcv_et_bg" />
+
+                    <attr format="reference" name="vcv_et_cursor" />
+
+                    <attr format="boolean" name="vcv_et_cursor_visible" />
+
+                    <attr format="dimension|reference" name="vcv_et_spacing" />
+
+                </declare-styleable>
+            </file>
+            <file
+                path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\res\values\colors.xml"
+                qualifiers="">
+                <color name="colorActivityBackground">#ffffff</color>
+                <color name="colorWhite">#ffffff</color>
+                <color name="login_color_btn_enable">#FF0062E3</color>
+                <color name="login_color_btn_disable">#FF092650</color>
+            </file>
+            <file
+                path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\res\values\strings.xml"
+                qualifiers="">
+                <string name="login_btn_login">登录</string>
+            </file>
+        </source>
+        <source
+            path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\build\generated\res\rs\debug" />
+        <source
+            path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\build\generated\res\resValues\debug" />
+    </dataSet>
+    <dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated"
+        generated="true"
+        ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~">
+        <source
+            path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\debug\res" />
+    </dataSet>
+    <dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug"
+        generated-set="debug$Generated"
+        ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~">
+        <source
+            path="D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\debug\res" />
+    </dataSet>
+    <mergedItems>
+        <configuration qualifiers="">
+            <declare-styleable name="vericationCodeView">
+
+                <attr format="integer" name="vcv_et_number" />
+
+                <attr name="vcv_et_inputType">
+                    <enum name="number" value="0" />
+                    <enum name="numberPassword" value="1" />
+                    <enum name="text" value="2" />
+                    <enum name="textPassword" value="3" />
+                </attr>
+
+                <attr format="dimension|reference" name="vcv_et_width" />
+
+                <attr format="color|reference" name="vcv_et_text_color" />
+
+                <attr format="dimension|reference" name="vcv_et_text_size" />
+
+                <attr format="reference" name="vcv_et_bg" />
+
+                <attr format="reference" name="vcv_et_cursor" />
+
+                <attr format="boolean" name="vcv_et_cursor_visible" />
+
+                <attr format="dimension|reference" name="vcv_et_spacing" />
+
+            </declare-styleable>
+        </configuration>
+    </mergedItems>
+</merger>

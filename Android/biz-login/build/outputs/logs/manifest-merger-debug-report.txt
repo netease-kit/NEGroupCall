@@ -1,0 +1,59 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:1:1-18:12
+INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:1:1-18:12
+INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:1:1-18:12
+INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:1:1-18:12
+INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:1:1-18:12
+INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:1:1-18:12
+INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:1:1-18:12
+	package
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:2:5-45
+		INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+		INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:1:1-18:12
+		INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:1:1-18:12
+		INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:1:11-69
+application
+ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:4:5-16:19
+activity#com.netease.yunxin.nertc.demo.login.ui.LoginActivity
+ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:5:9-9:55
+	android:screenOrientation
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:8:13-49
+	android:launchMode
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:9:13-43
+	android:theme
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:7:13-63
+	android:name
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:6:13-80
+activity#com.netease.yunxin.nertc.demo.login.ui.VerifyCodeActivity
+ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:11:9-15:55
+	android:screenOrientation
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:14:13-49
+	android:launchMode
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:15:13-43
+	android:theme
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:13:13-63
+	android:name
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml:12:13-85
+uses-sdk
+INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+		INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+		ADDED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
+		INJECTED from D:\github\Georgedamu\NEVideoCall-1to1\NLiteAVDemo-Android-Java\biz-login\src\main\AndroidManifest.xml
