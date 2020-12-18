@@ -1,0 +1,17 @@
+<resources>
+    <string name="room_name_can_not_null">房间号不能为空</string>
+
+    <string name="sdk_init_failed">SDK初始化失败</string>
+
+    <string name="join_channel">加入频道</string>
+
+    <string name="input_same_channel_name_and_start_dialog">输入相同房间号即可通话</string>
+
+    <string name="input_nickname">输入昵称</string>
+    <string name="how_about_call">通话品质如何？</string>
+    <string name="what_issue_happen">很抱歉给您带来的不便～ 请问您具体遇到了什么问题？</string>
+    <string name="good">好</string>
+    <string name="bad">差</string>
+    <string name="other_question">其他问题...</string>
+    <string name="submit">提交</string>
+</resources>

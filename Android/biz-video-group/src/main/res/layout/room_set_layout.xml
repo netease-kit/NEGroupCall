@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/channel_join_bg">
+
+    <RelativeLayout
+        android:id="@+id/rly_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:paddingStart="@dimen/dp_12">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dp_10"
+            android:layout_height="@dimen/dp_16"
+            android:src="@drawable/light_back_arrow" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/text_size_17"
+            android:textColor="@color/colorWhite"
+            android:text="@string/join_channel" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et_room_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/et_input_bg"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:textColorHint="@color/half_transparent_colorWhite"
+        android:paddingStart="@dimen/dp_16"
+        android:textSize="@dimen/text_size_14"
+        android:hint="@string/input_same_channel_name_and_start_dialog"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:inputType="number"
+        android:maxLength="12"
+        android:layout_below="@+id/rly_title" />
+
+    <EditText
+        android:id="@+id/et_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/et_input_bg"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:textColorHint="@color/half_transparent_colorWhite"
+        android:paddingStart="@dimen/dp_16"
+        android:textSize="@dimen/text_size_14"
+        android:hint="@string/input_nickname"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:maxLength="12"
+        android:inputType="text"
+        android:layout_below="@+id/et_room_name" />
+
+    <Button
+        android:id="@+id/btn_enter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/join_channel"
+        android:textColor="@color/colorWhite"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:background="@drawable/join_button_border"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

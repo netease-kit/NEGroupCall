@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorActivityBackground">#ffffff</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="half_transparent_colorWhite">#80ffffff</color>
+    <color name="login_color_btn_enable">#FF0062E3</color>
+    <color name="login_color_btn_disable">#FF092650</color>
+    <color name="uncheck_color">#2e000000</color>
+    <color name="checked_color">#337EFF</color>
+</resources>

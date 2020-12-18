@@ -1,0 +1,60 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.netease.yunxin.nertc.demo"
+
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            rootProject.ext.ndkAbis.each { abi ->
+                abiFilter(abi)
+            }
+        }
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+    }
+    
+
+    buildTypes {
+        release {
+            minifyEnabled false
+//            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        buildConfigField "String", "VERSION_IM", "\"${rootProject.ext.nimVersion}\""
+        buildConfigField "String", "VERSION_NERTC", "\"${rootProject.ext.nertcVersion}\""
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation project(':biz-user')
+//    implementation project(':biz-live')
+    implementation project(':lib-basic')
+    implementation project(':lib-picture')
+    implementation project(':base-config')
+    implementation project(':router')
+    implementation project(":biz-video-group")
+
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.google.android.material:material:1.2.1'
+}

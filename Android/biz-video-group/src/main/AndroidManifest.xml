@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.netease.biz_video_group">
+
+    <application>
+        <activity
+            android:name=".yunxin.voideoGroup.ui.VideoRoomSetActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".yunxin.voideoGroup.ui.VideoMeetingRoomActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+    </application>
+
+</manifest>

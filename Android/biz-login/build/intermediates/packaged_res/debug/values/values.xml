@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorActivityBackground">#ffffff</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="login_color_btn_disable">#FF092650</color>
+    <color name="login_color_btn_enable">#FF0062E3</color>
+    <string name="login_btn_login">登录</string>
+    <declare-styleable name="vericationCodeView">
+        <!--输入框的数量-->
+        <attr format="integer" name="vcv_et_number" />
+        <!--输入类型-->
+        <attr name="vcv_et_inputType">
+            <enum name="number" value="0" />
+            <enum name="numberPassword" value="1" />
+            <enum name="text" value="2" />
+            <enum name="textPassword" value="3" />
+        </attr>
+        <!--输入框的宽度-->
+        <attr format="dimension|reference" name="vcv_et_width" />
+        <!--输入框文字颜色-->
+        <attr format="color|reference" name="vcv_et_text_color" />
+        <!--输入框文字大小-->
+        <attr format="dimension|reference" name="vcv_et_text_size" />
+        <!--输入框背景-->
+        <attr format="reference" name="vcv_et_bg" />
+        <!--光标样式-->
+        <attr format="reference" name="vcv_et_cursor" />
+        <!--是否隐藏光标-->
+        <attr format="boolean" name="vcv_et_cursor_visible" />
+        <!--输入框间距，不输入则代表平分-->
+        <attr format="dimension|reference" name="vcv_et_spacing" />
+
+    </declare-styleable>
+</resources>
