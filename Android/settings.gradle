@@ -1,4 +1,4 @@
-rootProject.name = "NERTCScenesDemo"
+rootProject.name = "NERtcBasicScene"
 
 include ':app'
 
