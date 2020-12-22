@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NEJoinWidget</class>
+ <widget class="QMainWindow" name="NEJoinWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>500</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>NEJoinWidget</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">QWidget#centralwidget{
+	background-color: rgb(255, 255, 255);
+}</string>
+   </property>
+   <widget class="QPushButton" name="joinChannel">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>370</y>
+      <width>320</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>320</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>320</width>
+      <height>50</height>
+     </size>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(51, 126, 255);
+border-radius: 25px;
+font-family: PingFangSC-Regular;
+font-size: 16px;
+color: #FFFFFF;</string>
+    </property>
+    <property name="text">
+     <string>加入频道</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblJoinChanel">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>60</y>
+      <width>101</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: PingFangSC-Medium;
+font-size: 24px;
+color: #333333;</string>
+    </property>
+    <property name="text">
+     <string>加入频道</string>
+    </property>
+   </widget>
+   <widget class="MClearLineEdit" name="leRoomID">
+    <property name="geometry">
+     <rect>
+      <x>92</x>
+      <y>154</y>
+      <width>320</width>
+      <height>44</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>320</width>
+      <height>44</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>320</width>
+      <height>44</height>
+     </size>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::StrongFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+font-family: PingFangSC-Regular;
+font-size: 17px;
+color: #B0B6BE;
+border-width: 0px;
+}
+</string>
+    </property>
+    <property name="frame">
+     <bool>false</bool>
+    </property>
+    <property name="placeholderText">
+     <string>输入相同房间号即可通话</string>
+    </property>
+   </widget>
+   <widget class="MClearLineEdit" name="leNickname">
+    <property name="geometry">
+     <rect>
+      <x>91</x>
+      <y>233</y>
+      <width>320</width>
+      <height>44</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>320</width>
+      <height>44</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>320</width>
+      <height>44</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font-family: PingFangSC-Regular;
+font-size: 17px;
+color: #B0B6BE;
+border: 0px;</string>
+    </property>
+    <property name="frame">
+     <bool>false</bool>
+    </property>
+    <property name="placeholderText">
+     <string>输入昵称</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MClearLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">view/MClearLineEdit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
