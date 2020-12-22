@@ -34,5 +34,7 @@
 环境准备
 ---
 
+Windows: Qt5.14.2 + VS2017
 
+MacOS:Qt5.14.2 + XCode
 
