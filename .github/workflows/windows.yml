@@ -38,6 +38,7 @@ jobs:
     env:
       targetName: multipersionCallDemo.exe
       VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'
+      NERTCSDK_URL: https://yx-web-nosdn.netease.im/package/1607656913/NERtc_windows_SDK_v3.8.2.zip?download=NERtc_windows_SDK_v3.8.2.zip
     # 步骤
     steps:
       # 安装Qt
@@ -61,9 +62,10 @@ jobs:
       - name: download sdk
         shell: cmd
         run: |
-            echo "download rtc"
-            curl https://yx-web-nosdn.netease.im/package/1607656913/NERtc_windows_SDK_v3.8.2.zip?download=NERtc_windows_SDK_v3.8.2.zip -o rtc.zip
-            echo "test"
+            echo download rtc
+            curl  NERTCSDK_URL -o nertc_sdk.zip
+            echo start unzip
+            7za x nertc_sdk.zip -r
           
       # 编译msvc
       - name: build-msvc
