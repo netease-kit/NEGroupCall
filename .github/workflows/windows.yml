@@ -65,7 +65,7 @@ jobs:
             echo download rtc
             curl  ${NERTCSDK_URL} -o nertc_sdk.zip
             echo start unzip
-            unzip x nertc_sdk.zip -r
+            unzip  nertc_sdk.zip 
           
       # 编译msvc
       - name: build-msvc
