@@ -19,7 +19,7 @@ function Main() {
 	Copy-Item PC\nertcsample-multipersoncall-QT\nertc_sdk\dll\x86\nertc_sdk.dll $archiveName\
     
     # 拷贝exe
-    Copy-Item PC\nertcsample-multipersoncall-QT\bin\${targetName} ${archiveName} \
+    Copy-Item PC\nertcsample-multipersoncall-QT\bin\$targetName $archiveName\
  
     # 拷贝依赖
     windeployqt --qmldir . --plugindir $archiveName\plugins --no-translations --compiler-runtime $archiveName\$targetName
