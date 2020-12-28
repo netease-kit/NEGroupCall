@@ -45,11 +45,12 @@ jobs:
         shell: cmd
         run: |
             cd PC/nertcsample-multipersoncall-QT
-            chdir
             echo download rtc
             curl  https://yx-web-nosdn.netease.im/package/1607656913/NERtc_windows_SDK_v3.8.2.zip?download=NERtc_windows_SDK_v3.8.2.zip -o nertc_sdk.zip
             echo start unzip
             unzip nertc_sdk.zip
+            echo copy files
+            pwd
             cp  -r nertc_sdk_windows_12111120/api/          nertc_sdk/api/
             cp  -r nertc_sdk_windows_12111120/lib/x86/         nertc_sdk/lib/x86/
             cp  -r nertc_sdk_windows_12111120/dll/x86/         nertc_sdk/lib/dll/
