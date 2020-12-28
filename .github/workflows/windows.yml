@@ -59,7 +59,7 @@ jobs:
             echo copy files
             pwd
             ls
-            mv  nertc_sdk_windows_12111120/*         ./nertc_sdk/
+            mv  nertc_sdk_windows_12111120/*         ./nertc_sdk/   -f
             
             cd nertc_sdk
             ls
