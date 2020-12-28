@@ -38,6 +38,7 @@ jobs:
             echo start unzip
             unzip nertcsdk.zip
             echo copy files
+            rm -fr ./nertc_sdk/mac/*.framework
             mv -f sdk/*         ./nertc_sdk/mac    
             
       - name: build macos
