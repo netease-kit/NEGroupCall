@@ -44,6 +44,7 @@ jobs:
       - name: download sdk
         shell: cmd
         run: |
+            pwd
             cd ./PC/nertcsample-multipersoncall-QT
             echo download rtc
             curl  https://yx-web-nosdn.netease.im/package/1607656913/NERtc_windows_SDK_v3.8.2.zip?download=NERtc_windows_SDK_v3.8.2.zip -o nertc_sdk.zip
