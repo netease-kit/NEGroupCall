@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-10.15]
-        qt_ver: [5.9.9,5.12.10,5.15.2]
+        qt_ver: [5.14.2]
         qt_arch: [clang_64]
     env:
       targetName: multipersionCallDemo
@@ -28,6 +28,19 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
+      
+      # download sdk
+      - name: download sdk
+        shell: cmd
+        run: |
+            cd PC/nertcsample-multipersoncall-QT     
+            echo download rtc
+            curl https://yx-web-nosdn.netease.im/package/1607659210/NERTC_Mac_SDK_v3.8.2.zip?download=NERTC_Mac_SDK_v3.8.2.zip -o nertcsdk.zip
+            echo start unzip
+            unzip nertcsdk.zip
+            echo copy files
+            mv -f sdk/*         ./nertc_sdk/mac    
+            
       - name: build macos
         run: |
           qmake
