@@ -41,18 +41,6 @@ jobs:
     # 步骤
     steps:
          
-      # 安装Qt
-      - name: Install Qt
-        # 使用外部action。这个action专门用来安装Qt
-        uses: jurplel/install-qt-action@v2.10.0
-        with:
-          # Version of Qt to install
-          version: ${{ matrix.qt_ver }}
-          # Target platform for build
-          # target: ${{ matrix.qt_target }}
-          arch: ${{ matrix.qt_arch }}
-          aqtversion: '==0.10.0'
-          cached: 'false'
       # 拉取代码
       - uses: actions/checkout@v1
         with:
@@ -74,8 +62,21 @@ jobs:
             cp  -r nertc_sdk_windows_12111120/api/          ./PC/nertcsample-multipersoncall-QT/nertc_sdk/api/
             cp  -r nertc_sdk_windows_12111120/lib/x86/      ./PC/nertcsample-multipersoncall-QT/nertc_sdk/lib/x86/
             cp  -r nertc_sdk_windows_12111120/dll/x86/      ./PC/nertcsample-multipersoncall-QT/nertc_sdk/lib/dll/
-          
-      # 编译msvc
+         
+       # 安装Qt
+      - name: Install Qt
+        # 使用外部action。这个action专门用来安装Qt
+        uses: jurplel/install-qt-action@v2.10.0
+        with:
+          # Version of Qt to install
+          version: ${{ matrix.qt_ver }}
+          # Target platform for build
+          # target: ${{ matrix.qt_target }}
+          arch: ${{ matrix.qt_arch }}
+          aqtversion: '==0.10.0'
+          cached: 'false'
+      
+        # 编译msvc
       - name: build-msvc
         shell: cmd
         run: |
