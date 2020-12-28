@@ -65,7 +65,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{secrets.GITHUB_TOKEN}}
-          file: bin/${{env.targetName}}.dmg
+          file: ./PC/nertcsample-multipersoncall-QT/bin/${{env.targetName}}.dmg
           asset_name: ${{env.targetName}}_${{matrix.os}}_${{matrix.qt_ver}}.dmg
           tag: ${{ github.ref }}
           overwrite: true
