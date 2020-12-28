@@ -63,9 +63,9 @@ jobs:
         shell: cmd
         run: |
             echo download rtc
-            curl  NERTCSDK_URL -o nertc_sdk.zip
+            curl  ${NERTCSDK_URL} -o nertc_sdk.zip
             echo start unzip
-            7za x nertc_sdk.zip -r
+            unzip x nertc_sdk.zip -r
           
       # 编译msvc
       - name: build-msvc
