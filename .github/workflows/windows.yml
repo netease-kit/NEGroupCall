@@ -96,6 +96,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.package.outputs.packageName }}.zip
-          asset_name: ${{env.targetName}}_${{matrix.os}}_${{matrix.qt_ver}}.dmg
+          asset_name: ${{env.targetName}}_${{matrix.os}}_${{matrix.qt_ver}}.zip
           tag: ${{ github.ref }}
           overwrite: true
