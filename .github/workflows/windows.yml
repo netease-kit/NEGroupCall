@@ -26,7 +26,7 @@ jobs:
             qt_arch_install: msvc2017
           
     env:
-      targetName: multipersionCallDemo.exe
+      targetName: multipersionCallDemo
       VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'
     # 步骤
     steps:
@@ -96,6 +96,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.package.outputs.packageName }}.zip
-          asset_name: ${{ steps.package.outputs.packageName }}.zip
+          asset_name: ${{env.targetName}}_${{matrix.os}}_${{matrix.qt_ver}}.dmg
           tag: ${{ github.ref }}
           overwrite: true
