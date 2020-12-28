@@ -49,7 +49,7 @@ jobs:
             echo download rtc
             curl  https://yx-web-nosdn.netease.im/package/1607656913/NERtc_windows_SDK_v3.8.2.zip?download=NERtc_windows_SDK_v3.8.2.zip -o nertc_sdk.zip
             echo start unzip
-            unzip nertc_sdk.zip -r
+            unzip nertc_sdk.zip
             copy nertc_sdk_windows_12111120\api/*.h          nertc_sdk\api      /y
            
             
