@@ -40,23 +40,7 @@ jobs:
       VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'
     # 步骤
     steps:
-       # download sdk
-      - name: download sdk
-        shell: cmd
-        run: |
-            pwd
-            echo download rtc
-            curl  https://yx-web-nosdn.netease.im/package/1607656913/NERtc_windows_SDK_v3.8.2.zip?download=NERtc_windows_SDK_v3.8.2.zip -o nertc_sdk.zip
-            echo start unzip
-            unzip nertc_sdk.zip
-            echo copy files
-            pwd
-            ls
-            cp  -r nertc_sdk_windows_12111120/api/          ./PC/nertcsample-multipersoncall-QT/nertc_sdk/api/
-            cp  -r nertc_sdk_windows_12111120/lib/x86/      ./PC/nertcsample-multipersoncall-QT/nertc_sdk/lib/x86/
-            cp  -r nertc_sdk_windows_12111120/dll/x86/      ./PC/nertcsample-multipersoncall-QT/nertc_sdk/lib/dll/
-           
-            
+         
       # 安装Qt
       - name: Install Qt
         # 使用外部action。这个action专门用来安装Qt
@@ -74,7 +58,22 @@ jobs:
         with:
           fetch-depth: 1
           
-
+      # download sdk
+      - name: download sdk
+        shell: cmd
+        run: |
+            pwd
+            ls
+            echo download rtc
+            curl  https://yx-web-nosdn.netease.im/package/1607656913/NERtc_windows_SDK_v3.8.2.zip?download=NERtc_windows_SDK_v3.8.2.zip -o nertc_sdk.zip
+            echo start unzip
+            unzip nertc_sdk.zip
+            echo copy files
+            pwd
+            ls
+            cp  -r nertc_sdk_windows_12111120/api/          ./PC/nertcsample-multipersoncall-QT/nertc_sdk/api/
+            cp  -r nertc_sdk_windows_12111120/lib/x86/      ./PC/nertcsample-multipersoncall-QT/nertc_sdk/lib/x86/
+            cp  -r nertc_sdk_windows_12111120/dll/x86/      ./PC/nertcsample-multipersoncall-QT/nertc_sdk/lib/dll/
           
       # 编译msvc
       - name: build-msvc
