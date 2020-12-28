@@ -56,6 +56,15 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
+          
+       # 编译msvc
+      - name: download sdk
+        shell: cmd
+        run: |
+            echo "download rtc"
+            curl https://yx-web-nosdn.netease.im/package/1607656913/NERtc_windows_SDK_v3.8.2.zip?download=NERtc_windows_SDK_v3.8.2.zip -o rtc.zip
+            echo "test"
+          
       # 编译msvc
       - name: build-msvc
         shell: cmd
