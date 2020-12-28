@@ -40,8 +40,7 @@ jobs:
       VCINSTALLDIR: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC'
     # 步骤
     steps:
-      
-           # download sdk
+       # download sdk
       - name: download sdk
         shell: cmd
         run: |
@@ -51,9 +50,9 @@ jobs:
             curl  https://yx-web-nosdn.netease.im/package/1607656913/NERtc_windows_SDK_v3.8.2.zip?download=NERtc_windows_SDK_v3.8.2.zip -o nertc_sdk.zip
             echo start unzip
             unzip nertc_sdk.zip
-            copy nertc_sdk_windows_12111120/api/*.h          nertc_sdk/api      /y
-            copy nertc_sdk_windows_12111120/lib/x86/*.lib    nertc_sdk/lib/x86  /y
-            copy nertc_sdk_windows_12111120/dll/x86/*.dll    nertc_sdk/dll/x86  /y
+            xcopy nertc_sdk_windows_12111120/api/*.h          nertc_sdk/api      /y
+            xcopy nertc_sdk_windows_12111120/lib/x86/*.lib    nertc_sdk/lib/x86  /y
+            xcopy nertc_sdk_windows_12111120/dll/x86/*.dll    nertc_sdk/dll/x86  /y
             
       # 安装Qt
       - name: Install Qt
