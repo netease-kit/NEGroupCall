@@ -31,7 +31,6 @@ jobs:
       
       # download sdk
       - name: download sdk
-        shell: cmd
         run: |
             cd PC/nertcsample-multipersoncall-QT     
             echo download rtc
