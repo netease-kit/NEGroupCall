@@ -42,11 +42,12 @@ jobs:
         run: |
             cd PC/nertcsample-multipersoncall-QT     
             echo download rtc
-            curl  https://yx-web-nosdn.netease.im/package/1607656913/NERtc_windows_SDK_v3.8.2.zip?download=NERtc_windows_SDK_v3.8.2.zip -o nertc_sdk.zip
+            curl  https://yx-web-nosdn.netease.im/package/1607656913/NERtc_windows_SDK_v3.8.2.zip?download=NERtc_windows_SDK_v3.8.2.zip -o nertcsdk.zip
             echo start unzip
-            unzip nertc_sdk.zip
+            unzip nertcsdk.zip
             echo copy files
-            mv  -f nertc_sdk_windows_12111120/*         ./nertc_sdk/    
+            rm -fr nertc_sdk
+            mv -f nertc_sdk_windows_12111120/*         ./nertc_sdk/    
        # 安装Qt
       - name: Install Qt
         # 使用外部action。这个action专门用来安装Qt
