@@ -57,13 +57,9 @@ jobs:
             echo start unzip
             unzip nertc_sdk.zip
             echo copy files
-            pwd
-            ls
-            mv  nertc_sdk_windows_12111120/*         ./nertc_sdk/   -f
-            
+            mv  -f nertc_sdk_windows_12111120/*         ./nertc_sdk/
             cd nertc_sdk
-            ls
-  
+            ls 
          
        # 安装Qt
       - name: Install Qt
