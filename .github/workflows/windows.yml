@@ -99,5 +99,3 @@ jobs:
           asset_name: ${{env.targetName}}_${{matrix.os}}_${{matrix.qt_ver}}.dmg
           tag: ${{ github.ref }}
           overwrite: true
-          
-        
