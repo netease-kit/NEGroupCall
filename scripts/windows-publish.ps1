@@ -12,6 +12,12 @@ Write-Host "scriptDir" $scriptDir
 function Main() {
 
     New-Item -ItemType Directory $archiveName
+    
+    # 拷贝G2
+    Copy-Item PC\nertcsample-multipersoncall-QT\nertc_sdk\dll\x86\SDL2.dll $archiveName\
+	Copy-Item PC\nertcsample-multipersoncall-QT\nertc_sdk\dll\x86\nim_tools_http.dll $archiveName\
+	Copy-Item PC\nertcsample-multipersoncall-QT\nertc_sdk\dll\x86\nertc_sdk.dll $archiveName\
+    
     # 拷贝exe
     Copy-Item PC\nertcsample-multipersoncall-QT\bin\$targetName $archiveName\
  
