@@ -30,7 +30,7 @@ public final class NESdkBase {
         return this;
     }
 
-    public Context getContext() {
+    public Context getContext(){
         return context;
     }
 

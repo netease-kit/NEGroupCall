@@ -22,7 +22,6 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="14dp"
         android:layout_toEndOf="@+id/iv_function_icon"
-        android:text="@string/video_call"
         android:textColor="@color/colorWhite"
         android:textSize="16dp" />
 

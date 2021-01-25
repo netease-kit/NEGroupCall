@@ -2,10 +2,8 @@ package com.netease.yunxin.nertc.demo.utils;
 
 import android.content.Context;
 import android.text.TextUtils;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

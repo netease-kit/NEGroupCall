@@ -3,9 +3,9 @@ package com.netease.yunxin.nertc.demo.basic;
 import android.app.Activity;
 import android.view.View;
 
-import androidx.annotation.ColorRes;
-
 import com.gyf.immersionbar.ImmersionBar;
+
+import androidx.annotation.ColorRes;
 
 /**
  * Created by luc on 2020/11/12.

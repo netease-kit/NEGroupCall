@@ -1,0 +1,23 @@
+<resources>
+    <string name="login_btn_login">登录</string>
+    <string name="load_more">上拉加载更多</string>
+    <string name="have_no_more">没有更多了</string>
+    <string name="filter">滤镜</string>
+    <string name="beauty">美颜</string>
+    <string name="setting">设置</string>
+    <string name="demo_user_warning">本应用为测试产品、请勿商用。单次直播最长10分钟，每个频道最多10人</string>
+    <string name="set_cover">设置封面</string>
+    <string name="beauty_white">美白</string>
+    <string name="beauty_skin">磨皮</string>
+    <string name="thin_face">瘦脸</string>
+    <string name="big_eye">大眼</string>
+    <string name="reset_pre">恢复预设</string>
+    <string name="saturability">饱和度</string>
+    <string name="pull_to_refresh">下拉更新</string>
+    <string name="release_to_refresh">松开更新</string>
+    <string name="refreshing">更新中...</string>
+    <string name="self">我方</string>
+    <string name="other">对方</string>
+    <string name="start_new_live">开启直播间</string>
+    <string name="pk_live">PK直播</string>
+</resources>

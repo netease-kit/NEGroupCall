@@ -1,24 +1,22 @@
-rootProject.name = "NERtcBasicScene"
+rootProject.name = "NERTCScenesDemo"
 
 include ':app'
 
 include ':biz-user'
 include ':biz-video-group'
-//include ':biz-live'
+include ':biz-live'
 
 include ':lib-modularity'
 include ':lib-login'
-include ':lib-network'
 include ':lib-basic'
 include ':lib-utils'
 include ':lib-live'
 include ':lib-beauty-faceunity'
 include ':lib-user'
-include ':lib-picture'
 include ':lib-video-group'
 
 include ':base-config'
 
-include ':router-ani'
-include ':router-compiler'
-include ':router'
+//include ':router-ani'
+//include ':router-compiler'
+//include ':router'

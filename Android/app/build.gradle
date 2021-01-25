@@ -22,12 +22,10 @@ android {
 
         multiDexEnabled true
     }
-    
 
     buildTypes {
         release {
             minifyEnabled false
-//            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -46,14 +44,14 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.netease.yunxin.android.lib:picture:1.0.0-SNAPSHOT'
     implementation project(':biz-user')
-//    implementation project(':biz-live')
+    implementation project(':biz-live')
     implementation project(':lib-basic')
-    implementation project(':lib-picture')
     implementation project(':base-config')
-    implementation project(':router')
     implementation project(":biz-video-group")
 
+    implementation rootProject.ext.utilcodex
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.android.material:material:1.2.1'

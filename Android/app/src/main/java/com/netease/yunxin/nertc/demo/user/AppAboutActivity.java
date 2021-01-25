@@ -26,13 +26,13 @@ public class AppAboutActivity extends BaseActivity {
         close.setOnClickListener(v -> finish());
 
         TextView appVersion = findViewById(R.id.tv_app_version);
-        appVersion.setText("v" + BuildConfig.VERSION_NAME);
+        appVersion.setText("v"+BuildConfig.VERSION_NAME);
 
         TextView imVersion = findViewById(R.id.tv_im_version);
-        imVersion.setText("v" + BuildConfig.VERSION_IM);
+        imVersion.setText("v"+BuildConfig.VERSION_IM);
 
         TextView nertcVersion = findViewById(R.id.tv_g2_version);
-        nertcVersion.setText("v" + BuildConfig.VERSION_NERTC);
+        nertcVersion.setText("v"+BuildConfig.VERSION_NERTC);
 
         View privacy = findViewById(R.id.tv_privacy);
         privacy.setOnClickListener(v -> CommonBrowseActivity.launch(AppAboutActivity.this, "隐私政策", Constants.URL_PRIVACY));

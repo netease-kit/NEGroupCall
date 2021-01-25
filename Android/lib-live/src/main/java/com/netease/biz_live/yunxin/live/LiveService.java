@@ -1,7 +1,6 @@
 package com.netease.biz_live.yunxin.live;
 
 import android.content.Context;
-
 import com.netease.yunxin.nertc.module.base.ModuleService;
 
 /**

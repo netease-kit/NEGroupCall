@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.blankj.utilcode.util.ToastUtils;
+import com.netease.yunxin.lib_utils.utils.ToastUtils;
 import com.netease.yunxin.nertc.demo.basic.BaseActivity;
 import com.netease.yunxin.nertc.demo.basic.StatusBarConfig;
 import com.netease.yunxin.nertc.demo.user.business.UserBizControl;
@@ -143,10 +143,10 @@ public class VerifyCodeActivity extends BaseActivity {
             UserBizControl.login(phoneNumber, msmCode).subscribe(new ResourceSingleObserver<Boolean>() {
                 @Override
                 public void onSuccess(@NonNull Boolean aBoolean) {
-                    if (aBoolean) {
+                    if (aBoolean){
                         ToastUtils.showLong("登录成功");
                         startMainActivity();
-                    } else {
+                    }else {
                         ToastUtils.showLong("登录失败");
                     }
                 }

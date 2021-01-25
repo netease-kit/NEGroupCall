@@ -2,8 +2,12 @@ package com.netease.yunxin.nertc.demo;
 
 import android.app.Application;
 
+import com.netease.biz_live.yunxin.live.LiveApplicationLifecycle;
+import com.netease.biz_live.yunxin.live.LiveService;
+import com.netease.biz_live.yunxin.live.LiveServiceImpl;
 import com.netease.biz_video_group.yunxin.voideoGroup.VideoGroupServiceImpl;
 import com.netease.lib_video_group.yunxin.video_group.VideoGroupService;
+import com.netease.yunxin.android.lib.network.common.NetworkClient;
 import com.netease.yunxin.nertc.baselib.NativeConfig;
 import com.netease.yunxin.nertc.demo.user.UserCenterService;
 import com.netease.yunxin.nertc.demo.user.UserCenterServiceImpl;
@@ -15,6 +19,10 @@ public class DemoApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        // 配置网络基础 url 以及 debug 开关
+        NetworkClient.getInstance()
+                .configBaseUrl(NativeConfig.getBaseURL())
+                .configDebuggable(true);
         // 初始化相关sdk
         NESdkBase.getInstance()
                 .initContext(this)
@@ -26,13 +34,15 @@ public class DemoApplication extends Application {
 
         // 各个module初始化逻辑
         ApplicationLifecycleMgr.getInstance()
-//                .registerLifecycle(new LiveApplicationLifecycle())
+                .registerLifecycle(new LiveApplicationLifecycle())
                 .notifyOnCreate(this);
 
         // 模块方法实例注册
         ModuleServiceMgr.getInstance()
                 // 用户模块
                 .registerService(UserCenterService.class, getApplicationContext(), new UserCenterServiceImpl())
+                // 直播模块
+                .registerService(LiveService.class, getApplicationContext(), new LiveServiceImpl())
                 //多人通话
                 .registerService(VideoGroupService.class, getApplicationContext(), new VideoGroupServiceImpl());
     }

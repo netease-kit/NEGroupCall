@@ -67,7 +67,7 @@
         android:layout_marginEnd="20dp"
         android:src="@drawable/icon_checked"
         android:visibility="gone"
-        android:layout_height="16dp" />
+        android:layout_height="16dp"/>
 
     <TextView
         android:id="@+id/tv_other_question"
@@ -89,13 +89,13 @@
         android:layout_marginEnd="20dp"
         android:visibility="gone"
         android:src="@drawable/icon_checked"
-        android:layout_height="16dp" />
+        android:layout_height="16dp"/>
 
     <View
         android:layout_width="match_parent"
         android:background="#06ffffff"
         app:layout_constraintTop_toTopOf="@id/tv_interactive_question"
         app:layout_constraintBottom_toBottomOf="@id/tv_other_question"
-        android:layout_height="0dp" />
+        android:layout_height="0dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

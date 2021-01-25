@@ -18,8 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blankj.utilcode.util.PermissionUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.faceunity.FURenderer;
 import com.netease.biz_video_group.R;
 import com.netease.biz_video_group.yunxin.voideoGroup.model.RoomInfo;
@@ -31,7 +29,10 @@ import com.netease.lava.nertc.sdk.NERtcConstants;
 import com.netease.lava.nertc.sdk.NERtcEx;
 import com.netease.lava.nertc.sdk.NERtcParameters;
 import com.netease.lava.nertc.sdk.video.NERtcRemoteVideoStreamType;
+import com.netease.lava.nertc.sdk.video.NERtcVideoFrame;
 import com.netease.lava.nertc.sdk.video.NERtcVideoView;
+import com.netease.yunxin.lib_utils.utils.PermissionUtils;
+import com.netease.yunxin.lib_utils.utils.ToastUtils;
 import com.netease.yunxin.nertc.demo.basic.BaseActivity;
 import com.netease.yunxin.nertc.demo.user.UserModel;
 
@@ -227,6 +228,8 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
                 //此处可自定义第三方的美颜实现
                 neRtcVideoFrame.textureId = mFuRender.onDrawFrame(neRtcVideoFrame.data, neRtcVideoFrame.textureId,
                         neRtcVideoFrame.width, neRtcVideoFrame.height);
+
+                neRtcVideoFrame.format = NERtcVideoFrame.Format.TEXTURE_RGB;
             }
             return ivBeauty.isSelected();
         }, true);

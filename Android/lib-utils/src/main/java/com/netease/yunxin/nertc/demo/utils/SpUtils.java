@@ -21,7 +21,7 @@ public final class SpUtils {
      *
      * @param context 上下文
      */
-    public static int getScreenHeight(Context context) {
+    public static int getScreenHeight(Context context){
         return context.getResources().getDisplayMetrics().heightPixels;
     }
 

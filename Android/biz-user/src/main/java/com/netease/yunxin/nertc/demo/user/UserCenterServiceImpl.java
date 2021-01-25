@@ -88,4 +88,23 @@ public class UserCenterServiceImpl implements UserCenterService {
         return UserBizControl.getUserInfo() != null;
     }
 
+    @Override
+    public void logout(UserCenterServiceNotify notify) {
+        UserBizControl.logout().subscribe(new ResourceSingleObserver<Boolean>() {
+            @Override
+            public void onSuccess(@NonNull Boolean aBoolean) {
+                if (notify != null) {
+                    notify.onUserLogout(aBoolean, 0);
+                }
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                if (notify != null) {
+                    notify.onError(e);
+                }
+            }
+        });
+    }
+
 }

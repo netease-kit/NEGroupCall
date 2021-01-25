@@ -34,14 +34,14 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation rootProject.ext.utilcodex
 
     api project(':base-config')
-    api project(':lib-network')
+    api 'com.netease.yunxin.android.lib:network-common:1.0.0-SNAPSHOT'
     api project(':lib-user')
     api project(':lib-video-group')
     implementation project(':lib-basic')
-    implementation project(':router')
-    annotationProcessor project(':router-compiler')
+
     implementation rootProject.ext.nertcSdk
     implementation 'com.netease.yunxin:report:2.0.3'
     implementation project(':lib-beauty-faceunity')

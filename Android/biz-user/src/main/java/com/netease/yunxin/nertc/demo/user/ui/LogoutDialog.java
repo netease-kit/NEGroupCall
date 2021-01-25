@@ -6,13 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
 import com.netease.yunxin.nertc.demo.user.UserCenterService;
 import com.netease.yunxin.nertc.demo.user.UserCenterServiceNotify;
 import com.netease.yunxin.nertc.demo.user.business.UserBizControl;
 import com.netease.yunxin.nertc.user.R;
 
+import androidx.annotation.NonNull;
 import io.reactivex.observers.ResourceSingleObserver;
 
 

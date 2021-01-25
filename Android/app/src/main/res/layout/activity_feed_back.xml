@@ -65,7 +65,7 @@
         android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_demo_name"
-        app:layout_constraintBottom_toBottomOf="@id/tv_demo_name" />
+        app:layout_constraintBottom_toBottomOf="@id/tv_demo_name"/>
 
     <TextView
         android:id="@+id/tv_question_type"
@@ -97,7 +97,7 @@
         android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_question_type"
-        app:layout_constraintBottom_toBottomOf="@id/tv_question_type" />
+        app:layout_constraintBottom_toBottomOf="@id/tv_question_type"/>
 
     <EditText
         android:id="@+id/et_question_desc"
@@ -147,21 +147,21 @@
         android:background="#06ffffff"
         app:layout_constraintTop_toTopOf="@id/tv_demo_name"
         app:layout_constraintBottom_toBottomOf="@id/tv_demo_name"
-        android:layout_height="0dp" />
+        android:layout_height="0dp"/>
 
     <View
         android:layout_width="match_parent"
         android:background="#06ffffff"
         app:layout_constraintTop_toTopOf="@id/tv_question_type"
         app:layout_constraintBottom_toBottomOf="@id/tv_question_type"
-        android:layout_height="0dp" />
+        android:layout_height="0dp"/>
 
     <View
         android:layout_width="match_parent"
         android:background="#06ffffff"
         app:layout_constraintTop_toTopOf="@id/tv_question_desc_title"
         app:layout_constraintBottom_toBottomOf="@id/et_question_desc"
-        android:layout_height="0dp" />
+        android:layout_height="0dp"/>
 
     <View
         android:layout_width="match_parent"
