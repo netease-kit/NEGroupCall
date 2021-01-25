@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.netease.yunxin.android.lib.picture.ImageLoader;
 import com.netease.yunxin.nertc.demo.R;
 import com.netease.yunxin.nertc.demo.basic.BaseFragment;
 import com.netease.yunxin.nertc.demo.basic.CommonBrowseActivity;
 import com.netease.yunxin.nertc.demo.basic.Constants;
 import com.netease.yunxin.nertc.demo.feedback.FeedbackActivity;
-import com.netease.yunxin.nertc.demo.picture.ImageLoader;
 import com.netease.yunxin.nertc.module.base.ModuleServiceMgr;
 
 public class UserCenterFragment extends BaseFragment {

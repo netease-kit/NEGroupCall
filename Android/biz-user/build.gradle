@@ -31,14 +31,14 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.android.support.constraint:constraint-layout:2.0.1'
 
+    implementation rootProject.ext.utilcodex
+
     implementation project(':lib-basic')
-    api project(':lib-network')
+    
+    api 'com.netease.yunxin.android.lib:network-common:1.0.0-SNAPSHOT'
     api project(':lib-user')
     api project(':lib-utils')
 
     api rootProject.ext.imSdk
     api rootProject.ext.avsignallingSdk
-
-    implementation project(':router')
-    annotationProcessor project(':router-compiler')
 }

@@ -1,7 +1,8 @@
 package com.netease.yunxin.nertc.demo.feedback.network;
 
-import com.netease.yunxin.nertc.demo.network.BaseResponse;
-import com.netease.yunxin.nertc.demo.network.BaseUrl;
+
+import com.netease.yunxin.android.lib.network.common.BaseResponse;
+import com.netease.yunxin.android.lib.network.common.BaseUrl;
 
 import java.util.Map;
 

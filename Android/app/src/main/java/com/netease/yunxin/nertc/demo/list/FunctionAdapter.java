@@ -4,9 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.netease.yunxin.nertc.demo.R;
-
 import java.util.List;
 
 public class FunctionAdapter extends CommonAdapter<FunctionItem> {

@@ -7,7 +7,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
-import com.blankj.utilcode.util.ToastUtils;
+import com.netease.yunxin.lib_utils.utils.ToastUtils;
 import com.netease.yunxin.nertc.demo.R;
 import com.netease.yunxin.nertc.demo.basic.BaseActivity;
 import com.netease.yunxin.nertc.demo.basic.StatusBarConfig;
@@ -61,7 +61,7 @@ public class EditUserInfoActivity extends BaseActivity {
     }
 
     private void doForUpdatingUserModel(String newNickname) {
-        if (TextUtils.isEmpty(newNickname)) {
+        if (TextUtils.isEmpty(newNickname)){
             ToastUtils.showShort("用户信息更新失败");
             return;
         }

@@ -21,7 +21,7 @@ public final class Constants {
     public static final String URL_FREE_TRAIL = "https://id.163yun.com/register?h=media&t=media&clueFrom=nim&referrer=https%3A%2F%2Fapp.yunxin.163.com%2F";
 
     /**
-     * 免责声明
+     *  免责声明
      */
     public static final String URL_DISCLAIMER = "file:///android_asset/disclaimer.html";
 }

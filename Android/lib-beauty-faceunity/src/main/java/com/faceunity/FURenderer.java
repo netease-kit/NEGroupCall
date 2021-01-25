@@ -85,10 +85,13 @@ public class FURenderer implements OnFUControlListener {
     private static final String BUNDLE_FACE_MAKEUP = GRAPHICS_ASSETS_DIR + "face_makeup.bundle";
     // 美体 bundle
     private static final String BUNDLE_BEAUTIFY_BODY = GRAPHICS_ASSETS_DIR + "body_slim.bundle";
+
+    //fixme 暂时用不到，为了减小包大小，删除资源,后续如果用到重新添加资源
+
     // 算法模型文件夹
     private static final String AI_MODEL_ASSETS_DIR = "model/";
     // 人脸识别算法模型
-    private static final String BUNDLE_AI_MODEL_FACE_PROCESSOR = AI_MODEL_ASSETS_DIR + "ai_face_processor.bundle";
+    private static final String BUNDLE_AI_MODEL_FACE_PROCESSOR = AI_MODEL_ASSETS_DIR + "ai_face_processor_lite.bundle";
     // 舌头识别算法模型
     private static final String BUNDLE_TONGUE = GRAPHICS_ASSETS_DIR + "tongue.bundle";
 

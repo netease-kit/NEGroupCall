@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
 import com.netease.yunxin.nertc.demo.basic.BaseActivity;
 import com.netease.yunxin.nertc.demo.basic.StatusBarConfig;
 import com.netease.yunxin.nertc.demo.user.CommonUserNotify;
 import com.netease.yunxin.nertc.demo.user.UserCenterService;
 import com.netease.yunxin.nertc.module.base.ModuleServiceMgr;
+
+import androidx.annotation.Nullable;
 
 public class SplashActivity extends BaseActivity {
 

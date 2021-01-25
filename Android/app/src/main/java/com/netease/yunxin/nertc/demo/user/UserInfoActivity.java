@@ -6,10 +6,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.netease.yunxin.android.lib.picture.ImageLoader;
 import com.netease.yunxin.nertc.demo.R;
 import com.netease.yunxin.nertc.demo.basic.BaseActivity;
 import com.netease.yunxin.nertc.demo.basic.StatusBarConfig;
-import com.netease.yunxin.nertc.demo.picture.ImageLoader;
 import com.netease.yunxin.nertc.module.base.ModuleServiceMgr;
 
 public class UserInfoActivity extends BaseActivity {

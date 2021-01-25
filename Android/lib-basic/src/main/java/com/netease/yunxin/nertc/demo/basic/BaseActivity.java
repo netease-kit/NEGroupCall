@@ -3,15 +3,15 @@ package com.netease.yunxin.nertc.demo.basic;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.IdRes;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.gyf.immersionbar.ImmersionBar;
 import com.netease.yunxin.nertc.demo.user.CommonUserNotify;
 import com.netease.yunxin.nertc.demo.user.UserCenterService;
 import com.netease.yunxin.nertc.demo.user.UserCenterServiceNotify;
 import com.netease.yunxin.nertc.module.base.ModuleServiceMgr;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
     private final UserCenterService userCenterService = ModuleServiceMgr.getInstance().getService(UserCenterService.class);

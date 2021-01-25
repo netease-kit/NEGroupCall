@@ -9,7 +9,7 @@ public class FunctionItem {
 
     public final Runnable action;
 
-    public FunctionItem(int type, String nameStr, int iconResId) {
+    public FunctionItem(int type, String nameStr,int iconResId) {
         this.type = type;
         this.nameStr = nameStr;
         this.iconResId = iconResId;

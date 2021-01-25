@@ -44,7 +44,7 @@ public interface UserCenterService extends ModuleService {
     void updateUserInfo(UserModel model, UserCenterServiceNotify notify);
 
     /**
-     * 吊起登录页面
+     * 呼出登录页面
      *
      * @param context 上下文
      */
@@ -56,7 +56,7 @@ public interface UserCenterService extends ModuleService {
     void tryLogin(UserCenterServiceNotify notify);
 
     /**
-     * 用户登出
+     * 呼出用户登出页面
      */
     void launchLogout(Activity activity, int type, UserCenterServiceNotify notify);
 
@@ -64,4 +64,9 @@ public interface UserCenterService extends ModuleService {
      * 当前用户是否登录
      */
     boolean isLogin();
+
+    /**
+     * 直接调用接口登出
+     */
+    void logout(UserCenterServiceNotify notify);
 }
