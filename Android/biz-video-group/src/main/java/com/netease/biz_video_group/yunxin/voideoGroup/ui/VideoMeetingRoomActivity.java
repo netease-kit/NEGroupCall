@@ -31,8 +31,8 @@ import com.netease.lava.nertc.sdk.NERtcParameters;
 import com.netease.lava.nertc.sdk.video.NERtcRemoteVideoStreamType;
 import com.netease.lava.nertc.sdk.video.NERtcVideoFrame;
 import com.netease.lava.nertc.sdk.video.NERtcVideoView;
-import com.netease.yunxin.lib_utils.utils.PermissionUtils;
-import com.netease.yunxin.lib_utils.utils.ToastUtils;
+import com.blankj.utilcode.util.PermissionUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.yunxin.nertc.demo.basic.BaseActivity;
 import com.netease.yunxin.nertc.demo.user.UserModel;
 

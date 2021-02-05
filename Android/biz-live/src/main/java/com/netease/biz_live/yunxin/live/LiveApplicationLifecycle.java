@@ -7,7 +7,7 @@ import com.netease.neliveplayer.sdk.model.NESDKConfig;
 import com.netease.yunxin.android.lib.historian.Historian;
 import com.netease.yunxin.android.lib.network.common.NetworkClient;
 import com.netease.yunxin.android.lib.network.common.NetworkConstant;
-import com.netease.yunxin.lib_utils.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.yunxin.nertc.demo.user.CommonUserNotify;
 import com.netease.yunxin.nertc.demo.user.UserCenterService;
 import com.netease.yunxin.nertc.module.base.AbsApplicationLifecycle;

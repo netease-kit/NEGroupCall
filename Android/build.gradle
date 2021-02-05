@@ -25,6 +25,10 @@ allprojects {
         maven {
             url 'http://mvn.hz.netease.com/artifactory/libs-snapshots/'
         }
+
+        flatDir {
+            dirs '../aars'
+        }
     }
 }
 
@@ -45,7 +49,7 @@ ext {
     imSdk = "com.netease.nimlib:basesdk:$nimVersion"
     avsignallingSdk = "com.netease.nimlib:avsignalling:$nimVersion"
     chatRoomSdk = "com.netease.nimlib:chatroom:$nimVersion"
-    utilcodex = "com.netease.yunxin.android.lib:utils-androidx:1.0.1-SNAPSHOT"
+    utilcodex = "com.blankj:utilcodex:1.30.5"
 
     ndkAbis = [
             'armeabi-v7a',

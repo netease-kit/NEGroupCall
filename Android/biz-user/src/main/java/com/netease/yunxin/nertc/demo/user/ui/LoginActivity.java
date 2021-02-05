@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.netease.yunxin.lib_utils.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.yunxin.nertc.demo.basic.BaseActivity;
 import com.netease.yunxin.nertc.demo.basic.CommonBrowseActivity;
 import com.netease.yunxin.nertc.demo.basic.Constants;

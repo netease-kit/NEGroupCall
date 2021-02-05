@@ -17,7 +17,7 @@ import com.netease.biz_live.yunxin.live.model.response.LiveListResponse;
 import com.netease.biz_live.yunxin.live.network.LiveInteraction;
 import com.netease.biz_live.yunxin.live.ui.widget.FooterView;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
-import com.netease.yunxin.lib_utils.utils.ScreenUtils;
+import com.blankj.utilcode.util.ScreenUtils;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
 import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;

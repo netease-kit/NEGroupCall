@@ -57,7 +57,7 @@ import com.netease.biz_live.yunxin.live.ui.widget.PKControlView;
 import com.netease.yunxin.android.lib.historian.Historian;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
 import com.netease.yunxin.android.lib.picture.ImageLoader;
-import com.netease.yunxin.lib_utils.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.yunxin.nertc.demo.basic.BaseActivity;
 import com.netease.yunxin.nertc.demo.basic.StatusBarConfig;
 import com.netease.yunxin.nertc.demo.user.UserCenterService;

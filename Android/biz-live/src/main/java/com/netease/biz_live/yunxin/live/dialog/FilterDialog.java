@@ -19,7 +19,7 @@ import com.faceunity.OnFUControlListener;
 import com.faceunity.entity.Filter;
 import com.netease.biz_live.R;
 import com.netease.yunxin.android.lib.picture.ImageLoader;
-import com.netease.yunxin.lib_utils.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import java.util.HashMap;
 import java.util.List;

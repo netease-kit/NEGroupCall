@@ -17,7 +17,7 @@ import com.netease.biz_live.yunxin.live.audience.ui.view.PagerVerticalLayoutMana
 import com.netease.biz_live.yunxin.live.chatroom.control.Audience;
 import com.netease.biz_live.yunxin.live.model.LiveInfo;
 import com.netease.yunxin.android.lib.historian.Historian;
-import com.netease.yunxin.lib_utils.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.yunxin.nertc.demo.basic.BaseActivity;
 import com.netease.yunxin.nertc.demo.basic.StatusBarConfig;
 
