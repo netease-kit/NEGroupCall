@@ -8,7 +8,7 @@ import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.yunxin.android.lib.network.common.NetworkClient;
-import com.netease.yunxin.lib_utils.utils.ToastUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.netease.yunxin.nertc.demo.user.UserCenterServiceNotify;
 import com.netease.yunxin.nertc.demo.user.UserModel;
 import com.netease.yunxin.nertc.demo.user.network.UserServerImpl;
