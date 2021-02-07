@@ -17,15 +17,6 @@ allprojects {
         google()
         jcenter()
 
-        // 杭研 release 版本组件仓库
-        maven {
-            url 'http://mvn.hz.netease.com/artifactory/libs-releases/'
-        }
-        // 杭研 snapshot 版本组件仓库
-        maven {
-            url 'http://mvn.hz.netease.com/artifactory/libs-snapshots/'
-        }
-
         flatDir {
             dirs '../aars'
         }
