@@ -10,7 +10,7 @@
 #define AppKey_h
 
 /// 线上 IM key
-static NSString * const kAppKey = @"25435234599999";
+static NSString * const kAppKey = @"2543523459999dsgrger9";
 /// 线上 RTC key (同 IM key)
 static NSString * const kNertcAppkey = @"<#请输入rtc appkey#>";
 /// 线上服务器
