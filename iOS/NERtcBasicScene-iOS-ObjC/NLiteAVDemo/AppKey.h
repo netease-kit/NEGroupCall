@@ -12,7 +12,7 @@
 /// 线上 IM key
 static NSString * const kAppKey = @"0000999";
 /// 线上 RTC key (同 IM key)
-static NSString * const kNertcAppkey = @"112233";
+static NSString * const kNertcAppkey = @"112233445566";
 /// 线上服务器
 static NSString * const kApiHost = @"<#请输入服务器host#>";
 
