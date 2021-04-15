@@ -4,6 +4,7 @@ import com.netease.biz_video_group.yunxin.voideoGroup.model.RoomInfo;
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
 import com.netease.yunxin.android.lib.network.common.NetworkClient;
 import com.netease.yunxin.nertc.demo.user.UserModel;
+import com.netease.yunxin.nertc.demo.utils.TempLogUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +29,7 @@ public class GroupBizControl {
         map.put("appKey", appKey);
         map.put("nickName", nickName);
         map.put("clientType", 3);
+        TempLogUtil.log("API-/mpVideoCall/room/join入参:"+map.toString());
         return serverApi.joinRoom(map).compose(scheduleThread())
                 .map(roomInfoBaseResponse -> roomInfoBaseResponse);
     }

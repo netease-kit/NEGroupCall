@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.netease.biz_video_group.yunxin.voideoGroup.widget.SquareVideoCallItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/square_video_call_view"
+    android:layout_width="@dimen/dp_100"
+    android:layout_height="@dimen/dp_100"
+    xmlns:tools="http://schemas.android.com/tools" />

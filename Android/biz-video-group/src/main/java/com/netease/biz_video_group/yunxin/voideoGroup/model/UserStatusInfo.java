@@ -8,15 +8,11 @@ public class UserStatusInfo {
     public UserStatusInfo(boolean isSelf, String nickname) {
         this.isSelf = isSelf;
         this.nickname = nickname;
-        this.isMute = false;
-        this.enableVideo = true;
     }
 
     public UserStatusInfo(String nickname, long userId) {
         this.nickname = nickname;
         this.userId = userId;
-        this.isMute = true;
-        this.enableVideo = false;
     }
 
     //昵称
@@ -29,7 +25,35 @@ public class UserStatusInfo {
     public boolean isSelf;
 
     //是否开启视频
-    public boolean enableVideo;
+    public boolean enableVideo=false;
 
-    public boolean isMute;
+    /**
+     * 是否开启麦克风
+     */
+    public boolean enableMicphone=false;
+
+    /**
+     * 加入房间的时间戳
+     */
+    public long joinRoomTimeStamp;
+    public int uiType;
+
+    public static class UIType{
+        /**
+         * 全屏的样式
+         */
+        public static final int FULL_SCREEN_TYPE =0;
+        /**
+         * 平分整个屏幕的样式
+         */
+        public static final int HALF_TYPE =1;
+        /**
+         * 三个用户进入时，第三个用户特殊的样式
+         */
+        public static final int THIRD_SPECIAL_TYPE =2;
+        /**
+         * 四分之一的样式
+         */
+        public static final int QUARTER_TYPE=3;
+    }
 }

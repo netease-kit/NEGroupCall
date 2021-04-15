@@ -1,22 +1,13 @@
-rootProject.name = "NERTCScenesDemo"
+rootProject.name = "MultiCallDemo"
 
 include ':app'
 
 include ':biz-user'
 include ':biz-video-group'
-include ':biz-live'
 
 include ':lib-modularity'
-include ':lib-login'
 include ':lib-basic'
 include ':lib-utils'
-include ':lib-live'
 include ':lib-beauty-faceunity'
 include ':lib-user'
 include ':lib-video-group'
-
-include ':base-config'
-
-//include ':router-ani'
-//include ':router-compiler'
-//include ':router'

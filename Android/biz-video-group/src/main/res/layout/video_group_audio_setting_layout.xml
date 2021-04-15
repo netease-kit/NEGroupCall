@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:background="@android:color/holo_green_light">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_20"
+            android:text="场景"
+            android:textColor="#222222"
+            android:textSize="@dimen/text_size_15" />
+
+        <com.netease.biz_video_group.yunxin.voideoGroup.widget.AudioSceneSelectedView
+            android:id="@+id/audio_scene_view"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_80"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+    <View
+        android:background="@color/video_group_line_color"
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1" />
+    <FrameLayout
+        android:id="@+id/fl_quality"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_44"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:background="@android:color/holo_green_light">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_20"
+            android:text="音质"
+            android:textColor="#222222"
+            android:textSize="@dimen/text_size_15" />
+
+        <TextView
+            android:id="@+id/tv_quality"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_80"
+            tools:text="极致"
+            android:textColor="#222222"
+            android:textSize="@dimen/text_size_16" />
+
+        <ImageView
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginRight="@dimen/dp_20"
+            android:background="@drawable/video_group_icon_arrow_right"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20" />
+    </FrameLayout>
+    <View
+        android:background="@color/video_group_line_color"
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1" />
+</LinearLayout>

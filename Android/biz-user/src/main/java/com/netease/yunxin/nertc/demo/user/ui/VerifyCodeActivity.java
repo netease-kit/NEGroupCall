@@ -17,6 +17,7 @@ import com.netease.yunxin.nertc.demo.basic.StatusBarConfig;
 import com.netease.yunxin.nertc.demo.user.business.UserBizControl;
 import com.netease.yunxin.nertc.demo.user.network.UserServerImpl;
 import com.netease.yunxin.nertc.demo.user.ui.view.VerifyCodeView;
+import com.netease.yunxin.nertc.demo.utils.TempLogUtil;
 import com.netease.yunxin.nertc.user.R;
 
 import io.reactivex.annotations.NonNull;
@@ -162,7 +163,7 @@ public class VerifyCodeActivity extends BaseActivity {
     private void startMainActivity() {
         Intent intent = new Intent();
         intent.addCategory("android.intent.category.DEFAULT");
-        intent.setAction("com.nertc.g2.action.main");
+        intent.setAction("com.nertc.groupcall.action.main");
         startActivity(intent);
         finish();
     }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
+    <!-- switch的高度-->
+    <size android:height="@dimen/dp_28"/>
+    <corners android:radius="@dimen/dp_140"/>
+    <solid android:color="#999999" />
+</shape>

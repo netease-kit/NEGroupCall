@@ -2,7 +2,7 @@ package com.netease.yunxin.nertc.demo.feedback.network;
 
 import com.netease.yunxin.android.lib.network.common.BaseResponse;
 import com.netease.yunxin.android.lib.network.common.NetworkClient;
-import com.netease.yunxin.nertc.baselib.NativeConfig;
+import com.netease.yunxin.nertc.demo.basic.BuildConfig;
 import com.netease.yunxin.nertc.demo.user.UserModel;
 
 import java.util.HashMap;
@@ -35,7 +35,7 @@ public class FeedbackServiceImpl {
         map.put("feedback_source", demoName);
         map.put("content", content);
         map.put("type", 1);
-        map.put("appkey", NativeConfig.getAppKey());
+        map.put("appkey", BuildConfig.APP_KEY);
         return api.demoSuggest(map).map(BaseResponse::isSuccessful)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

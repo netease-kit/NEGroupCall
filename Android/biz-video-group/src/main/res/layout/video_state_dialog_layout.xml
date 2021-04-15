@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/dp_12"
+        android:textSize="@dimen/text_size_16"
+        android:textColor="#222222"
+        android:text="实时数据"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="#E6E7EB"/>
+
+    <TextView
+        android:id="@+id/tv_network"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="网络延时: 0ms"
+        android:textSize="@dimen/text_size_14"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"/>
+
+    <TextView
+        android:id="@+id/tv_video_bitrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="视频发送/接收码率: 0/0 kbps"
+        android:textSize="@dimen/text_size_14"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"/>
+
+    <TextView
+        android:id="@+id/tv_audio_bitrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="音频发送/接收码率: 0/0 kbps"
+        android:textSize="@dimen/text_size_14"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"/>
+
+    <TextView
+        android:id="@+id/tv_video_lost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="本地上行/下行视频丢包率: 0/0%"
+        android:textSize="@dimen/text_size_14"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"/>
+
+    <TextView
+        android:id="@+id/tv_audio_lost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="本地上行/下行音频丢包率: 0/0%"
+        android:textSize="@dimen/text_size_14"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginEnd="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"/>
+
+
+</LinearLayout>

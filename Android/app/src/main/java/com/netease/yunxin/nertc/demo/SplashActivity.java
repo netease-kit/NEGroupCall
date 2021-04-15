@@ -20,6 +20,14 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!this.isTaskRoot()) {
+            Intent mainIntent = getIntent();
+            String action = mainIntent.getAction();
+            if (mainIntent.hasCategory(Intent.CATEGORY_LAUNCHER) && Intent.ACTION_MAIN.equals(action)) {
+                finish();
+                return;
+            }
+        }
         setContentView(R.layout.activity_splash);
         UserCenterService service = ModuleServiceMgr.getInstance().getService(UserCenterService.class);
         service.tryLogin(new CommonUserNotify() {

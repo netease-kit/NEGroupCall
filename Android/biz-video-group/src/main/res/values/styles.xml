@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="VideoGroup_dialog_fragment_animation">
+        <item name="android:windowEnterAnimation">@anim/video_group_dialog_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/video_group_dialog_out_bottom</item>
+    </style>
+</resources>

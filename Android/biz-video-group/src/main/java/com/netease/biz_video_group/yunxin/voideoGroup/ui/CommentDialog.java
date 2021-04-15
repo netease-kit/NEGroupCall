@@ -27,7 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.netease.biz_video_group.R;
 import com.netease.biz_video_group.yunxin.voideoGroup.network.GroupBizControl;
 import com.blankj.utilcode.util.ToastUtils;
-import com.netease.yunxin.nertc.baselib.NativeConfig;
+import com.netease.yunxin.nertc.demo.basic.BuildConfig;
 import com.netease.yunxin.nertc.demo.user.UserCenterService;
 import com.netease.yunxin.nertc.demo.user.UserModel;
 import com.netease.yunxin.nertc.module.base.ModuleServiceMgr;
@@ -156,7 +156,7 @@ public class CommentDialog extends DialogFragment {
         UserModel userModel = ModuleServiceMgr.getInstance().getService(UserCenterService.class).getCurrentUser();
         String tel = userModel.mobile;
         String uid = userModel.avRoomUid;
-        String appkey = TextUtils.isEmpty(this.appKey) ? (NativeConfig.getAppKey()) : this.appKey;
+        String appkey = TextUtils.isEmpty(this.appKey) ? (BuildConfig.APP_KEY) : this.appKey;
         String appid = Objects.requireNonNull(getContext()).getApplicationInfo().processName;
         GroupBizControl.submitComment(feedback_type, tel, uid, content, appkey, appid, conetent_type, feedback_source).subscribe(new ResourceSingleObserver<Boolean>() {
             @Override
