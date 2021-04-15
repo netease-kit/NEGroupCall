@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_user_center_bg"
+    tools:context=".user.UserInfoActivity">
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:padding="10dp"
+        android:src="@drawable/icon_left_arrow_light"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_title" />
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="意见反馈"
+        android:textColor="@color/colorWhite"
+        android:textSize="17dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#19ffffff"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_demo_name"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical|end"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:singleLine="true"
+        android:hint="请选择Demo名称"
+        android:textColorHint="#ccffffff"
+        android:drawablePadding="11dp"
+        android:textColor="#ccffffff"
+        app:drawableEndCompat="@drawable/icon_right_arrow_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_demo_name_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_demo_name_title"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
+        android:text="Demo名称"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_demo_name"
+        app:layout_constraintBottom_toBottomOf="@id/tv_demo_name"/>
+
+    <TextView
+        android:id="@+id/tv_question_type"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical|end"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:singleLine="true"
+        android:hint="请选择问题类型"
+        android:textColorHint="#ccffffff"
+        android:drawablePadding="11dp"
+        android:textColor="#ccffffff"
+        app:drawableEndCompat="@drawable/icon_right_arrow_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_question_type_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_demo_name" />
+
+    <TextView
+        android:id="@+id/tv_question_type_title"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
+        android:text="问题类型"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_question_type"
+        app:layout_constraintBottom_toBottomOf="@id/tv_question_type"/>
+
+    <EditText
+        android:id="@+id/et_question_desc"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:background="#00000000"
+        android:gravity="top|start"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textSize="16dp"
+        android:hint="请输入您的意见"
+        android:textColor="#ccffffff"
+        android:textColorHint="#66ffffff"
+        app:layout_constraintTop_toBottomOf="@id/tv_question_desc_title" />
+
+    <TextView
+        android:id="@+id/tv_question_desc_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="问题描述"
+        android:paddingTop="17dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_question_type" />
+
+    <TextView
+        android:id="@+id/tv_commit"
+        android:layout_width="315dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/selector_feedback_commit_bg"
+        android:gravity="center"
+        android:text="提交"
+        android:enabled="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_question_desc" />
+
+    <View
+        android:layout_width="match_parent"
+        android:background="#06ffffff"
+        app:layout_constraintTop_toTopOf="@id/tv_demo_name"
+        app:layout_constraintBottom_toBottomOf="@id/tv_demo_name"
+        android:layout_height="0dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:background="#06ffffff"
+        app:layout_constraintTop_toTopOf="@id/tv_question_type"
+        app:layout_constraintBottom_toBottomOf="@id/tv_question_type"
+        android:layout_height="0dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:background="#06ffffff"
+        app:layout_constraintTop_toTopOf="@id/tv_question_desc_title"
+        app:layout_constraintBottom_toBottomOf="@id/et_question_desc"
+        android:layout_height="0dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#19ffffff"
+        app:layout_constraintTop_toTopOf="@id/tv_question_type" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#19ffffff"
+        app:layout_constraintBottom_toBottomOf="@id/tv_question_type" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#19ffffff"
+        app:layout_constraintTop_toTopOf="@id/tv_question_desc_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#19ffffff"
+        app:layout_constraintBottom_toBottomOf="@id/et_question_desc" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

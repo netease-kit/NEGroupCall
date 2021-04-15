@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_12"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/beauty"
+            android:textColor="#FF0F0C0A"
+            android:textSize="@dimen/text_size_16"
+            android:layout_centerInParent="true" />
+
+        <ImageView
+            android:id="@+id/iv_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/reset" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#33000000" />
+
+    <LinearLayout
+        android:id="@+id/lly_beauty_white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_12"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_20"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="#222222"
+            android:text="@string/beauty_white"
+            android:layout_marginRight="@dimen/dp_20" />
+
+        <SeekBar
+            android:id="@+id/sb_beauty_white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:max="100"
+            android:maxHeight="2dp"
+            android:progress="50"
+            android:padding="0dp"
+            android:progressDrawable="@drawable/background_process_control_seekbar_bg"
+            android:saveEnabled="true"
+            android:thumb="@drawable/seekbar_custom_thumb" />
+
+        <TextView
+            android:id="@+id/tv_beauty_white_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="#222222"
+            android:text="0.0" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lly_beauty_skin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_12"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_20"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="#222222"
+            android:text="@string/beauty_skin"
+            android:layout_marginRight="@dimen/dp_20" />
+
+        <SeekBar
+            android:id="@+id/sb_beauty_skin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:max="100"
+            android:maxHeight="2dp"
+            android:progress="50"
+            android:padding="0dp"
+            android:progressDrawable="@drawable/background_process_control_seekbar_bg"
+            android:saveEnabled="true"
+            android:thumb="@drawable/seekbar_custom_thumb" />
+
+        <TextView
+            android:id="@+id/tv_beauty_skin_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="#222222"
+            android:text="0.0" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lly_thin_face"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_12"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_20"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="#222222"
+            android:text="@string/thin_face"
+            android:layout_marginRight="@dimen/dp_20" />
+
+        <SeekBar
+            android:id="@+id/sb_thin_face"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:max="100"
+            android:maxHeight="2dp"
+            android:progress="50"
+            android:padding="0dp"
+            android:progressDrawable="@drawable/background_process_control_seekbar_bg"
+            android:saveEnabled="true"
+            android:thumb="@drawable/seekbar_custom_thumb" />
+
+        <TextView
+            android:id="@+id/tv_thin_face_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="#222222"
+            android:text="0.0" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lly_big_eye"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_12"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingEnd="@dimen/dp_20"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="#222222"
+            android:text="@string/big_eye"
+            android:layout_marginRight="@dimen/dp_20" />
+
+        <SeekBar
+            android:id="@+id/sb_big_eye"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:max="100"
+            android:maxHeight="2dp"
+            android:progress="50"
+            android:padding="0dp"
+            android:progressDrawable="@drawable/background_process_control_seekbar_bg"
+            android:saveEnabled="true"
+            android:thumb="@drawable/seekbar_custom_thumb" />
+
+        <TextView
+            android:id="@+id/tv_big_eye_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="#222222"
+            android:text="0.0" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

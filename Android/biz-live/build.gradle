@@ -1,0 +1,73 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.airbnb.android:lottie:3.5.0'
+    implementation rootProject.ext.nertcSdk
+    implementation 'com.netease.yunxin:report:2.0.3'
+    implementation rootProject.ext.chatRoomSdk
+
+    //smartRefresh
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
+
+    implementation rootProject.ext.utilcodex
+
+    implementation(name: 'netease-network', ext: 'aar')
+    implementation(name: 'netease-picture', ext: 'aar')
+    implementation "com.google.code.gson:gson:2.8.6"
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.7'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'jp.wasabeef:glide-transformations:4.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+
+//    implementation 'com.netease.yunxin.android.lib:network-common:1.0.0-SNAPSHOT'
+//    implementation 'com.netease.yunxin.android.lib:picture:1.0.0-SNAPSHOT'
+
+    implementation project(':base-config')
+    implementation project(':lib-basic')
+    implementation project(':lib-utils')
+    implementation project(':lib-user')
+    implementation project(':lib-beauty-faceunity')
+    api project(':lib-live')
+
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+}

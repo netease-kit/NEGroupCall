@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(':base-config')
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.1'
+
+    implementation rootProject.ext.utilcodex
+    implementation(name: 'netease-network', ext: 'aar')
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.7'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    implementation project(':lib-basic')
+    
+//    api 'com.netease.yunxin.android.lib:network-common:1.0.0-SNAPSHOT'
+    implementation project(':lib-user')
+    implementation project(':lib-utils')
+
+    api rootProject.ext.imSdk
+    api rootProject.ext.avsignallingSdk
+}

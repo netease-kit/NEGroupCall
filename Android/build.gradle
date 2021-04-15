@@ -1,0 +1,49 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.0.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+        flatDir {
+            dirs '../aars'
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    compileSdkVersion = 30
+    buildToolsVersion = "30.0.0"
+    minSdkVersion = 19
+    targetSdkVersion = 30
+
+    nertcVersion = "3.8.1"
+    nimVersion = '8.1.0'
+
+    nertcSdk = "com.netease.yunxin:nertc:$nertcVersion"
+    imSdk = "com.netease.nimlib:basesdk:$nimVersion"
+    avsignallingSdk = "com.netease.nimlib:avsignalling:$nimVersion"
+    chatRoomSdk = "com.netease.nimlib:chatroom:$nimVersion"
+    utilcodex = "com.blankj:utilcodex:1.30.5"
+
+    ndkAbis = [
+            'armeabi-v7a',
+            'arm64-v8a',
+    ]
+}
