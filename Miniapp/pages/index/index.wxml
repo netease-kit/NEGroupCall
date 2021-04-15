@@ -1,0 +1,13 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='title' style='padding-top:{{(headerHeight + statusBarHeight)/2 - 12}}px'>
+    <text>网易云信 实时音视频</text>
+  </view>
+  <view class='guide-box'>
+    <view class="single-box" wx:for="{{entryInfos}}" wx:key="*this" id="{{index}}" bindtap='handleEntry'>
+      <image class="icon" mode="aspectFit" src="{{item.icon}}" role="img"></image>
+      <view class="label">{{item.title}}</view>
+      <image class="arrow" src="../../assets/images/arrow2-right.png"></image>
+    </view>
+  </view>
+</view>

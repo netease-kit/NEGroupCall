@@ -1,0 +1,3 @@
+<view class="room-container">
+  <nertc-room id="nertc-component" config="{{rtcConfig}}" />
+</view>

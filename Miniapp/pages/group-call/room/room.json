@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "disableScroll": true,
+  "usingComponents": {
+    "nertc-room": "/components/nertc-room/nertc-room"
+  }
+}

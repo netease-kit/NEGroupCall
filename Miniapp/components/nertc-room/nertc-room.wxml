@@ -1,0 +1,142 @@
+<view class="nertc-room-container">
+  <view
+    class="user-item {{(pusher.isFullScreen || !userList.length) ? 'fullscreen' : ''}} {{pusher.isListener ? 'listener' : ''}}"
+    data-index="{{pusher.listenerIndex}}"
+  >
+    <live-pusher
+      wx:if="{{pusher.url}}"
+      class="pusher"
+      url="{{pusher.url}}"
+      mode="{{pusher.mode}}"
+      autopush="{{pusher.autopush}}"
+      enable-camera="{{pusher.enableCamera}}"
+      enable-mic="{{pusher.enableMic}}"
+      muted="{{!pusher.enableMic}}"
+      enable-agc="{{pusher.enableAgc}}"
+      enable-ans="{{pusher.enableAns}}"
+      enable-ear-monitor="{{pusher.enableEarMonitor}}"
+      auto-focus="{{pusher.enableAutoFocus}}"
+      zoom="{{pusher.enableZoom}}"
+      min-bitrate="{{pusher.minBitrate}}"
+      max-bitrate="{{pusher.maxBitrate}}"
+      video-width="{{pusher.videoWidth}}"
+      video-height="{{pusher.videoHeight}}"
+      beauty="{{pusher.beautyLevel}}"
+      whiteness="{{pusher.whitenessLevel}}"
+      orientation="{{pusher.videoOrientation}}"
+      aspect="{{pusher.videoAspect}}"
+      device-position="{{pusher.frontCamera}}"
+      remote-mirror="{{pusher.enableRemoteMirror}}"
+      local-mirror="{{pusher.localMirror}}"
+      background-mute="{{pusher.enableBackgroundMute}}"
+      audio-quality="{{pusher.audioQuality}}"
+      audio-volume-type="{{pusher.audioVolumeType}}"
+      audio-reverb-type="{{pusher.audioReverbType}}"
+      waiting-image="{{pusher.waitingImage}}"
+      debug="{{debug}}"
+      bindstatechange="_pusherStateChangeHandler"
+      bindnetstatus="_pusherNetStatusHandler"
+      binderror="_pusherErrorHandler"
+      bindbgmstart="_pusherBGMStartHandler"
+      bindbgmprogress="_pusherBGMProgressHandler"
+      bindbgmcomplete="_pusherBGMCompleteHandler"
+      bindaudiovolumenotify="_pusherAudioVolumeNotify"
+    ></live-pusher>
+    <cover-view class="nickName-container">
+      <cover-image wx:if="{{!pusher.enableMic}}" class="user-audio" src="./resources/images/mic-off.png" />
+      <cover-view class="text">{{nickName}}</cover-view>
+    </cover-view>
+    <cover-image
+      wx:if="{{userList.length && pusher.url}}"
+      class="icon-fullscreen"
+      src="{{pusher.isFullScreen ? './resources/images/icon-small.png' : './resources/images/icon-large.png'}}"
+      bindtap="_togglePusherFullScreen"
+    />
+    <cover-view class="net-status" wx:if="{{pusher.netQualityIcon}}">
+      <image class="net-status-icon" src="{{pusher.netQualityIcon}}" />
+    </cover-view>
+  </view>
+  <view
+    wx:for="{{userList}}"
+    wx:key="uid"
+    class="user-item {{item.isFullScreen ? 'fullscreen' : ''}} {{item.isListener ? 'listener' : ''}}"
+    data-index="{{item.listenerIndex}}"
+  >
+    <live-player
+      wx:if="{{item.stream && !item.stream.muteVideo}}"
+      class="player"
+      data-nickname="{{item.nickName}}"
+      data-uid="{{item.uid}}"
+      id="{{item.uid}}"
+      src="{{item.url}}"
+      mode="RTC"
+      autoplay= "{{item.stream.autoplay}}"
+      mute-audio= "{{item.stream.muteAudio}}"
+      mute-video= "{{item.stream.muteVideo}}"
+      orientation= "{{item.stream.orientation}}"
+      object-fit= "{{item.stream.objectFit}}"
+      background-mute= "{{item.stream.enableBackgroundMute}}"
+      min-cache= "{{item.stream.minCache}}"
+      max-cache= "{{item.stream.maxCache}}"
+      sound-mode= "{{item.stream.soundMode}}"
+      enable-recv-message= "{{item.stream.enableRecvMessage}}"
+      auto-pause-if-navigate= "{{item.stream.autoPauseIfNavigate}}"
+      auto-pause-if-open-native= "{{item.stream.autoPauseIfOpenNative}}"
+      debug="{{debug}}"
+      bindstatechange="_playerStateChange"
+      bindfullscreenchange="_playerFullscreenChange"
+      bindnetstatus="_playerNetStatus"
+      bindaudiovolumenotify  ="_playerAudioVolumeNotify"
+    ></live-player>
+    <cover-view class="nickName-container">
+      <cover-image wx:if="{{item.stream.muteAudio}}" class="user-audio" src="./resources/images/mic-off.png" />
+      <cover-view class="text">{{item.nickName}}</cover-view>
+    </cover-view>
+    <cover-image
+      class="icon-fullscreen"
+      src="{{item.isFullScreen ? './resources/images/icon-small.png' : './resources/images/icon-large.png'}}"
+      data-uid="{{item.uid}}"
+      bindtap="_togglePlayerFullScreen"
+    />
+  </view>
+  <cover-view class="tools">
+    <cover-image bindtap="_toggleAudio" class="icon" src="{{pusher.enableMic ? './resources/images/mic-on.png' : './resources/images/mic-off.png'}}" />
+    <cover-image bindtap="_toggleVideo" class="icon" src="{{pusher.enableCamera ? './resources/images/camera-on.png' : './resources/images/camera-off.png'}}" />
+    <cover-image bindtap="_hangUp" class="icon" src="./resources/images/tool-hangup.png" />
+    <cover-image bindtap="switchCamera" class="icon" src="./resources/images/icon-revert.png" />
+    <cover-image data-key="moreToolsVisible" bindtap="_toggleVisible" class="icon" src="./resources/images/tool-more.png" />
+  </cover-view>
+  <cover-view wx:if="{{moreToolsVisible}}" class="more-tools">
+    <cover-image data-key="beautyVisible" bindtap="_toggleVisible" class="icon" src="./resources/images/beauty-on.png" />
+    <cover-image data-key="statusVisible" bindtap="_toggleVisible" class="icon" src="./resources/images/icon-data.png" />
+  </cover-view>
+  <cover-view class="dialog-mask" wx:if="{{beautyVisible}}" data-key="beautyVisible" bindtap="_toggleVisible">
+    <cover-view class="dialog-inner" catchtap="_preventBubble">
+      <cover-view class="dialog-title">美颜</cover-view>
+      <cover-view class="dialog-content">
+        <cover-view class="dialog-beauty-content">
+          <cover-view class="beauty-item" catchtap="_selectBeautyStyle">
+            <cover-image class="beauty-item-img" src="./resources/images/icon-beauty-type.png" />
+            <cover-view class="beauty-item-title">美颜类型</cover-view>
+            <cover-view class="beauty-item-value">{{beautyStyleArray[beautyIndex].label}}</cover-view>
+          </cover-view>
+          <cover-view class="beauty-item" catchtap="_selectFilter">
+            <cover-image class="beauty-item-img" src="./resources/images/icon-beauty-filter.png" />
+            <cover-view class="beauty-item-title">滤镜</cover-view>
+            <cover-view class="beauty-item-value">{{filterArray[filterIndex].label}}</cover-view>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+  <cover-view class="dialog-mask" wx:if="{{statusVisible}}" data-key="statusVisible" bindtap="_toggleVisible">
+    <cover-view class="dialog-inner" catchtap="_preventBubble">
+      <cover-view class="dialog-title">实时数据</cover-view>
+      <cover-view class="dialog-content">
+        <cover-view class="status-item">网络延时：{{pusher.videoFPS || '-'}}ms</cover-view>
+        <cover-view class="status-item">视频发送/接收码率：{{pusher.videoBitrate || '-'}}/{{playerVideoBitrate || '-'}} kbps</cover-view>
+        <cover-view class="status-item">音频发送/接收码率：{{pusher.audioBitrate || '-'}}/{{playerAudioBitrate || '-'}} kbps</cover-view>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+</view>
