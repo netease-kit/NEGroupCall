@@ -255,11 +255,26 @@ Component({
         this.client.join(params)
           .then(() => {
             logger.log(TAG_NAME, 'enterRoom: join success')
-            return this.client.publish()
+            const { openCamera, openMicrophone } = this.data.config
+            if (openCamera && openMicrophone) {
+              return this.client.publish()
+            }
+            if (openCamera && !openMicrophone) {
+              return this.client.publish('video')
+            }
+            if (!openCamera && openMicrophone) {
+              return this.client.publish('audio')
+            }
+            if (!openCamera && !openMicrophone) {
+              return Promise.resolve()
+            }
           })
           .then(url => {
             logger.log(TAG_NAME, 'enterRoom: publish success', url)
-            const pusher = Object.assign(this.data.pusher, { url })
+            let pusher = this.data.pusher
+            if (url) {
+              pusher = Object.assign(this.data.pusher, { url })
+            }
             this.setData({
               pusher
             }, () => {
@@ -692,10 +707,6 @@ Component({
       logger.log(TAG_NAME, 'checkParam config:', rtcConfig)
       if (!rtcConfig.channelName) {
         logger.error('未设置 channelName')
-        return false
-      }
-      if (!rtcConfig.token) {
-        logger.error('未设置 token')
         return false
       }
       if (!rtcConfig.uid) {

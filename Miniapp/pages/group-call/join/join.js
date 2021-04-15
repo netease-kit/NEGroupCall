@@ -125,7 +125,7 @@ Page({
           channelName: avRoomCName,
           uid: avRoomUid,
           channelId: avRoomCid,
-          token: avRoomCheckSum,
+          token: avRoomCheckSum, // 如果是非安全模式，请传入空字符串
           nickName,
           openCamera: this.data.openCamera,
           openMicrophone: this.data.openMicrophone,
