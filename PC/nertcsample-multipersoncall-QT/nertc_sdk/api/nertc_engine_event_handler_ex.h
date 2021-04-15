@@ -1,4 +1,4 @@
-﻿/** @file nertc_engine_event_handler_ex.h
+/** @file nertc_engine_event_handler_ex.h
 * @brief NERTC SDK回调扩展接口头文件。
 * NERTC SDK所有接口参数说明: 所有与字符串相关的参数(char *)全部为UTF-8编码。
 * @copyright (c) 2015-2019, NetEase Inc. All rights reserved
@@ -27,6 +27,24 @@ class IRtcEngineEventHandlerEx : public IRtcEngineEventHandler
 {
 public:
     virtual ~IRtcEngineEventHandlerEx() {}
+
+    /** 远端用户开启辅流视频回调。
+
+     @param uid 远端用户ID。
+     @param max_profile 最大分辨率。
+     */
+    virtual void onUserSubStreamVideoStart(uid_t uid, NERtcVideoProfileType max_profile) {
+        (void)uid;
+        (void)max_profile;
+    }
+    /** 远端用户停用辅流视频回调。
+
+     @param uid 远端用户ID。
+     */
+    virtual void onUserSubStreamVideoStop(uid_t uid) {
+        (void)uid;
+    }
+
     /** 远端用户视频配置更新回调。
 
      @param uid 远端用户ID。
@@ -291,6 +309,27 @@ public:
         (void)url;
         (void)state;
     }
+    
+    /** 监测音频啸叫的回调。
+
+     @param howling 是否出现啸叫
+     - true: 啸叫；
+     - false: 正常；。
+     */
+    virtual void onAudioHowling(bool howling) {
+        (void)howling;
+    }
+
+	/** 收到 sei 数据回调
+	 * @param[in] uid 发送该 sei 的用户 id
+	 * @param[in] data 接收到的 sei 数据
+	 * @param[in] dataSize 接收到 sei 数据的大小
+	 */
+	virtual void onRecvSEIMsg(uid_t uid, const char* data, uint32_t dataSize) {
+		(void)uid;
+		(void)data;
+		(void)dataSize;
+	}
 };
 } //namespace nertc
 

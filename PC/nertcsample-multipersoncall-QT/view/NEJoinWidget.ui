@@ -10,6 +10,12 @@
     <height>500</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="minimumSize">
    <size>
     <width>500</width>
@@ -26,6 +32,18 @@
    <string>NEJoinWidget</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="minimumSize">
+    <size>
+     <width>500</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>500</width>
+     <height>16777215</height>
+    </size>
+   </property>
    <property name="styleSheet">
     <string notr="true">QWidget#centralwidget{
 	background-color: rgb(255, 255, 255);
@@ -34,8 +52,8 @@
    <widget class="QPushButton" name="joinChannel">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>370</y>
+      <x>70</x>
+      <y>350</y>
       <width>320</width>
       <height>50</height>
      </rect>
@@ -58,27 +76,8 @@
     <property name="styleSheet">
      <string notr="true">background-color: rgb(51, 126, 255);
 border-radius: 25px;
-font-family: PingFangSC-Regular;
 font-size: 16px;
 color: #FFFFFF;</string>
-    </property>
-    <property name="text">
-     <string>加入频道</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lblJoinChanel">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>60</y>
-      <width>101</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">font-family: PingFangSC-Medium;
-font-size: 24px;
-color: #333333;</string>
     </property>
     <property name="text">
      <string>加入频道</string>
@@ -87,8 +86,8 @@ color: #333333;</string>
    <widget class="MClearLineEdit" name="leRoomID">
     <property name="geometry">
      <rect>
-      <x>92</x>
-      <y>154</y>
+      <x>70</x>
+      <y>110</y>
       <width>320</width>
       <height>44</height>
      </rect>
@@ -110,7 +109,7 @@ color: #333333;</string>
     </property>
     <property name="styleSheet">
      <string notr="true">QLineEdit{
-font-family: PingFangSC-Regular;
+
 font-size: 17px;
 color: #B0B6BE;
 border-width: 0px;
@@ -127,8 +126,8 @@ border-width: 0px;
    <widget class="MClearLineEdit" name="leNickname">
     <property name="geometry">
      <rect>
-      <x>91</x>
-      <y>233</y>
+      <x>70</x>
+      <y>180</y>
       <width>320</width>
       <height>44</height>
      </rect>
@@ -146,10 +145,11 @@ border-width: 0px;
      </size>
     </property>
     <property name="styleSheet">
-     <string notr="true">font-family: PingFangSC-Regular;
+     <string notr="true">
 font-size: 17px;
 color: #B0B6BE;
-border: 0px;</string>
+border: 0px;
+outline: none;</string>
     </property>
     <property name="frame">
      <bool>false</bool>
@@ -157,6 +157,155 @@ border: 0px;</string>
     <property name="placeholderText">
      <string>输入昵称</string>
     </property>
+   </widget>
+   <widget class="QCheckBox" name="cbOpenCamera">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>250</y>
+      <width>181</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox{
+	font-size: 14px;
+	color: #333333;
+	spacing: 8px;
+}
+
+QCheckBox::indicator {
+    min-width:16px;
+    min-height:16px;
+    max-width:16px;
+    max-height:16px;
+}
+
+QCheckBox::indicator:unchecked
+{
+	border-image: url(:/image/normal.png);
+}
+
+QCheckBox::indicator:checked
+{
+   
+	border-image: url(:/image/check.png);
+}</string>
+    </property>
+    <property name="text">
+     <string>入会时打开摄像头</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="cbOpenMic">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>280</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QCheckBox{
+	font-size: 14px;
+	color: #333333;
+	spacing: 8px;
+}
+
+QCheckBox::indicator {
+    min-width:16px;
+    min-height:16px;
+    max-width:16px;
+    max-height:16px;
+}
+
+QCheckBox::indicator:unchecked
+{
+	border-image: url(:/image/normal.png);
+}
+
+QCheckBox::indicator:checked
+{
+   
+	border-image: url(:/image/check.png);
+}</string>
+    </property>
+    <property name="text">
+     <string>入会时打开麦克风</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSetting">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>10</y>
+      <width>20</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>20</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>20</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/image/setting.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>30</y>
+      <width>148</width>
+      <height>53</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="lblJoinChanel">
+       <property name="font">
+        <font>
+         <family>.AppleSystemUIFont</family>
+         <pointsize>24</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">f
+font-size: 24px;
+color: #333333;</string>
+       </property>
+       <property name="text">
+        <string>加入频道</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
  </widget>

@@ -39,7 +39,9 @@ public:
 
     /** 开关本地音频发送。该方法用于允许/禁止往网络发送本地音频流。
 
-    @note 该方法不影响录音状态，因为并没有禁用录音设备。
+    @note 
+    - 该方法不影响录音状态，因为并没有禁用录音设备。
+    - 静音状态会在通话结束后被重置为非静音
 
     @param[in] mute 静音/取消静音:
     - true: 静音本地音频
@@ -55,7 +57,7 @@ public:
 
     @note
     - 该方法需要在 \ref IRtcEngine::joinChannel "joinChannel" 之前设置好， \ref IRtcEngine::joinChannel "joinChannel" 之后设置不生效。
-    - 音乐场景下，建议将 profile 设置为 #kNERtcAudioProfileHighQuality (4).
+    - 音乐场景下，建议将 profile 设置为 #kNERtcAudioProfileHighQuality .
 
     @param[in]  profile 设置采样率，码率，编码模式和声道数: #NERtcAudioProfileType.
     @param[in]  scenario 设置音频应用场景: #NERtcAudioScenarioType.
@@ -66,7 +68,63 @@ public:
     */
     virtual int setAudioProfile(NERtcAudioProfileType profile, NERtcAudioScenarioType scenario) = 0;
 
+    /** 设置预设的EQ模式
+    
+    @note 
+    - 调用后，之前 \ref IRtcEngineEx::setLocalVoiceEqualizations "setLocalVoiceEqualizations" 设置无效
+    - 通话结束后重置为默认关闭
+
+    @param[in] type 预设置的EQ模式值
+
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int setLocalVoiceEqualizationPreset(NERtcVoiceEqualizationType type) = 0;
+
+    /** 设置自定义的EQ
+
+    @note 
+    - 调用后之前 \ref IRtcEngineEx::setLocalVoiceEqualizationPreset "setLocalVoiceEqualizationPreset" 设置内容无效
+    - 每个 band 的增益，数组大小为10，［０－９］分别代表 10 个频带。
+    - 对应的中心频率是 [31，63，125，250，500，1k，2k，4k，8k，16k] Hz 单位是 dB，每一个值的范围是 [-15，15]，默认值为 0
+    - 通话结束后重置为默认关闭
+
+    @param[in] band_gain float[10]
+
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int setLocalVoiceEqualizations(float* band_gain) = 0;
+
+    /** 设置预设的混响模式
+
+    @note 通话结束后重置为默认关闭
+
+    @param[in] type 预设置的混响模式值
+
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int setLocalVoiceReverbPreset(NERtcVoiceReverbType type) = 0;
+
+    /** 设置预设的变声模式
+
+    @note 通话结束后重置为默认关闭
+
+    @param[in] type 预设置的变声模式值
+
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int setLocalVoiceChangerPreset(NERtcVoiceChangerType type) = 0;
+
     /** 订阅／取消订阅指定音频流。
+
+    @note 当kNERtcKeyAutoSubscribeAudio默认打开时，用户不能手动修改音频订阅状态
 
     @param[in] uid 指定用户的 ID
     @param[in] subscribe
@@ -75,6 +133,7 @@ public:
 
     @return
     - 0: 方法调用成功；
+    - 30005: 状态异常，可能是自动订阅打开，导致该接口无效
     - 其他: 方法调用失败。
 
     */
@@ -105,9 +164,22 @@ public:
     */
     virtual int enableDualStreamMode(bool enable) = 0;
 
+    /** 设置本地辅流视图。
+
+     该方法设置本地辅流视频显示信息。App 通过调用此接口绑定本地辅流的显示视窗(view)。 在 App 开发中，通常在初始化后调用该方法进行本地视频设置，然后再加入频道。
+
+     @param[in] canvas 视频画布信息
+     @return
+     - 0: 方法调用成功；
+     - 其他: 方法调用失败。
+     */
+    virtual int setupLocalSubStreamVideoCanvas(NERtcVideoCanvas* canvas) = 0;
+
     /** 设置本地视图显示模式。
 
     该方法设置本地视图显示模式。 App 可以多次调用此方法更改显示模式。
+
+    @note 在打开屏幕共享前必须设置本地辅流画布。
 
     @param[in] scaling_mode  视频显示模式: #NERtcVideoScalingMode
     @return
@@ -115,6 +187,19 @@ public:
     - 其他: 方法调用失败。
     */
     virtual int setLocalRenderMode(NERtcVideoScalingMode scaling_mode) = 0;
+
+    /** 设置本地辅流视图显示模式。
+
+    该方法设置本地视图显示模式。 App 可以多次调用此方法更改显示模式。
+
+    @note 必须先通过 setupLocalSubStreamVideoCanvas 设置本地辅流画布。
+
+    @param[in] scaling_mode  视频显示模式: #NERtcVideoScalingMode
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int setLocalSubStreamRenderMode(NERtcVideoScalingMode scaling_mode) = 0;
 
     /** 设置本地视频镜像模式。
 
@@ -139,6 +224,50 @@ public:
     */
     virtual int setRemoteRenderMode(uid_t uid, NERtcVideoScalingMode scaling_mode) = 0;
 
+    /** 设置远端用户辅流视图。
+
+     该方法绑定远端用户和辅流显示视图，即设定 uid 指定的用户用哪个视图显示。调用该接口时需要指定远端视频的 uid，一般可以在用户加入后设置好。
+
+     @note 
+     - 如果 App 不能事先知道对方的 uid，可以在 APP 收到 \ref IRtcEngineEventHandler::onUserJoined "onUserJoined" 事件时设置。
+     - 退出频道后，SDK 会把远端用户的绑定关系清除掉。
+
+     @param[in] uid 远端用户 ID。
+     @param[in] canvas 视频画布信息
+     @return
+     - 0: 方法调用成功；
+     - 其他: 方法调用失败。
+     */
+    virtual int setupRemoteSubStreamVideoCanvas(uid_t uid, NERtcVideoCanvas* canvas) = 0;
+
+    /** 订阅 / 取消订阅指定远端用户的视频辅流。对方打开视频后需要主动订阅
+
+    @note 
+    - 必须在远端加入房间后调用。
+    - 必须先设置远端辅流画布。
+
+    @param[in] uid 指定用户的用户 ID。
+    @param[in] subscribe
+    - true: 订阅指定远端用户的视频流；
+    - false: 取消订阅指定远端用户的视频流。
+
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int subscribeRemoteVideoSubStream(uid_t uid, bool subscribe) = 0;
+
+    /** 设置远端辅流视图显示模式。
+
+    该方法设置远端辅流视图显示模式。App 可以多次调用此方法更改显示模式。
+
+    @param[in] uid 远端用户 ID。
+    @param[in] scaling_mode  视频显示模式: #NERtcVideoScalingMode
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int setRemoteSubSteamRenderMode(uid_t uid, NERtcVideoScalingMode scaling_mode) = 0;
 
     /** 开启视频预览。
 
@@ -164,7 +293,12 @@ public:
 
     /** 开关本地视频发送。
 
-    @note 调用该方法禁视频流时，SDK 不再发送本地视频流，但摄像头仍然处于工作状态。相比于 \ref nertc::IRtcEngine::enableLocalVideo "enableLocalVideo" (false) 用于控制本地视频流发送的方法，该方法响应速度更快。该方法不影响本地视频流获取，没有禁用摄像头。
+    @note
+    - 调用该方法禁视频流时，SDK 不再发送本地视频流，但摄像头仍然处于工作状态。
+    相比于 \ref nertc::IRtcEngine::enableLocalVideo "enableLocalVideo" (false)
+    用于控制本地视频流发送的方法，该方法响应速度更快。 
+    该方法不影响本地视频流获取，没有禁用摄像头。
+    - mute状态会在通话结束后被重置为非mute
 
     @param[in] mute
     - true: 不发送本地视频流
@@ -188,7 +322,9 @@ public:
 
     /** 设置录制的声音格式。该方法设置 \ref nertc::INERtcAudioFrameObserver::onAudioFrameDidRecord "onAudioFrameDidRecord" 回调的录制声音格式。
 
-     joinChannel 前/后都允许更改设置。取消监听后，后重置为空。
+     @note 
+     - joinChannel 前/后都允许更改设置。
+     - 取消监听，重置为空。
 
      @param format 指定 *onAudioFrameDidRecord* 中返回数据的采样率和数据的通道数。允许传入 NULL，默认为 NULL。
 
@@ -200,7 +336,9 @@ public:
 
     /** 设置播放的声音格式。该方法设置 \ref nertc::INERtcAudioFrameObserver::onAudioFrameWillPlayback "onAudioFrameWillPlayback" 回调的播放声音格式。
 
-     joinChannel 前/后都允许更改设置。取消监听后，后重置为空。
+     @note
+     - joinChannel 前/后都允许更改设置。
+     - 取消监听，重置为空。
 
      @param format 指定 *onAudioFrameWillPlayback* 中返回数据的采样率和数据的通道数。允许传入 NULL，默认为 NULL。
 
@@ -209,6 +347,22 @@ public:
      - 其他: 方法调用失败。
      */
     virtual int setPlaybackAudioFrameParameters(NERtcAudioFrameRequestFormat *format) = 0;
+
+
+	/** 设置采集和播放后的混合后的采样频率。该方法设置 \ref nertc::INERtcAudioFrameObserver::onMixedAudioFrame "onMixedAudioFrame" 回调的声音格式。
+
+	 @note
+     - joinChannel 前/后都允许更改设置。
+     - 目前只支持设置采样率。
+     - 未设置该接口，回调中采样率以sdk默认值返回。
+
+	 @param sample_rate 指定 *onMixedAudioFrame* 中返回数据的采样率。仅支持 8000， 16000， 32000， 44100或48000。
+
+	 @return
+	 - 0: 方法调用成功；
+	 - 其他: 方法调用失败。
+	 */
+	virtual int setMixedAudioFrameParameters(int sample_rate) = 0;
 
     /** 注册语音观测器对象。joinChannel 前/后都允许更改设置。
 
@@ -498,6 +652,36 @@ public:
     */
     virtual int getEffectPlaybackVolume(uint32_t effect_id, uint32_t *volume) = 0;
 
+    /** 开启声音共享。只支持windows
+
+    请在频道内调用该方法，该方法会捕获系统声音发送，开启本地语音后工作;
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int startSystemAudioLoopbackCapture() = 0;
+
+    /** 关闭声音共享。只支持windows
+
+    请在频道内调用该方法，通话结束后自动关闭
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int stopSystemAudioLoopbackCapture() = 0;
+
+    /** 设置声音共享音量。只支持windows
+
+    请在频道内调用该方法。
+
+    @param[in] volume 音效音量范围为 0~100。默认 100 为原始音量。
+
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int setSystemAudioLoopbackCaptureVolume(uint32_t volume) = 0;
+
     /** 开启或关闭耳返。
 
     请在频道内调用该方法。
@@ -548,7 +732,9 @@ public:
 
     /** 通过指定区域共享屏幕。共享一个屏幕或该屏幕的部分区域。用户需要在该方法中指定想要共享的屏幕区域。
 
-     该方法仅适用于 Windows。
+     @note
+     - 该方法仅适用于 Windows。
+     - 该方法打开视频辅流。
 
      @param  screen_rect 指定待共享的屏幕相对于虚拟屏的位置。
      @param  region_rect (可选) 指定待共享区域相对于整个屏幕屏幕的位置。如果设置的共享区域超出了屏幕的边界，则只共享屏幕内的内容；如果将 width 或 height 设为 0, 则共享整个屏幕。
@@ -562,7 +748,10 @@ public:
 
     /** 通过屏幕 ID 共享屏幕。共享一个屏幕或该屏幕的部分区域。用户需要在该方法中指定想要共享的屏幕 ID。
     
-     该方法仅适用于 macOS。
+
+     @note
+     - 该方法仅适用于 macOS。
+     - 该方法打开视频辅流。
 
      @param  display_id 指定待共享的屏幕 ID。开发者需要通过该参数指定你要共享的那个屏幕。
      @param  region_rect （可选）指定待共享的区域相对于整个窗口的位置。如果设置的共享区域超出了窗口的边界，则只共享窗口内的内容；如果宽或高为 0，则共享整个窗口。
@@ -575,6 +764,10 @@ public:
     virtual int startScreenCaptureByDisplayId(unsigned int display_id, const NERtcRectangle& region_rect, const NERtcScreenCaptureParameters& capture_params) = 0;
 
     /** 通过窗口 ID 共享窗口。共享一个窗口或该窗口的部分区域。用户需要在该方法中指定想要共享的窗口 ID。
+    
+     @note
+     - 该方法仅适用于 Windows 和 macOS。
+     - 该方法打开视频辅流。
 
      @param  window_id 指定待共享的窗口 ID。
      @param  region_rect （可选）指定待共享的区域相对于整个窗口的位置。如果设置的共享区域超出了窗口的边界，则只共享窗口内的内容；如果宽或高为 0，则共享整个窗口。
@@ -650,6 +843,107 @@ public:
     */
     virtual int pushExternalVideoFrame(NERtcVideoFrame* frame) = 0;
 
+
+    /** 开启或关闭外部音频源数据输入
+
+    启用外部音频数据输入功能，并设计采集参数。默认不启用该功能。
+    加入通话前调用该接口，当该方法调用成功后，音频输入设备选择和异常重启失效。
+    调用成功后可以使用 pushExternalAudioFrame 接口发送音频 PCM 数据。
+
+    @note 
+    - 该方法设置内部引擎为启用状态，启动时将用虚拟设备代替麦克风工作，在 \ref IRtcEngine::leaveChannel "leaveChannel" 后仍然有效。
+    - 如果需要关闭该功能，需要在下次通话前调用接口关闭外部音频数据输入功能。
+    - 该接口在麦克风设备使用时调用失败，如通话前的麦克风检测。
+    - 启用外部音频数据输入功能后，SDK 内部实现部分麦克风由外部输入数据代替。例如进行 loopback 检测时，会听到输入的外部数据。
+    - 启用外部音频数据输入功能后，麦克风相关的设置会失败或不在通话中生效。
+
+    @param[in] enabled 是否外部数据输入:
+    - true: 开启外部数据输入；
+    - false: 关闭外部数据输入 (默认)。
+    @param[in] sample_rate 数据采样率，后续数据传入需要按该格式传入。 
+    注意：调用接口关闭功能时可传入任意合法值，此时设置不会生效。
+    @param[in] channels 数据声道数，后续数据传入需要按该格式传入。
+    注意：调用接口关闭功能时可传入任意合法值，此时设置不会生效。
+    可设置为：
+    - 1：单声道。
+    - 2：双声道。
+
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int setExternalAudioSource(bool enabled, int sample_rate, int channels) = 0;
+
+    /** 推送外部音频数据输入
+
+    将外部音频数据帧推送给内部引擎。
+    通过 setExternalAudioSource 启用外部音频数据输入功能成功后，可以使用 pushExternalAudioFrame 接口发送音频 PCM 数据。
+
+    @note 
+    - pushExternalAudioFrame 中数据长度不能超过 7680字节。
+    - 数据帧时长建议匹配 10ms 周期。
+    - 该方法在音频输入设备关闭后不再生效。例如关闭本地音频、通话结束、通话前麦克风设备测试关闭等情况下，该设置不再生效。
+
+    @param[in] frame 桢数据，数据长度不能超过7680:
+    - 外部输入数据帧，数据时长和调用周期时长一致。
+
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int pushExternalAudioFrame(NERtcAudioFrame* frame) = 0;
+
+    /** 开启或关闭外部音频数据渲染
+
+    启用外部音频数据渲染功能，并设计采集参数。默认不启用该功能。
+    加入通话前调用该接口，当该方法调用成功后，音频播放设备选择和异常重启失效。
+    调用成功后可以使用 pullExternalAudioFrame 接口获取音频 PCM 数据。
+
+    @note
+    - 该方法设置内部引擎为启用状态，启动时将用虚拟设备代替扬声器工作，在 \ref IRtcEngine::leaveChannel "leaveChannel"
+    后仍然有效。
+    - 如果需要关闭该功能，需要在下次通话前调用接口关闭该功能。
+    - 该接口在设备使用时调用失败，如通话前的扬声器检测。
+    - 启用外部音频数据渲染功能后，SDK 内部实现部分扬声器由外部渲染代替。例如进行 loopback
+    检测时，需要由外部渲染播放。
+    - 启用外部音频数据渲染功能后，扬声器相关的设置会失败或不在通话中生效。
+
+    @param[in] enabled 是否外部数据输出:
+    - true: 开启外部数据渲染；
+    - false: 关闭外部数据渲染 (默认)。
+    @param[in] sample_rate 数据采样率，后续数据按该格式返回。
+    注意：调用接口关闭功能时可传入任意合法值，此时设置不会生效。
+    @param[in] channels 数据声道数，后续数据按该格式返回。
+    注意：调用接口关闭功能时可传入任意合法值，此时设置不会生效。
+    可设置为：
+    - 1：单声道。
+    - 2：双声道。
+
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int setExternalAudioRender(bool enabled, int sample_rate, int channels) = 0;
+
+    /** 获取外部音频渲染数据
+
+    该方法将从内部引擎拉取音频数据。
+    通过 setExternalAudioRender 启用外部音频数据渲染功能成功后，可以使用 pullExternalAudioFrame 接口获取音频 PCM 数据。
+
+    @note
+    - pullExternalAudioFrame 中数据长度不能超过 7680字节。
+    - 数据帧时长建议匹配 10ms 周期。
+    - 该方法在音频渲染设备关闭后不再生效，此时会返回空数据。例如通话结束、通话前扬声器设备测试关闭等情况下，该设置不再生效。
+
+    @param[out] data 数据指针，SDK内部会将数据拷贝到data中。
+    @param[in] len 需要的数据长度，数据长度不能超过7680。
+
+    @return
+    - 0: 方法调用成功；
+    - 其他: 方法调用失败。
+    */
+    virtual int pullExternalAudioFrame(void* data, int len) = 0;
+
     /** 查询 SDK 版本号。
 
      @param[out] build 编译号。
@@ -671,7 +965,7 @@ public:
     virtual void uploadSdkInfo() = 0;
 
     /** 添加房间推流任务，成功添加后当前用户可以收到该直播流的状态通知。通话中有效。
-     @param[in] info 直播任务信息。 #NERtcLiveStreamTaskInfo
+     @param[in] info 直播任务信息。
      @return
      - 0: 方法调用成功；
      - 其他: 方法调用失败。
@@ -679,7 +973,7 @@ public:
     virtual int addLiveStreamTask(const NERtcLiveStreamTaskInfo& info) = 0;
 
     /** 更新修改房间推流任务。通话中有效。
-     @param[in] info 直播任务信息。 #NERtcLiveStreamTaskInfo
+     @param[in] info 直播任务信息。
      @return
      - 0: 方法调用成功；
      - 其他: 方法调用失败。
@@ -693,6 +987,48 @@ public:
      - 其他: 方法调用失败。
      */
     virtual int removeLiveStreamTask(const char* task_id) = 0;
+
+	/**
+	 将小数据量的自定义数据嵌入视频帧中
+     
+     @note 本接口有以下限制：
+     - 纯音频SDK禁用该接口，如需使用请前往云信官网下载并替换成视频SDK
+	 - sei 的发送的最大数据长度为 4k，若发送大量数据，会导致视频码率增大，可能导致视频画质下降甚至卡顿
+	 - sei 发送的频率，最高为视频发送的帧率，建议不超过 10 次/秒
+	 - sei 数据不一定立刻发出去，最快在下一帧视频数帧之后发送，最慢在接下来的 5 帧视频帧之后发送
+	 - sei 数据有可能由于弱网信息而丢失，所以建议多次发送来保证接收端收到的概率
+	 - 需要使用哪个通道发送sei时，需要提前把对应的数据流通道开启
+
+     @param data 自定义数据
+     @param length 自定义数据长度，最大值 4k
+	 @param type  sei使用的流通道类型
+
+	 @return 操作返回值，成功则返回 0
+	 - 成功:  成功进入待发送队列，会在最近的视频帧之后发送该数据
+	 - 失败:  数据被限制发送，可能发送的频率太高，队列已经满了，或者数据大小超过最大值 4k
+	 */
+	virtual int sendSEIMsg(const char* data, int length, NERtcStreamChannelType type) = 0;
+
+	/**
+	 将小数据量的自定义数据嵌入视频帧中
+
+     @note 本接口有以下限制：
+     - 纯音频SDK禁用该接口，如需使用请前往云信官网下载并替换成视频SDK
+     - sei 的发送的最大数据长度为 4k，若发送大量数据，会导致视频码率增大，可能导致视频画质下降甚至卡顿
+     - sei 发送的频率，最高为视频发送的帧率，建议不超过 10 次/秒
+     - sei 数据不一定立刻发出去，最快在下一帧视频数帧之后发送，最慢在接下来的 5 帧视频帧之后发送
+     - sei 数据有可能由于弱网信息而丢失，所以建议多次发送来保证接收端收到的概率
+     - 需要使用哪个通道发送sei时，需要提前把对应的数据流通道开启
+
+     @param data 自定义数据
+     @param length 自定义数据长度，最大值 4k
+	 @note 纯音频SDK禁用该接口，如需使用请前往云信官网下载并替换成视频SDK
+
+	 @return 操作返回值，成功则返回 0
+	 - 成功:  成功进入待发送队列，会在最近的视频帧之后发送该数据
+	 - 失败:  数据被限制发送，可能发送的频率太高，队列已经满了，或者数据大小超过最大值 4k
+	 */
+	virtual int sendSEIMsg(const char* data, int length) = 0;
 };
 
 } //namespace nertc

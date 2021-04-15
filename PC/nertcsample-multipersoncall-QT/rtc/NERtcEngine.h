@@ -1,14 +1,17 @@
 ﻿#ifndef NRTC_ENGINE_H
 #define NRTC_ENGINE_H
 
+#include <QMutex>
 #include <QObject>
 
+#include "include/base_type_defines.h"
 #include "nertc_sdk/api/nertc_audio_device_manager.h"
 #include "nertc_sdk/api/nertc_base.h"
 #include "nertc_sdk/api/nertc_engine_ex.h"
 #include "nertc_sdk/api/nertc_video_device_manager.h"
 
-#define APP_KEY  //输入你的appkey
+//输入你的appkey
+#define APP_KEY ""
 
 class NEAudioMixer;
 class NEDeviceManager;
@@ -74,12 +77,15 @@ public:
     bool getIsInit();
 
     //加入频道
-    int joinChannel(const QString& token, const QString& roomid, const QString& uid, unsigned int video_resolution = 2);
+    int joinChannel(const QString& token, const QString& roomid, const QString& uid);
     //离开频道
     int leaveChannel();
 
-    //设置视频分辨率
-    void setCurrentVideoProfile(unsigned int index);
+    //设置视频参数
+    void setCurrentVideoProfile(unsigned int profile);
+    void setCustomVideoProfile(unsigned int profile, int framerate);
+    //设置音频参数
+    void setCurrentAudioProfile(unsigned int profile, unsigned int sence);
 
     //启用/关闭美颜
     void enableBeauty(bool enabled);
@@ -143,10 +149,10 @@ Q_SIGNALS:
     void sigUserLeft(quint64 uid);
 
     //视频停止
-    void videoStopped(unsigned long long uid);
+    void videoStopped(quint64 uid);
 
     //视频开始
-    void videoStart(unsigned long long uid, int max_profile);
+    void videoStart(quint64 uid, int max_profile);
 
     //断开
     void sigDisconnected(int code);
@@ -159,6 +165,15 @@ Q_SIGNALS:
 
     //用户启用/禁用音频
     void sigUserAudioMute(quint64 uid, bool mute);
+
+    //网络状况
+    void sigNetworkQuality(quint64 uid, nertc::NERtcNetworkQualityType up, nertc::NERtcNetworkQualityType down);
+
+    //数据统计
+    void sigRtcStats(NERoomStats stats);
+
+public:
+    QMutex m_mutex;
 
 private:
     // 网易云通信 SDK 引擎
@@ -178,9 +193,6 @@ private:
 
     // 事件处理器
     std::shared_ptr<NEEventHandler> m_rtcEngineHandler;
-
-    // 当前视频分辨率
-    nertc::NERtcVideoProfileType current_video_profile;
 
     // 实验性参数
     NRTCParameter rtc_parameter_;

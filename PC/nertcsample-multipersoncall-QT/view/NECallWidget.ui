@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1184</width>
-    <height>666</height>
+    <width>1366</width>
+    <height>718</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1184</width>
-    <height>666</height>
+    <width>1366</width>
+    <height>718</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
   <property name="styleSheet">
    <string notr="true"/>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
+  <layout class="QHBoxLayout" name="horizontalLayout_3">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -175,8 +175,7 @@ margin-left: </string>
             <item>
              <widget class="QLabel" name="label">
               <property name="styleSheet">
-               <string notr="true">font-family: PingFangSC-Regular;
-font-size: 14px;
+               <string notr="true">font-size: 14px;
 color: #FFFFFF;</string>
               </property>
               <property name="text">
@@ -245,33 +244,203 @@ background-color: rgb(0, 0, 0);
 }
 </string>
          </property>
-         <layout class="QGridLayout" name="gridLayout">
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <property name="spacing">
+           <number>2</number>
+          </property>
           <property name="leftMargin">
-           <number>15</number>
+           <number>58</number>
           </property>
           <property name="topMargin">
            <number>8</number>
           </property>
           <property name="rightMargin">
-           <number>15</number>
+           <number>58</number>
           </property>
           <property name="bottomMargin">
            <number>8</number>
           </property>
+          <item>
+           <layout class="QHBoxLayout" name="layout_top"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="layout_bottom"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QWidget" name="speakerModeWidget" native="true">
+         <property name="styleSheet">
+          <string notr="true">QWidget#speakerModeWidget{
+background-color: rgb(0, 0, 0);
+}
+</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
           <property name="spacing">
            <number>8</number>
           </property>
-          <item row="1" column="1">
-           <widget class="NEVideoWidget" name="videoWidget_4" native="true"/>
+          <property name="leftMargin">
+           <number>58</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>58</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QFrame" name="frame_2">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>90</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>90</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <spacer name="horizontalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>276</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>160</width>
+                 <height>90</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>484</width>
+                 <height>90</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_6">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <layout class="QHBoxLayout" name="secondaryMembersLayout">
+                  <property name="spacing">
+                   <number>4</number>
+                  </property>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>278</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="NEVideoWidget" name="videoWidget_3" native="true"/>
-          </item>
-          <item row="0" column="1">
-           <widget class="NEVideoWidget" name="videoWidget_2" native="true"/>
-          </item>
-          <item row="0" column="0">
-           <widget class="NEVideoWidget" name="videoWidget_1" native="true"/>
+          <item>
+           <widget class="QWidget" name="widget_2" native="true">
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QHBoxLayout" name="speakerLayout">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+              </layout>
+             </item>
+            </layout>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -282,14 +451,6 @@ background-color: rgb(0, 0, 0);
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>NEVideoWidget</class>
-   <extends>QWidget</extends>
-   <header location="global">view/NEVideoWidget.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

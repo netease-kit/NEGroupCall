@@ -92,7 +92,7 @@ public:
         
     /** Sets the volume of the microphone.
 
-     @param volume Sets the volume of the microphone. The value ranges between 0 (lowest volume) and 255 (highest volume).
+     @param volume Sets the volume of the microphone. The value ranges between 0 (lowest volume & mute) and 255 (highest volume).
      @return
      - 0: Success.
      - other: Failure.
@@ -108,7 +108,7 @@ public:
     virtual int getRecordDeviceVolume(uint32_t* volume) = 0;
     /** Sets the volume of the audio playout device.
 
-     @param volume Sets the volume of the audio playout device. The value ranges between 0 (lowest volume) and 255 (highest volume).
+     @param volume Sets the volume of the audio playout device. The value ranges between 0 (lowest volume & mute) and 255 (highest volume).
      @return
      - 0: Success.
      - other: Failure.

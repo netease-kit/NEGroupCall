@@ -1,4 +1,4 @@
-﻿/** @file nertc_engine_event_handler.h
+/** @file nertc_engine_event_handler.h
 * @brief NERTC SDK回调接口头文件。
 * NERTC SDK所有接口参数说明: 所有与字符串相关的参数(char *)全部为UTF-8编码。
 * @copyright (c) 2015-2019, NetEase Inc. All rights reserved
@@ -89,6 +89,18 @@ public:
         (void)uid;
     }
 
+    /** 连接状态变更。
+
+      有时候由于通话流程、用户行为、网络原因等，客户端通话状态变更，触发此回调。
+
+     @param state  变更后通话状态。
+     @param reason  变更原因。
+     */
+    virtual void onConnectionStateChange(NERtcConnectionStateType state, NERtcReasonConnectionChangedType reason) {
+        (void)state;
+        (void)reason;
+    }
+
     /** 重新加入频道回调。
 
 	  有时候由于网络原因，客户端可能会和服务器失去连接，SDK会进行自动重连，自动重连后触发此回调方法。
@@ -123,13 +135,29 @@ public:
     virtual void onDisconnect(NERtcErrorCode reason) {
         (void)reason;
     }
+    
+    /** 参会者角色类型变更回调。
+    
+    本地用户加入房间后，通过 \ref IRtcEngine::setClientRole "setClientRole" 切换用户角色后会触发此回调。例如从主播切换为观众、从观众切换为主播。
+
+    @note 直播场景下，如果您在加入房间后调用该方法切换用户角色，调用成功后，会触发以下回调：
+    - 主播切观众，本端触发onClientRoleChanged回调，远端触发\ref nertc::IRtcEngineEventHandler::onUserLeft "onUserLeft"回调。
+    - 观众切主播，本端触发onClientRoleChanged回调，远端触发\ref nertc::IRtcEngineEventHandler::onUserJoined "onUserJoined"回调。
+
+     @param oldRole  原角色类型。
+     @param newRole  新角色类型。
+     */
+    virtual void onClientRoleChanged(NERtcClientRole oldRole, NERtcClientRole newRole) {
+        (void)oldRole;
+        (void)newRole;
+    }
 
     /** 远端用户加入当前频道回调。
 
      - 通信模式下，该回调提示有远端用户加入了频道，并返回新加入用户的 ID；如果加入之前，已经有其他用户在频道中了，新加入的用户也会收到这些已有用户加入频道的回调。
 
      @param uid 新加入频道的远端用户ID。
-     @param user_name 新加入频道的远端用户名。
+     @param user_name 新加入频道的远端用户名(无效)。
      */
     virtual void onUserJoined(uid_t uid, const char * user_name) {
         (void)uid;

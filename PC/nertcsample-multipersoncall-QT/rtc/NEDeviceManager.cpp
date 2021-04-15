@@ -1,6 +1,7 @@
 #include <QDebug>
 #include <QTimer>
 
+#include "utils/log_instance.h"
 #include "NEDeviceManager.h"
 #include "NERtcEngine.h"
 
@@ -63,7 +64,7 @@ void NEDeviceManager::setCurMicphone(const QString &deviceGuid)
 
     curMicphoneId = deviceGuid;
 
-    qInfo() << "setCurMicphone: " <<  audio_device_manager->setRecordDevice(deviceGuid.toUtf8().data());
+    LOG(INFO) << "setCurMicphone: " <<  audio_device_manager->setRecordDevice(deviceGuid.toUtf8().data());
 }
 
 const QString &NEDeviceManager::getCurMicphone()
@@ -79,8 +80,8 @@ void NEDeviceManager::setCurCameraDevice(const QString &deviceGuid)
 
     curCameraDeviceId = deviceGuid;
 
-    qInfo() << "deviceGuid: " << deviceGuid;
-    qInfo() << "setCurCameraDevice: " <<  video_device_manager->setDevice(deviceGuid.toUtf8().data());
+    LOG(INFO) << "deviceGuid: " << deviceGuid.toStdString();
+    LOG(INFO) << "setCurCameraDevice: " <<  video_device_manager->setDevice(deviceGuid.toUtf8().data());
 }
 
 const QString &NEDeviceManager::getCurCameraDevice()

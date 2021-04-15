@@ -2,12 +2,15 @@
 #define NEBEAUTYMANAGER_H
 
 #include <QObject>
+#include <QPointer>
+
+class NERtcEngine;
 
 class NEBeautyManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit NEBeautyManager(QObject *parent = nullptr);
+    explicit NEBeautyManager(NERtcEngine* engine);
     ~NEBeautyManager();
 
     //设置美颜相关参数：滤镜、美型，具体参考相芯美颜文档
@@ -27,7 +30,8 @@ public:
 private:
     int m_BeautyHandles;
     int m_FrameID = 0;
-    bool m_bInit;
+    bool m_bInit = false;
+    QPointer<NERtcEngine> m_engine;
 };
 
 #endif // NEBEAUTYMANAGER_H
