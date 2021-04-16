@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.netease.biz_live.yunxin.live.LiveService;
 import com.netease.lib_video_group.yunxin.video_group.VideoGroupService;
 import com.netease.yunxin.nertc.demo.R;
 import com.netease.yunxin.nertc.demo.basic.BaseFragment;
@@ -38,12 +37,6 @@ public class AppEntranceFragment extends BaseFragment {
                         () -> {
                             VideoGroupService videoGroupService = ModuleServiceMgr.getInstance().getService(VideoGroupService.class);
                             videoGroupService.startVideoGroup(getContext());
-                        }),
-                new FunctionItem(FunctionAdapter.TYPE_VIEW_TITLE, "Live", R.drawable.icon_title_live),
-                new FunctionItem(R.drawable.icon_pk_live, "PK 直播",
-                        () -> {
-                            LiveService liveService = ModuleServiceMgr.getInstance().getService(LiveService.class);
-                            liveService.launchPkLive(getContext());
                         })
         )));
     }

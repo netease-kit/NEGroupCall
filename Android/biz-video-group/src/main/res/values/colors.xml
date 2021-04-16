@@ -7,4 +7,5 @@
     <color name="login_color_btn_disable">#FF092650</color>
     <color name="uncheck_color">#2e000000</color>
     <color name="checked_color">#337EFF</color>
+    <color name="video_group_line_color">#E6E7EB</color>
 </resources>

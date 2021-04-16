@@ -42,9 +42,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-
-    api project(':base-config')
-//    api 'com.netease.yunxin.android.lib:network-common:1.0.0-SNAPSHOT'
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+    implementation 'androidx.cardview:cardview:1.0.0'
     api project(':lib-user')
     api project(':lib-video-group')
     implementation project(':lib-basic')

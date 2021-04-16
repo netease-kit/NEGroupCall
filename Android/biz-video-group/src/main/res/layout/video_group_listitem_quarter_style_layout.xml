@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.netease.biz_video_group.yunxin.voideoGroup.widget.VideoCallBaseItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/video_call_base_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:background="@android:color/holo_green_dark" />

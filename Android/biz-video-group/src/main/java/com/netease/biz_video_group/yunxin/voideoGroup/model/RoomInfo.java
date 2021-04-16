@@ -13,4 +13,20 @@ public class RoomInfo implements Serializable {
     public int meetingUniqueId;//int	房间在数据库中的唯一id
     public String mpRoomId;//String	房间号，由用户输入
     public String nrtcAppKey;//String	nrtc的appKey
+
+    @Override
+    public String toString() {
+        return "RoomInfo{" +
+                "avRoomCName='" + avRoomCName + '\'' +
+                ", avRoomCid='" + avRoomCid + '\'' +
+                ", avRoomUid=" + avRoomUid +
+                ", avRoomCheckSum='" + avRoomCheckSum + '\'' +
+                ", createTime=" + createTime +
+                ", duration=" + duration +
+                ", roomKey='" + roomKey + '\'' +
+                ", meetingUniqueId=" + meetingUniqueId +
+                ", mpRoomId='" + mpRoomId + '\'' +
+                ", nrtcAppKey='" + nrtcAppKey + '\'' +
+                '}';
+    }
 }

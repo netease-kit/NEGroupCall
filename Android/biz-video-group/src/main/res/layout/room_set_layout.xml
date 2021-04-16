@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/channel_join_bg">
 
     <RelativeLayout
@@ -26,6 +27,16 @@
             android:textSize="@dimen/text_size_17"
             android:textColor="@color/colorWhite"
             android:text="@string/join_channel" />
+
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            tools:background="@android:color/holo_green_light"
+            android:src="@drawable/video_group_icon_setting"
+            android:id="@+id/iv_setting"
+            android:scaleType="centerInside"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_40" />
     </RelativeLayout>
 
     <EditText
@@ -63,6 +74,25 @@
         android:maxLength="12"
         android:inputType="text"
         android:layout_below="@+id/et_room_name" />
+
+
+    <com.netease.biz_video_group.yunxin.voideoGroup.widget.ParameterSettingView
+        android:id="@+id/camera_setting"
+        android:layout_below="@+id/et_user_name"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <com.netease.biz_video_group.yunxin.voideoGroup.widget.ParameterSettingView
+        android:id="@+id/micphone_setting"
+        android:layout_below="@+id/camera_setting"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btn_enter"

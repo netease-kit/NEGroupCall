@@ -38,7 +38,6 @@ public class DemoNameActivity extends BaseActivity {
         demoNameList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         String demoName = getIntent().getStringExtra(KEY_PARAM_DEMO_NAME);
         adapter = new DemoNameAdapter(this, demoName, Arrays.asList(
-                "一对一音视频通话",
                 "多人视频通话"
         ));
         demoNameList.setAdapter(adapter);
