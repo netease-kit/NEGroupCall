@@ -1,0 +1,43 @@
+<view class="container-box">
+  <view class='title' style='padding-top:{{(headerHeight + statusBarHeight)/2 - 12}}px'>
+    <view>加入频道</view>
+  </view>
+  <view class="input-wrapper">
+    <input type="number" maxlength="12" data-key="channelName" value="{{channelName}}" maxlength="20" bindinput="changeHandler" placeholder="输入相同房间号即可通话" />
+  </view>
+  <view class="input-wrapper">
+    <input type="text" maxlength="12" data-key="nickName" value="{{nickName}}" maxlength="20" bindinput="changeHandler" placeholder="输入昵称" />
+  </view>
+  <view class="opt-item">
+    <text>入会时打开摄像头</text>
+    <switch color="#337EFF" data-key="openCamera" checked="{{openCamera}}" bindchange="changeHandler"></switch>
+  </view>
+  <view class="opt-item">
+    <text>入会时打开麦克风</text>
+    <switch color="#337EFF" data-key="openMicrophone" checked="{{openMicrophone}}" bindchange="changeHandler"></switch>
+  </view>
+  <view class="opt-item">
+    <text>视频分辨率</text>
+    <radio-group class="radio-group-no-box" data-key="resolution" bindchange="changeHandler">
+      <label wx:for="{{resolutionArray}}" wx:key="index" class="radio-item {{ resolution == item.value ? 'selected': ''}}">
+        <radio value="{{item.value}}" checked="{{item.checked}}" /> {{item.title}}
+      </label>
+    </radio-group>
+  </view>
+  <view class="opt-item">
+    <text>音质</text>
+    <radio-group class="radio-group-no-box" data-key="audioQuality" bindchange="changeHandler">
+      <label wx:for="{{audioQualityArray}}" wx:key="index" class="radio-item {{ audioQuality == item.value ? 'selected': ''}}">
+        <radio value="{{item.value}}" checked="{{item.checked}}" /> {{item.title}}
+      </label>
+    </radio-group>
+  </view>
+  <view class="opt-item">
+    <text>调试模式</text>
+    <switch color="#337EFF" data-key="debug" checked="{{debug}}" bindchange="changeHandler"></switch>
+  </view>
+</view>
+<view class='bottom-btn'>
+  <button class="btn" bindtap="joinRoom" hover-class="none">加入频道</button>
+</view>
+<cover-image class='close' style="top:{{(headerHeight + statusBarHeight) - 34}}rpx"src="../../../assets/images/arrow-left.png" bindtap="onBack"></cover-image>

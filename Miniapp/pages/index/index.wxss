@@ -1,0 +1,50 @@
+/**index.wxss**/
+
+.container {
+  background-image: url(https://yx-web-nosdn.netease.im/quickhtml%2Fassets%2Fyunxin%2Fdefault%2Fgroupcall%2Fbg.png);
+  background-color: #333;
+  background-repeat:no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.container .title{
+  color: #FFFFFF;
+  padding-top: 65rpx;
+  padding-bottom: 40rpx;
+  line-height: 60rpx;
+  font-size: 36rpx;
+}
+.guide-box {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 80%;
+}
+.single-box {
+  padding: 40rpx 48rpx;
+  background-color: #323755;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.icon {
+  width: 96rpx;
+  height: 96rpx;
+}
+.label {
+  color: #fff;
+  font-size: 32rpx;
+  flex: 1;
+  margin-left: 24rpx;
+}
+.arrow {
+  height: 32rpx;
+  width: 32rpx;
+}
