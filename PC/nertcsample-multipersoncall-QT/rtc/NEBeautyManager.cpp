@@ -5,10 +5,12 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <QThread>
+#include "utils/log_instance.h"
 
 #include "NEBeautyManager.h"
 #include "CNamaSDK.h"          //nama SDK 的头文件
 #include "authpack.h"
+#include "NERtcEngine.h"
 
 #define MAX_BEAUTYFACEPARAMTER 7
 #define MAX_FACESHAPEPARAMTER 15
@@ -22,17 +24,16 @@ const std::string g_faceShapeParamName[MAX_FACESHAPEPARAMTER] = { "cheek_thinnin
                                                                   "intensity_canthus", "intensity_eye_space", "intensity_eye_rotate", "intensity_long_nose",
                                                                   "intensity_philtrum", "intensity_smile" };
 
-NEBeautyManager::NEBeautyManager(QObject *parent)
-    : QObject(parent)
-    , m_bInit(false)
+NEBeautyManager::NEBeautyManager(NERtcEngine* engine)
 {
+    m_engine = engine;
 }
 
 NEBeautyManager::~NEBeautyManager()
 {
     fuDestroyAllItems();
 
-    qInfo() << "~NEBeautyManager";
+    LOG(INFO) << "~NEBeautyManager";
 }
 
 void NEBeautyManager::initBeauty()
@@ -41,7 +42,7 @@ void NEBeautyManager::initBeauty()
         return;
     }
 
-    qInfo()  <<  "fuGetOpenGLSupported: " << fuGetOpenGLSupported();
+    LOG(INFO)  <<  "fuGetOpenGLSupported: " << fuGetOpenGLSupported();
 
     auto ret = fuSetup(nullptr, 0, nullptr, g_auth_package, sizeof(g_auth_package));
 
@@ -49,22 +50,22 @@ void NEBeautyManager::initBeauty()
         m_bInit = true;
     }
 
-    qInfo() << "fuSetup:" << ret;
+    LOG(INFO) << "fuSetup:" << ret;
 
     qDebug()<< "fuGetVersion: " << fuGetVersion();
 
     QString beautyBundlePath = QCoreApplication::applicationDirPath() + "/assert/" + g_faceBeautification;
 
-    qInfo() << "beautyBundlePath: " << beautyBundlePath;
+    LOG(INFO) << "beautyBundlePath: " << beautyBundlePath.toStdString();
 
     std::vector<char> propData;
     if (false == LoadBundleInner(beautyBundlePath.toStdString(), propData))
     {
-        qDebug() << "load face beautification data failed.";
+        LOG(INFO) << "load face beautification data failed";
         return;
     }
 
-    qDebug() << "load face beautification data.";
+    LOG(INFO) << "load face beautification data.";
 
     m_BeautyHandles = fuCreateItemFromPackage(&propData[0], propData.size());
 

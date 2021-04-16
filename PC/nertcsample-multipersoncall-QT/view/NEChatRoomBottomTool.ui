@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>330</width>
+    <width>385</width>
     <height>60</height>
    </rect>
   </property>
@@ -33,13 +33,13 @@
     <widget class="QFrame" name="frame_3">
      <property name="minimumSize">
       <size>
-       <width>330</width>
+       <width>384</width>
        <height>60</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>330</width>
+       <width>384</width>
        <height>60</height>
       </size>
      </property>
@@ -106,14 +106,7 @@ background-color: #393947;</string>
 {
 	border-image: url(:/image/voice-on.png);
 	background-color: transparent;
-}
-
-QPushButton:checked
-{
-	background-color: transparent;
-	border-image: url(:/image/voice-off.png);
-}
-</string>
+}</string>
           </property>
           <property name="text">
            <string/>
@@ -163,9 +156,15 @@ padding-right: 2px;
 
 QPushButton::menu-indicator{image:none;}
 
-QPushButton:hover{
+QPushButton:pressed{
 	background-color: rgba(0, 0, 0, 100);
-}</string>
+}
+
+QPushButton:open{
+	background-color: rgba(0, 0, 0, 100);
+}
+
+</string>
           </property>
           <property name="text">
            <string/>
@@ -241,7 +240,12 @@ padding-right: 2px;
 
 QPushButton::menu-indicator{image:none;}
 
-QPushButton:hover{
+
+QPushButton:pressed{
+	background-color: rgba(0, 0, 0, 100);
+}
+
+QPushButton:open{
 	background-color: rgba(0, 0, 0, 100);
 }</string>
           </property>
@@ -287,6 +291,31 @@ QPushButton:checked{
         </property>
         <property name="checkable">
          <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnData">
+        <property name="minimumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-image: url(:/image/data.png);</string>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>

@@ -11,6 +11,7 @@
 #include "ui_NEChatRoomBottomTool.h"
 #include "view/NEAudioDeviceListWidget.h"
 #include "view/NECameraDeviceListWidget.h"
+#include "utils/log_instance.h"
 
 NEChatRoomBottomTool::NEChatRoomBottomTool(QWidget* parent) : QWidget(parent), ui(new Ui::NEChatRoomBottomTool) {
     ui->setupUi(this);
@@ -19,6 +20,7 @@ NEChatRoomBottomTool::NEChatRoomBottomTool(QWidget* parent) : QWidget(parent), u
     this->setAttribute(Qt::WA_TranslucentBackground);
 
 #ifdef USE_BEAUTY
+    ui->btnBeauty->setChecked(true);
     connect(ui->btnBeauty, &QPushButton::clicked, this, &NEChatRoomBottomTool::onBeautyClicked);
 #else
     ui->btnBeauty->setVisible(false);
@@ -56,6 +58,7 @@ NEChatRoomBottomTool::NEChatRoomBottomTool(QWidget* parent) : QWidget(parent), u
     connect(cameraWidget, &NECameraDeviceListWidget::sigCameraDeviceChanged, this, &NEChatRoomBottomTool::onCameraDeviceChanged);
     connect(audioWidget, &NEAudioDeviceListWidget::sigSpeakerDeviceChanged, this, &NEChatRoomBottomTool::onSpeakerDeviceChanged);
     connect(audioWidget, &NEAudioDeviceListWidget::sigMicDeviceChanged, this, &NEChatRoomBottomTool::onMicDeviceChanged);
+    connect(ui->btnData, &QPushButton::clicked, this, &NEChatRoomBottomTool::sigShowData);
 }
 
 NEChatRoomBottomTool::~NEChatRoomBottomTool() {
@@ -73,7 +76,49 @@ void NEChatRoomBottomTool::init() {
 }
 
 void NEChatRoomBottomTool::setVideoCheck(bool check) {
-    ui->btnVideo->setChecked(check);
+    m_bCameraCheck = check;
+
+    if (m_bCameraCheck) {
+        ui->btnVideo->setStyleSheet(
+            "QPushButton{border-image: url(:/image/video-off.png);"
+            "background-color: transparent;}");
+    } else {
+        ui->btnVideo->setStyleSheet(
+            "QPushButton{border-image: url(:/image/video-on.png);"
+            "background-color: transparent;}");
+    }
+}
+
+void NEChatRoomBottomTool::setAudioCheck(bool check)
+{
+    m_bMicCheck = check;
+
+    if (m_bMicCheck) {
+        ui->btnVoice->setStyleSheet(
+            "QPushButton{border-image: url(:/image/voice-off.png);"
+            "background-color: transparent;}");
+    } else {
+        ui->btnVoice->setStyleSheet(
+            "QPushButton{border-image: url(:/image/voice-on.png);"
+            "background-color: transparent;}");
+    }
+}
+
+void NEChatRoomBottomTool::setVideoEnable(bool bEnable)
+{
+    if(bEnable) {
+        ui->btnVideo->setCursor(QCursor(Qt::PointingHandCursor));
+    } else {
+        ui->btnVideo->setCursor(QCursor(Qt::ArrowCursor));
+    }
+
+    ui->btnVideo->setEnabled(bEnable);
+    ui->btnVideo->update();
+}
+
+bool NEChatRoomBottomTool::getIsBeutyOpen()
+{
+    return !ui->btnBeauty->isChecked();
 }
 
 bool NEChatRoomBottomTool::eventFilter(QObject* watched, QEvent* event) {
@@ -94,29 +139,43 @@ bool NEChatRoomBottomTool::eventFilter(QObject* watched, QEvent* event) {
     return false;
 }
 
-void NEChatRoomBottomTool::showEvent(QShowEvent* event) {
-    init();
+void NEChatRoomBottomTool::hideEvent(QHideEvent *event)
+{
+      ui->btnVideoSetting->menu()->hide();
+      ui->btnVoiceSetting->menu()->hide();
 }
 
 void NEChatRoomBottomTool::onVoiceClicked() {
-    bool bCheck = !ui->btnVoice->isChecked();
-    Q_EMIT sigVoiceEnable(bCheck);
+    m_bMicCheck = !m_bMicCheck;
+
+    if (m_bMicCheck) {
+        ui->btnVoice->setStyleSheet(
+            "QPushButton{border-image: url(:/image/voice-off.png);"
+            "background-color: transparent;}");
+    } else {
+        ui->btnVoice->setStyleSheet(
+            "QPushButton{border-image: url(:/image/voice-on.png);"
+            "background-color: transparent;}");
+    }
+
+    bool enable = !m_bMicCheck;
+    Q_EMIT sigVoiceEnable(enable);
 }
 
 void NEChatRoomBottomTool::onVideoClicked() {
     qint64 curTime = QDateTime::currentMSecsSinceEpoch();
 
     //防止操作过快导致卡死
-    if (qAbs(lastClickTime - curTime) < 500) {
-        qInfo() << "opt fast";
+    if (qAbs(lastClickTime - curTime) < 1000) {
+        LOG(INFO) << "opt fast";
         return;
     }
 
     lastClickTime = curTime;
 
-    m_bCheck = !m_bCheck;
+    m_bCameraCheck = !m_bCameraCheck;
 
-    if (m_bCheck) {
+    if (m_bCameraCheck) {
         ui->btnVideo->setStyleSheet(
             "QPushButton{border-image: url(:/image/video-off.png);"
             "background-color: transparent;}");
@@ -126,7 +185,8 @@ void NEChatRoomBottomTool::onVideoClicked() {
             "background-color: transparent;}");
     }
 
-    bool enable = !m_bCheck;
+    bool enable = !m_bCameraCheck;
+    ui->btnVideo->setChecked(m_bCameraCheck);
     Q_EMIT sigVideoEnable(enable);
 }
 
@@ -196,6 +256,6 @@ void NEChatRoomBottomTool::onSpeakerDeviceChanged(const QString& deviceID) {
 }
 
 void NEChatRoomBottomTool::onMicDeviceChanged(const QString& deviceID) {
-    qInfo() << "onMicDeviceChanged: " << deviceID;
+    LOG(INFO) << "onMicDeviceChanged: " << deviceID.toStdString();
     m_engine->getDeviceManager()->setCurMicphone(deviceID);
 }

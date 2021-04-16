@@ -11,8 +11,7 @@ NERequest* NEHttpApi::join(const QString& roomid, const QString& nickname) {
 #endif
     paramMap["clientType"] = QString::number(clientType);
 
-	//此处填充自己的http地址
-    return NEHttpManager::instance().post("", paramMap, 10000);
+    return NEHttpManager::instance().post(getBaseUrl() + "/mpVideoCall/room/anonymousJoin", paramMap, 10000);
 }
 
 NERequest* NEHttpApi::saveSuggest(const NERoomSuggestInfo& info) {
@@ -31,8 +30,8 @@ NERequest* NEHttpApi::saveSuggest(const NERoomSuggestInfo& info) {
     paramMap["cid"] = info.cid;
     paramMap["appid"] = info.appid;
     paramMap["appkey"] = info.appkey;
-	//此处填充自己的http地址
-    return NEHttpManager::instance().post("", paramMap, 10000);
+
+    return NEHttpManager::instance().post("https://statistic.live.126.net/statics/report/feedback/demoSuggest", paramMap, 10000);
 }
 
 NERequest* NEHttpApi::getUserInfo(const QString& roomid, const QString& uid) {
@@ -40,6 +39,10 @@ NERequest* NEHttpApi::getUserInfo(const QString& roomid, const QString& uid) {
 
     paramMap["mpRoomId"] = roomid;
     paramMap["avRoomUid"] = uid;
-	//此处填充自己的http地址
-    return NEHttpManager::instance().post("", paramMap, 10000);
+
+    return NEHttpManager::instance().post(getBaseUrl() + "/mpVideoCall/room/member/info", paramMap, 100000);
+}
+
+QString NEHttpApi::getBaseUrl() {
+    return "https://yiyong.netease.im";
 }

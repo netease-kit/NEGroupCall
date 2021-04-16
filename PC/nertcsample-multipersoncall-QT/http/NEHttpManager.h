@@ -17,9 +17,9 @@ public:
         return manager;
     }
 
-    NERequest *get(const QString &urlString,const QMap<QString,QString> &params,int timeout = 0);
+    NERequest *get(const QString &urlString,const QMap<QString,QString> &params,int timeout = 100000);
 
-    NERequest *post(const QString &urlString,const QMap<QString,QString> &params,int timeout = 0);
+    NERequest *post(const QString &urlString,const QMap<QString,QString> &params,int timeout = 100000);
 
 private:
     NEHttpManager();

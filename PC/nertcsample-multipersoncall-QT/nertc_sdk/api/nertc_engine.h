@@ -1,4 +1,4 @@
-﻿/** @file nertc_engine.h
+/** @file nertc_engine.h
 * @brief NERTC SDK接口头文件。
 * NERTC SDK所有接口参数说明: 所有与字符串相关的参数(char *)全部为UTF-8编码。
 * @copyright (c) 2015-2019, NetEase Inc. All rights reserved
@@ -16,6 +16,9 @@
  <li>\ref nertc::IRtcEngineEventHandler "IRtcEngineEventHandler" 接口类用于向应用程序发送回调通知。</li>
  <li>\ref nertc::IRtcEngineEventHandlerEx "IRtcEngineEventHandlerEx" 接口类用于向应用程序发送扩展回调通知。</li>
  <li>\ref nertc::IRtcMediaStatsObserver "IRtcMediaStatsObserver" 接口类用于向应用程序发送扩展的媒体回调通知。</li>
+ <li>\ref nertc::INERtcAudioFrameObserver "INERtcAudioFrameObserver" 接口类用于向应用程序发送音频数据帧回调通知。</li>
+ <li>\ref nertc::IAudioDeviceManager "IAudioDeviceManager" 接口类用于向应用程序使用音频设备相关功能方法。</li>
+ <li>\ref nertc::IVideoDeviceManager "IVideoDeviceManager" 接口类用于向应用程序使用视频设备相关功能方法。</li>
  </ul></p>
  
  @section 方法
@@ -24,10 +27,12 @@
  主要包括创建 NERTC 引擎和基本通信的方法。本组方法适用于云信如下产品：语音通话、视频通话。
 
  - createNERtcEngine()
+ - destroyNERtcEngine()
  - \ref nertc::IRtcEngine::initialize "initialize"
  - \ref nertc::IRtcEngine::release "release"
  - \ref nertc::IRtcEngine::joinChannel "joinChannel"
  - \ref nertc::IRtcEngine::leaveChannel "leaveChannel"
+ - \ref nertc::IRtcEngine::setClientRole "setClientRole"
  - \ref nertc::IRtcEngine::setChannelProfile "setChannelProfile"
 
  ### 核心音频方法
@@ -43,12 +48,17 @@
  - \ref nertc::IRtcEngine::enableLocalVideo "enableLocalVideo"
  - \ref nertc::IRtcEngineEx::setVideoConfig "setVideoConfig"
  - \ref nertc::IRtcEngine::setupLocalVideoCanvas "setupLocalVideoCanvas"
+ - \ref nertc::IRtcEngineEx::setupLocalSubStreamVideoCanvas "setupLocalSubStreamVideoCanvas"
  - \ref nertc::IRtcEngine::setupRemoteVideoCanvas "setupRemoteVideoCanvas"
+ - \ref nertc::IRtcEngineEx::setupRemoteSubStreamVideoCanvas "setupRemoteSubStreamVideoCanvas"
  - \ref nertc::IRtcEngineEx::setLocalRenderMode "setLocalRenderMode"
  - \ref nertc::IRtcEngineEx::setRemoteRenderMode "setRemoteRenderMode"
  - \ref nertc::IRtcEngineEx::startVideoPreview "startVideoPreview"
  - \ref nertc::IRtcEngineEx::stopVideoPreview "stopVideoPreview"
  - \ref nertc::IRtcEngineEx::muteLocalVideoStream "muteLocalVideoStream"
+ - \ref nertc::IRtcEngineEx::subscribeRemoteAudioStream "subscribeRemoteAudioStream"
+ - \ref nertc::IRtcEngine::subscribeRemoteVideoStream "subscribeRemoteVideoStream"
+ - \ref nertc::IRtcEngineEx::subscribeRemoteVideoSubStream "subscribeRemoteVideoSubStream"
  
  ### 其他方法
  本组方法适用于云信如下产品： 语音通话、视频通话。
@@ -60,8 +70,10 @@
     本组方法适用于云信如下产品： 语音通话、视频通话。
  
  - \ref nertc::IRtcEngineEx::setParameters "setParameters"
+ - \ref nertc::IRtcEngineEx::setAudioFrameObserver "setAudioFrameObserver"
  - \ref nertc::IRtcEngineEx::setRecordingAudioFrameParameters "setRecordingAudioFrameParameters"
  - \ref nertc::IRtcEngineEx::setPlaybackAudioFrameParameters "setPlaybackAudioFrameParameters"
+ - \ref nertc::IRtcEngineEx::setMixedAudioFrameParameters "setMixedAudioFrameParameters"
 
  @section 回调
  
@@ -76,6 +88,7 @@
  - \ref nertc::IRtcEngineEventHandler::onDisconnect "onDisconnect" 
  - \ref nertc::IRtcEngineEventHandler::onUserJoined "onUserJoined"
  - \ref nertc::IRtcEngineEventHandler::onUserLeft "onUserLeft"
+ - \ref nertc::IRtcEngineEventHandler::onClientRoleChanged "onClientRoleChanged"
 
  ### 媒体事件回调
  本组方法适用于云信如下产品： 语音通话、视频通话。
@@ -83,6 +96,8 @@
  - \ref nertc::IRtcEngineEventHandler::onUserAudioStop "onUserAudioStop"
  - \ref nertc::IRtcEngineEventHandler::onUserVideoStart "onUserVideoStart"
  - \ref nertc::IRtcEngineEventHandler::onUserVideoStop "onUserVideoStop"
+ - \ref nertc::IRtcEngineEventHandlerEx::onUserSubStreamVideoStart "onUserSubStreamVideoStart"
+ - \ref nertc::IRtcEngineEventHandlerEx::onUserSubStreamVideoStop "onUserSubStreamVideoStop"
  - \ref nertc::IRtcEngineEventHandlerEx::onUserAudioMute "onUserAudioMute"
  - \ref nertc::IRtcEngineEventHandlerEx::onUserVideoMute "onUserVideoMute" 
  - \ref nertc::IRtcEngineEventHandlerEx::onUserVideoProfileUpdate "onUserVideoProfileUpdate"
@@ -90,9 +105,13 @@
  - \ref nertc::IRtcEngineEventHandlerEx::onVideoDeviceStateChanged "onVideoDeviceStateChanged"
  - \ref nertc::IRtcEngineEventHandlerEx::onFirstAudioDataReceived "onFirstAudioDataReceived"
  - \ref nertc::IRtcEngineEventHandlerEx::onFirstVideoDataReceived "onFirstVideoDataReceived"
+ - \ref nertc::IRtcEngineEventHandlerEx::onCaptureVideoFrame "onCaptureVideoFrame"
+ ### 音频数据帧回调
+ 本组方法适用于云信如下产品： 语音通话。
  - \ref nertc::INERtcAudioFrameObserver::onAudioFrameDidRecord "onAudioFrameDidRecord"
  - \ref nertc::INERtcAudioFrameObserver::onAudioFrameWillPlayback "onAudioFrameWillPlayback"
- - \ref nertc::IRtcEngineEventHandlerEx::onCaptureVideoFrame "onCaptureVideoFrame"
+ - \ref nertc::INERtcAudioFrameObserver::onMixedAudioFrame "onMixedAudioFrame"
+ - \ref nertc::INERtcAudioFrameObserver::onPlaybackAudioFrameBeforeMixing "onPlaybackAudioFrameBeforeMixing"
 
 */
 
@@ -155,13 +174,34 @@ public:
 
     /** 销毁 IRtcEngine 对象。
 
+     @note 如果需要重新使用IRtcEngine，release后不能再initialize，需要destroyNERtcEngine后重新createNERtcEngine
+
      @param[in] sync
 
      - true: 同步调用。在等待 IRtcEngine 对象资源释放后再返回。App 不应该在 SDK 产生的回调中调用该接口，否则由于 SDK 要等待回调返回才能回收相关的对象资源，会造成死锁。SDK 会自动检测这种死锁并转为异步调用，但是检测本身会消耗额外的时间。
      - false: 异步调用。不等 IRtcEngine 对象资源释放就立即返回。SDK 会自行释放所有资源。使用异步调用时要注意，不要在该调用后立即卸载 SDK 动态库，否则可能会因为 SDK 的清理线程还没有退出而崩溃。
      */
     virtual void release(bool sync = false) = 0;
+    
+    /** 设置参会者角色
 
+    setClientRole 接口用于在直播场景中设置用户角色。默认情况下用户以主播角色加入房间。
+    
+    在加入房间前，用户需要调用setClientRole 接口设置本端模式为观众或主播模式。在加入房间后，用户可以通过本接口切换用户模式。
+    
+    用户角色支持设置为主播或观众，主播和观众的权限不同。默认情况下用户以主播角色加入房间。
+
+    - 主播：可以开关摄像头等设备、可以发布流、可以操作互动直播推流相关接口、上下线对其他房间内用户可见
+    - 观众：不可以开关摄像头等设备、不可以发布流、不可以操作互动直播推流相关接口、上下线对其他房间内用户不可见
+
+     @note 可以在通话前后设置，通话前设置会在加入频道之后生效。如果设置观众模式。则会停止音视频设备。
+
+     @param[in] role 参会者模式 NERtcClientRole
+     @return
+     - 0: 方法调用成功；
+     - 其他: 方法调用失败。
+     */
+    virtual int setClientRole(NERtcClientRole role) = 0;
 
     /** 设置通话模式
 
@@ -253,7 +293,7 @@ public:
 
     /** 设置远端用户视图。
 
-     该方法绑定远端用户和显示视图，即设定 uid 指定的用户用哪个视图显示。调用该接口时需要指定远端视频的 uid，一般可以在进频道前提前设置好。
+     该方法绑定远端用户和显示视图，即设定 uid 指定的用户用哪个视图显示。调用该接口时需要指定远端视频的 uid，一般可以在用户加入后设置好。
 
      如果 App 不能事先知道对方的 uid，可以在 APP 收到 \ref IRtcEngineEventHandler::onUserJoined "onUserJoined" 事件时设置。
      退出频道后，SDK 会把远端用户的绑定关系清除掉。
@@ -308,11 +348,14 @@ public:
 
 /** 创建 RTC 引擎对象并返回指针。
 
+ @note 同时只支持一个IRtcEngine对象，新创建前必须先释放前一个IRtcEngine。
+
  @return RTC 引擎对象的指针。
  */
 NERTC_API nertc::IRtcEngine* NERTC_CALL createNERtcEngine();
 
 /** 销毁 RTC 引擎对象。
+ @note 释放前需要先调用\ref nertc::IRtcEngine::release "release"
  */
 NERTC_API void NERTC_CALL destroyNERtcEngine(void *& nertc_engine_inst);
 

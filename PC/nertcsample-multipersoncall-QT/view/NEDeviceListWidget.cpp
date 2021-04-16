@@ -82,7 +82,5 @@ void NEDeviceListWidget::onItemClicked(QListWidgetItem *item)
 
    itemWidget->setCurrentItem(true);
 
-   qInfo() << "curDeviceGuid: " << curDeviceGuid;
-
    Q_EMIT sigDeviceChanged(curDeviceGuid);
 }

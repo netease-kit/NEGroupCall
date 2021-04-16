@@ -11,7 +11,7 @@ using namespace nertc;
 
 class NERtcEngine;
 
-class NEEventHandler : public QObject, public IRtcEngineEventHandlerEx
+class NEEventHandler : public QObject, public IRtcEngineEventHandlerEx , public IRtcMediaStatsObserver
 {
 
     Q_OBJECT
@@ -74,6 +74,10 @@ public:
     virtual void onError(int error_code, const char* msg) override;
 
     virtual void onWarning(int warn_code, const char* msg) override;
+
+    virtual void onNetworkQuality(const NERtcNetworkQualityInfo *infos, unsigned int user_count) override;
+
+    virtual void onRtcStats(const NERtcStats &stats) override;
 
 private:
     QPointer<NERtcEngine> m_engine;

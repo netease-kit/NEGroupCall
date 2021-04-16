@@ -22,5 +22,16 @@
         <file>image/background.png</file>
         <file>image/check.png</file>
         <file>image/normal.png</file>
+        <file>image/networkquality_bad.svg</file>
+        <file>image/networkquality_general.svg</file>
+        <file>image/networkquality_good.svg</file>
+        <file>image/networkquality_unknown.svg</file>
+        <file>image/data.png</file>
+        <file>image/zoomIn.png</file>
+        <file>image/zoomOut.png</file>
+        <file>image/setting.png</file>
+        <file>image/triangle-combox.png</file>
+        <file>image/radio-check.png</file>
+        <file>image/radio-uncheck.png</file>
     </qresource>
 </RCC>

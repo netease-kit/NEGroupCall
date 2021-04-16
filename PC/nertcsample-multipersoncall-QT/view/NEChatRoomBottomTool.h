@@ -19,10 +19,11 @@ public:
     ~NEChatRoomBottomTool();
 
     void setRtcEngine(std::shared_ptr<NERtcEngine> engine);
-
     void init();
-
     void setVideoCheck(bool check);
+    void setAudioCheck(bool check);
+    void setVideoEnable(bool bEnable);
+    bool getIsBeutyOpen();
 
 Q_SIGNALS:
     void sigVoiceEnable(bool bEnable);
@@ -31,14 +32,15 @@ Q_SIGNALS:
     void sigExitCall();
     void sigVideoSetting();
     void sigAudioSetting();
+    void sigShowData();
 
 protected:
     virtual bool eventFilter(QObject* watched, QEvent* event) override;
-    virtual void showEvent(QShowEvent* event) override;
+    virtual void hideEvent(QHideEvent *event) override;
 
-private Q_SLOTS:
+public Q_SLOTS:
     void onVoiceClicked();
-    void onVideoClicked();
+    void onVideoClicked( );
     void onBeautyClicked();
     void onVideoSettingClicked();
     void onAudioSettingClicked();
@@ -57,7 +59,8 @@ private:
 
     qint64 lastClickTime;
 
-    bool m_bCheck = false;
+    bool m_bCameraCheck = false;
+    bool m_bMicCheck = false;
 };
 
 #endif  // NEBOTTOMTOOL_H

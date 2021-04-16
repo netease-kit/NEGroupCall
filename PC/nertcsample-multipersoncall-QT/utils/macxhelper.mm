@@ -22,7 +22,7 @@ void Macxhelper::getCVPixelbufferInfo(void* cvref, void* &data, int &width, int 
     OSType format = CVPixelBufferGetPixelFormatType(cvPixelBufferRef);
 
     //获取图像格式类型
-    //qInfo() << "getCVPixelbuffertype: " << getCVPixelbuffertype(cvref);
+    //LOG(INFO) << "getCVPixelbuffertype: " << getCVPixelbuffertype(cvref);
 
     //获取宽高
     width = CVPixelBufferGetWidth(cvPixelBufferRef);

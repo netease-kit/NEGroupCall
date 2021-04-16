@@ -66,8 +66,7 @@ void MClearLineEdit::onClearText()
 
 void MClearLineEdit::setTextStyle(const QString &color)
 {
-    this->setStyleSheet(QString("font-family: PingFangSC-Regular;"
-                        "font-size: 17px;"
+    this->setStyleSheet(QString("font-size: 17px;"
                         "color: %1;"
                                 "border: 0px;").arg(color));
 }

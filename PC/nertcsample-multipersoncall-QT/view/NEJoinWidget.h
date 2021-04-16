@@ -26,6 +26,9 @@ private Q_SLOTS:
     void onJoinHttpRequestSuccess(const QString &response);
     void onJoinHttpRequestFailed(int errType,int errCode,const QString &err);
 
+protected:
+    virtual void closeEvent(QCloseEvent* event) override;
+
 private:
     Ui::NEJoinWidget *ui;
 

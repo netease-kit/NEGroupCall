@@ -3,6 +3,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkCookie>
+#include "utils/log_instance.h"
 
 #include "NERequest.h"
 #include "NEHttpManager.h"
@@ -15,7 +16,7 @@ NERequest::NERequest(QNetworkReply *reply, const QString &url, int timeout)
     , hasError(false)
     , hasTimeout(false)
 {
-    qInfo() << "request url : " << url;
+    LOG(INFO) << "request url : " << url.toStdString();
 
     connect(reply,&QIODevice::readyRead,this,&NERequest::onReplyRedyRead);
     connect(reply, &QNetworkReply::finished, this, &NERequest::onReplyFinished);
@@ -42,7 +43,7 @@ NERequest::~NERequest()
 
 void NERequest::quit()
 {
-    qInfo() << "quit request : " << url;
+    LOG(INFO) << "quit request : " << url.toStdString();
 
     hasQuit = true;
 
@@ -84,7 +85,7 @@ void NERequest::onReplyFinished()
 
     if(err.error != QJsonParseError::NoError)
     {
-        qInfo() << "request json fail :" << response;
+        LOG(INFO) << "request json fail :" << response.toStdString();
 
         emit onFail(UPClassHttpError::HTTP_JSON_ERROR,ERROR_CODE_JSON,"json parse error !");
 
@@ -97,10 +98,10 @@ void NERequest::onReplyFinished()
 
     if(obj["code"].toInt() != 200)
     {
-        qInfo() << "response " << response;
+        LOG(INFO) << "response " << response.toStdString();
 
-        qInfo() << "request " << url << "error, code : " << obj["code"].toInt() << ", errorMsg : "<< obj["msg"].toString();
-        qInfo() << response;
+        LOG(INFO) << "request " << url.toStdString() << "error, code : " << obj["code"].toInt() << ", errorMsg : "<< obj["msg"].toString().toStdString();
+        LOG(INFO) << response.toStdString();
 
         emit onFail(UPClassHttpError::HTTP_VALUE_ERROR,obj["code"].toInt(),obj["msg"].toString());
 
@@ -109,7 +110,7 @@ void NERequest::onReplyFinished()
         return;
     }
 
-    qInfo() << "request finish : " << url;
+    LOG(INFO) << "request finish : " << url.toStdString();
 
     emit onSuccess(response);
 
@@ -128,7 +129,7 @@ void NERequest::onReplyError(QNetworkReply::NetworkError code)
 
     hasError = true;
 
-    qInfo() << "request network error :" << url << code << reply->attribute( QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    LOG(INFO) << "request network error :" << url.toStdString() << code << reply->attribute( QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
     emit onFail(UPClassHttpError::HTTP_NETWORK_ERROR,reply->attribute( QNetworkRequest::HttpStatusCodeAttribute).toInt(),"network error !");
 
@@ -144,7 +145,7 @@ void NERequest::onReplysslError(const QList<QSslError> &errors)
 
     hasError = true;
 
-    qInfo() << "request ssl error :" << url;
+    LOG(INFO) << "request ssl error :" << url.toStdString();
 
     emit onFail(UPClassHttpError::HTTP_SSL_ERROR,ERROR_CODE_SSL,"ssl error !");
 
@@ -161,7 +162,7 @@ void NERequest::onTimeout()
     if(reply != nullptr)
         reply->abort();
 
-    qInfo() << "request time out :" << url;
+    LOG(INFO) << "request time out :" << url.toStdString();
 
     emit onFail(UPClassHttpError::HTTP_TIMEOUT_ERROR,ERROR_CODE_TIMEOUT,"http timeout !");
 
