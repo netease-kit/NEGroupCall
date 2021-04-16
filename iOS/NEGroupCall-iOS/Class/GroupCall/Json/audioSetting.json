@@ -1,0 +1,32 @@
+
+[
+    {
+       "title" : "场景",
+       "subTitle":"",
+       "isScenario":true,
+       "content" : "",
+       "logoImgName" : "",
+       "showSubtitle": false,
+       "isShowNextImg" : false,
+       "isNext" : false,
+       "cellClassName":"",
+       "isShowBottomLine" : true,
+       "pushClass" : "",
+       "pushClassParams" : "",
+       "performSelector" : ""
+    },
+    {
+       "title" : "音质",
+       "subTitle":"",
+       "content" : "高清",
+       "logoImgName" : "",
+       "showSubtitle": true,
+       "isShowNextImg" : true,
+       "isNext" : true,
+       "cellClassName":"",
+       "isShowBottomLine" : false,
+       "pushClass" : "",
+       "pushClassParams" : "",
+       "performSelector" : "setupSoundQuality:"
+    }
+]

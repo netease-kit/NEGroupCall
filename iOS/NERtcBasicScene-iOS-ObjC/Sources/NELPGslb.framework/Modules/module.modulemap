@@ -1,6 +1,0 @@
-framework module NELPGslb {
-  umbrella header "NELPGslb.h"
-
-  export *
-  module * { export * }
-}
