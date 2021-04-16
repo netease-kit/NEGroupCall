@@ -1,0 +1,30 @@
+[
+    {
+       "title" : "分辨率",
+       "subTitle":"",
+       "content" : "1280*720",
+       "logoImgName" : "",
+       "showSubtitle": false,
+       "isShowNextImg" : true,
+       "isNext" : true,
+       "cellClassName":"",
+       "isShowBottomLine" : true,
+       "pushClass" : "",
+       "pushClassParams" : "",
+       "performSelector" : "setupResolutionRatio:"
+    },
+    {
+       "title" : "帧率",
+       "subTitle":"",
+       "content" : "30",
+       "logoImgName" : "",
+       "showSubtitle": true,
+       "isShowNextImg" : true,
+       "isNext" : true,
+       "cellClassName":"",
+       "isShowBottomLine" : false,
+       "pushClass" : "",
+       "pushClassParams" : "",
+       "performSelector" : "setupFrameRate:"
+    }
+]
