@@ -19,22 +19,27 @@
 4.  然后在「应用」一栏中创建您的项目
 5.  等待专属客户经理联系您，并向他获取Appkey
 
-**Windows**
-
-下载[Windows端SDK](https://dev.yunxin.163.com/docs/product/%E9%9F%B3%E8%A7%86%E9%A2%91%E9%80%9A%E8%AF%9D2.0/SDK&%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81%E4%B8%8B%E8%BD%BD)，"api/", "dll/", "lib/"三个文件夹拷贝到nertc_sdk目录
-
-**Mac**
-
-下载[Mac端SDK](https://dev.yunxin.163.com/docs/product/%E9%9F%B3%E8%A7%86%E9%A2%91%E9%80%9A%E8%AF%9D2.0/SDK&%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81%E4%B8%8B%E8%BD%BD),拷贝"NEFundation_Mac.framework", "nertc_sdk_Mac.framework"到/nertc_sdk/mac/目录下
-
-**美颜**
-
-由于本sample美颜的功能是使用相芯SDK实现的，所以您在使用前需要获取相芯的证书，即复制authpack.h文件到/CNamaSDK/auth路径下
-
 环境准备
 ---
-
 Windows: Qt5.14.0及以上版本 + VS2017/VS2019
 
-MacOS:Qt5.14.0及以上版本+ XCode
+MacOS: Qt5.14.0及以上版本+ XCode
 
+运行示例源码
+---
+
+ 1. 下载SDK
+    - 下载[Windows端SDK](https://yx-web-nosdn.netease.im/package/1618217725/NERtc_Windows_SDK_v4.1.1.zip?download=NERtc_Windows_SDK_v4.1.1.zip)，"api/", "dll/", "lib/"三个文件夹拷贝到nertc_sdk目录
+    - 下载[Mac端SDK](https://yx-web-nosdn.netease.im/package/1616651545/NERTC_Mac_SDK_v4.0.3.zip?download=NERTC_Mac_SDK_v4.0.3.zip),拷贝"NEFundation_Mac.framework", "nertc_sdk_Mac.framework"到/nertc_sdk/mac/目录下
+ 2. 双击NERtcSample-MultipersonCall.pro打开工程
+ 3. 在NERtcEngine.h中输入appkey
+ 4. 如果需要体验应用美颜效果，则需要完成以下步骤：
+    - 在 NERtcSample-MultipersonCall.pro 文件中打开 USE_BEAUTY 宏（不需要则注释该宏）
+    - 获取相芯科技的美颜证书，并拷贝到/CNamaSDK/auth目录
+    - 下载相芯科技美颜SDK
+     macOS: 拷贝到CNamaSDK/mac目录
+     windows: 拷贝到CNamaSDK/api/, CNamaSDK/dll/, CNamaSDK/lib/
+    - 下载相芯科技资源文件face_beautification_v2.bundle，并拷贝到CNamaSDK/assert目录
+ 5. 如果您当前使用非安全模式，则需要在NERtcSample-MultipersonCall.pro文件中打开UNSAFE_APPKEY宏（安全模式则注释该宏）
+ 6. windows下执行build_win32.bat脚本，将库拷贝至bin目录
+ 7. 在Qt creator中点击编译、运行程序
