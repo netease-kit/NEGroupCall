@@ -91,7 +91,6 @@ void NECallWidget::onJoinChannel() {
     setWindowFlags(Qt::Window);
     this->showNormal();
     this->resize(1184, 666);
-    move((QApplication::desktop()->width() - this->width()) / 2, (QApplication::desktop()->height() - this->height()) / 2);
     m_userCount = 1;
 
     //设置自己的渲染窗口
