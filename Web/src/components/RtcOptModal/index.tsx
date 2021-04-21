@@ -114,10 +114,8 @@ const RtcOptModal: FC<IProps> = ({ visible, onOk, onCancel }) => {
   const [frameRate, setFrameRate] = useState<number>(
     WebRTC2.CHAT_VIDEO_FRAME_RATE_20,
   );
-  const [audioScene, setAudioScene] = useState<AudioScene>('music');
-  const [audioQuality, setAudioQuality] = useState<Quality>(
-    'high_quality_stereo',
-  );
+  const [audioScene, setAudioScene] = useState<AudioScene>('chat');
+  const [audioQuality, setAudioQuality] = useState<Quality>('speech_standard');
 
   const okHandler = () => {
     onOk?.({
