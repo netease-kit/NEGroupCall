@@ -99,9 +99,9 @@ export default () => {
           evt.curState === 'DISCONNECTED'
         ) {
           if (!clickFlag) {
-            message.error('网络连接断开', 1, returnJoin.bind(null, false));
+            message.error('网络连接断开', 1, returnJoin);
           } else {
-            returnJoin(false);
+            returnJoin();
           }
         }
       },
@@ -111,27 +111,13 @@ export default () => {
   // @ts-ignore
   window.rtc = rtc;
 
-  const returnJoin = (rtcLeave: boolean) => {
-    if (rtcLeave) {
-      rtc
-        .leave()
-        .then(() => {
-          logger.log('离开成功');
-        })
-        .catch((err) => {
-          logger.log('离开失败: ', err);
-        })
-        .finally(() => {
-          history.push('/');
-        });
-    } else {
-      history.push('/');
-    }
+  const returnJoin = () => {
+    history.push('/');
   };
 
   useEffect(() => {
     if (!channelName || !nickName) {
-      returnJoin(false);
+      returnJoin();
       return;
     }
     rtc
@@ -151,19 +137,14 @@ export default () => {
       .catch((err) => {
         logger.error('rtc join', err);
         if (err.code && err.code === 2001) {
-          message.error(
-            '本应用为测试产品，每个频道最多4人',
-            1,
-            returnJoin.bind(null, false),
-          );
+          message.error('本应用为测试产品，每个频道最多4人', 1, returnJoin);
         } else {
-          message.error(
-            err?.msg || '加入房间失败',
-            1,
-            returnJoin.bind(null, false),
-          );
+          message.error(err?.msg || '加入房间失败', 1, returnJoin);
         }
       });
+    return () => {
+      rtc.leave();
+    };
   }, []);
 
   useEffect(() => {
@@ -353,7 +334,7 @@ export default () => {
 
   const exit = () => {
     setFeedbackVisible(false);
-    returnJoin(true);
+    returnJoin();
   };
 
   const handleFeedbackOk = (params: FeedbackParams) => {

@@ -251,7 +251,7 @@ class RTC {
       await this.client.join({
         channelName: avRoomCName,
         uid: this.uid,
-        token: avRoomCheckSum, //如果是非安全模式, token: ''
+        token: avRoomCheckSum, // 如果是非安全模式, token: ''
       });
       if (this.options.openCamera || this.options.openMic) {
         await this.initAndPlayLocalStream({
@@ -519,6 +519,45 @@ class RTC {
     );
   }
 
+  public destroy() {
+    try {
+      this.localStream.destroy();
+      this.client.destroy();
+    } catch (error) {
+      //
+    }
+    this.client.removeAllListeners();
+    this.client = null;
+    this.remoteUsers = [];
+    this.localStream = null;
+    this.remoteStreams = [];
+    this.microphoneId = '';
+    this.cameraId = '';
+    this.speakerId = '';
+
+    this.uid = undefined;
+    this.nickName = '';
+    this.appkey = '';
+    this.options = {
+      resolution: WebRTC2.VIDEO_QUALITY_720p,
+      frameRate: WebRTC2.CHAT_VIDEO_FRAME_RATE_15,
+      audioQuality: 'speech_low_quality',
+      openCamera: true,
+      openMic: true,
+    };
+    // private appSecret: string = ''
+    // private token: string = ''
+    this.channelName = '';
+    this.channelId = '';
+    this.max = 4;
+    this.onLocalStreamUpdate = () => {};
+    this.onRemoteStreamUpdate = () => {};
+    this.onRemoteStreamSubscribed = (userId: number) => {};
+    this.onNetworkQuality = (stats: Stat[]) => {};
+    this.onDisconnect = () => {};
+    this.onConnectionState = (evt: Evts) => {};
+  }
+
   private async initAndPlayLocalStream(params: {
     audio: boolean;
     video: boolean;
@@ -548,13 +587,13 @@ class RTC {
         video = [],
       } = await this.getDevices();
       if (!audioIn.length) {
-        throw '获取到的麦克风列表为空';
+        throw { msg: '获取到的麦克风列表为空' };
       }
       if (!audioOut.length && !checkBrowser('safari')) {
-        throw '获取到的扬声器列表为空';
+        throw { msg: '获取到的扬声器列表为空' };
       }
       if (!video.length) {
-        throw '获取到的摄像头列表为空';
+        throw { msg: '获取到的摄像头列表为空' };
       }
       this.microphoneId = audioIn[0]?.deviceId || '';
       this.cameraId = video[0]?.deviceId || '';
@@ -613,40 +652,6 @@ class RTC {
     } catch (error) {
       return Promise.reject(error);
     }
-  }
-
-  private destroy() {
-    this.localStream.destroy();
-    WebRTC2.destroy();
-    this.client = null;
-    this.remoteUsers = [];
-    this.localStream = null;
-    this.remoteStreams = [];
-    this.microphoneId = '';
-    this.cameraId = '';
-    this.speakerId = '';
-
-    this.uid = undefined;
-    this.nickName = '';
-    this.appkey = '';
-    this.options = {
-      resolution: WebRTC2.VIDEO_QUALITY_720p,
-      frameRate: WebRTC2.CHAT_VIDEO_FRAME_RATE_15,
-      audioQuality: 'speech_low_quality',
-      openCamera: true,
-      openMic: true,
-    };
-    // private appSecret: string = ''
-    // private token: string = ''
-    this.channelName = '';
-    this.channelId = '';
-    this.max = 4;
-    this.onLocalStreamUpdate = () => {};
-    this.onRemoteStreamUpdate = () => {};
-    this.onRemoteStreamSubscribed = (userId: number) => {};
-    this.onNetworkQuality = (stats: Stat[]) => {};
-    this.onDisconnect = () => {};
-    this.onConnectionState = (evt: Evts) => {};
   }
 }
 
