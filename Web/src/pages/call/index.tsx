@@ -278,10 +278,10 @@ export default () => {
   };
 
   useEffect(() => {
-    if (localStream || remoteStreams.length) {
+    if (remoteUsers.length) {
       setLargeOne('');
     }
-  }, [localStream, remoteStreams.length]);
+  }, [remoteUsers.length]);
 
   const handleAudioEnabled = () => {
     setEnableAudioIng(true);
@@ -418,7 +418,9 @@ export default () => {
         ) : (
           <div className={styles['userNick']}>{nickName}</div>
         )}
-        {localStream && stats.some((item) => item.uid === localStream.getId()) && (
+        {stats.some(
+          (item) => !remoteUsers.map((item2) => item2.uid).includes(item.uid),
+        ) && (
           <div className={styles.networkInfo}>
             <Icon
               type="iconxinhao"
@@ -427,7 +429,8 @@ export default () => {
               color={
                 networkColorMap[
                   (stats.find(
-                    (item) => item.uid === localStream.getId(),
+                    (item) =>
+                      !remoteUsers.map((item2) => item2.uid).includes(item.uid),
                   ) as Stat).uplinkNetworkQuality
                 ]
               }

@@ -173,9 +173,9 @@ export default () => {
       <div className={styles.joinWrapper}>
         <div className={styles.joinTextWrapper}>
           <div className={styles.joinTextHeader}>
-            欢迎使用
+            网易云信
             <br />
-            新一代 网易云信RTC
+            音视频通话 2.0
           </div>
           <div className={styles.joinTextDesc}>
             新一代音视频通话支持双声道128Kbps码率立体声高清音质，支持1080P高清画质，3行代码接入。提供更高清，更易用的音视频服务
