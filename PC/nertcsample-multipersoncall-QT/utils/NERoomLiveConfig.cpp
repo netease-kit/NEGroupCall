@@ -10,6 +10,16 @@ NERoomInfo NERoomLiveConfig::getRoomInfo() const
     return  m_roomInfo;
 }
 
+void NERoomLiveConfig::setRoomProfile(const NERoomProfile &profile)
+{
+    m_roomProfile = profile;
+}
+
+NERoomProfile NERoomLiveConfig::getRoomProfile() const
+{
+    return m_roomProfile;
+}
+
 void NERoomLiveConfig::appendLiveUser(const NELiveUser &user)
 {
     userList << user;

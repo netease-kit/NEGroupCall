@@ -1,0 +1,71 @@
+{
+  "private": true,
+  "version": "1.1.2",
+  "scripts": {
+    "start": "cross-env ENV=test umi dev",
+    "dev:mock": "cross-env ENV=dev umi dev",
+    "build:test": "cross-env ENV=test umi build",
+    "build": "cross-env ENV=prod umi build",
+    "pack:test": "sh ./bin/deploy.sh test",
+    "pack": "sh ./bin/deploy.sh master",
+    "postinstall": "umi generate tmp",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage",
+    "lint": "umi-lint --fix --eslint.ext='.ts,tsx' src/",
+    "precommit": "umi-lint --staged --eslint.ext='.ts,tsx' --prettier --fix src/",
+    "cz": "cz"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier"
+    ],
+    "*.ts?(x)": [
+      "npm run precommit",
+      "prettier --parser=typescript"
+    ]
+  },
+  "dependencies": {
+    "@ant-design/pro-layout": "^5.0.12",
+    "@umijs/preset-react": "1.x",
+    "@umijs/test": "^3.2.27",
+    "axios": "^0.21.0",
+    "jssha": "^3.1.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "styled-components": "^5.2.1",
+    "umi": "^3.2.27",
+    "yunxin-log-debug": "^1.0.1"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^11.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/styled-components": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.14.2",
+    "@typescript-eslint/parser": "^4.14.2",
+    "@umijs/plugin-esbuild": "^1.1.0",
+    "@umijs/test": "^3.3.7",
+    "commitizen": "^4.2.3",
+    "commitlint": "^11.0.0",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.19.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.0.7",
+    "prettier": "^2.2.0",
+    "react": "17.x",
+    "react-dom": "17.x",
+    "typescript": "^4.1.2",
+    "umi-lint": "^2.0.2",
+    "yorkie": "^2.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  }
+}

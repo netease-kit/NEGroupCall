@@ -14,10 +14,15 @@
 #include "http/NERequest.h"
 #include "ui_NEJoinWidget.h"
 #include "utils/NERoomLiveConfig.h"
+#include "utils/log_instance.h"
+#include "view/NESettingWidget.h"
 
-NEJoinWidget::NEJoinWidget(QWidget* parent) : QMainWindow(parent), ui(new Ui::NEJoinWidget) {
+NEJoinWidget::NEJoinWidget(QWidget* parent)
+    : QMainWindow(parent)
+    , ui(new Ui::NEJoinWidget) {
     ui->setupUi(this);
-    setWindowTitle("加入频道");
+    setWindowTitle("多人通话");
+    setFixedSize(460, 470);
 
     videowindowPtr = std::make_shared<NECallWidget>();
     connect(this, &NEJoinWidget::sigJoinChannel, videowindowPtr.get(), &NECallWidget::onJoinChannel);
@@ -25,6 +30,10 @@ NEJoinWidget::NEJoinWidget(QWidget* parent) : QMainWindow(parent), ui(new Ui::NE
     connect(ui->leRoomID, &QLineEdit::returnPressed, this, &NEJoinWidget::onBtnJoinChannelClicked);
     connect(ui->leNickname, &QLineEdit::returnPressed, this, &NEJoinWidget::onBtnJoinChannelClicked);
     connect(videowindowPtr.get(), &NECallWidget::sigCloseWindow, this, &NEJoinWidget::onCloseWindow);
+    connect(ui->btnSetting, &QPushButton::clicked, this, [=] {
+        NESettingWidget widget;
+        widget.exec();
+    });
 }
 
 NEJoinWidget::~NEJoinWidget() {
@@ -32,11 +41,12 @@ NEJoinWidget::~NEJoinWidget() {
 }
 
 void NEJoinWidget::onBtnJoinChannelClicked() {
+    ui->joinChannel->setEnabled(false);
     QString roomid = ui->leRoomID->text();
     QString nickname = ui->leNickname->text();
     int pos = 0;
 
-    qInfo() << "nickname: " << nickname;
+    LOG(INFO) << "nickname: " << nickname.toStdString();
 
     if (roomid.isEmpty()) {
         Toast::showTip("请填写房间号", this);
@@ -70,12 +80,11 @@ void NEJoinWidget::onBtnJoinChannelClicked() {
 }
 
 void NEJoinWidget::onCloseWindow() {
-    this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);
     this->show();
 }
 
 void NEJoinWidget::onJoinHttpRequestSuccess(const QString& response) {
-    qInfo() << "onJoinHttpRequestSuccess: " << response;
+    LOG(INFO) << "onJoinHttpRequestSuccess: " << response.toStdString();
 
     QJsonDocument doc = QJsonDocument::fromJson(response.toUtf8());
     QJsonObject data = doc.object()["data"].toObject();
@@ -89,23 +98,36 @@ void NEJoinWidget::onJoinHttpRequestSuccess(const QString& response) {
     info.avRoomUid = data["avRoomUid"].toVariant().toString();
     info.requestId = data["requestId"].toString();
     info.createTime = data["createTime"].toInt();
-    info.nrtcAppKey = data["nrtcAppKey"].toString();
     info.avRoomCName = data["avRoomCName"].toString();
     info.avRoomCheckSum = data["avRoomCheckSum"].toString();
     info.meetingUniqueId = data["meetingUniqueId"].toString();
     info.selfnickName = ui->leNickname->text();
+    info.isOpenMic = ui->cbOpenMic->isChecked();
+    info.isOpenCamera = ui->cbOpenCamera->isChecked();
+
+    //如果是非安全模式，则token为空
+#ifdef UNSAFE_APPKEY
+    info.avRoomCheckSum = "";
+#endif
 
     NERoomLiveConfig::instance().setRoomInfo(info);
     Q_EMIT sigJoinChannel();
     this->hide();
+    ui->joinChannel->setEnabled(true);
 }
 
 void NEJoinWidget::onJoinHttpRequestFailed(int errType, int errCode, const QString& err) {
-    qInfo() << "onJoinHttpRequestFailed err: " << err;
+    LOG(INFO) << "onJoinHttpRequestFailed err: " << err.toStdString();
 
     if (errCode == 2001) {
         Toast::showTip("本应用为测试产品，每个频道最多4人，已达人数上限", this);
     } else {
         Toast::showTip("加入房间失败", this);
     }
+
+    ui->joinChannel->setEnabled(true);
+}
+
+void NEJoinWidget::closeEvent(QCloseEvent* event) {
+    QApplication::quit();
 }

@@ -16,13 +16,11 @@
 using namespace nertc;
 
 NERtcEngine::NERtcEngine(QObject* parent)
-    : QObject(parent), m_rtcEngine(Q_NULLPTR), m_connectState(kNERtcConnectionStateDisconnected), current_video_profile(kNERtcVideoProfileStandard),
-      m_bBeauty(false), m_bInit(false) {
-    qDebug() << "NERtcEngine";
+    : QObject(parent), m_rtcEngine(Q_NULLPTR), m_connectState(kNERtcConnectionStateDisconnected)
+    , m_bBeauty(false), m_bInit(false) {
 }
 
 NERtcEngine::~NERtcEngine() {
-    qDebug() << "~NERtcEngine";
     release();
 }
 
@@ -34,7 +32,7 @@ bool NERtcEngine::init(const char* app_key, const char* log_dir_path) {
     m_rtcEngine = dynamic_cast<IRtcEngineEx*>(createNERtcEngine());
 
     NERtcEngineContext rtcEngineContext;
-    qInfo() << "app_key:" << app_key;
+    //LOG(INFO) << "app_key:" << app_key;
     rtcEngineContext.app_key = app_key;
     rtcEngineContext.log_dir_path = log_dir_path;
     rtcEngineContext.log_level = kNERtcLogLevelInfo;
@@ -48,6 +46,8 @@ bool NERtcEngine::init(const char* app_key, const char* log_dir_path) {
         return false;
     }
 
+    //注册统计信息观测器
+    m_rtcEngine->setStatsObserver(m_rtcEngineHandler.get());
     //初始化混音控制器
     m_audioMixer = std::make_shared<NEAudioMixer>(this);
     //初始化设备管理器
@@ -55,7 +55,7 @@ bool NERtcEngine::init(const char* app_key, const char* log_dir_path) {
 
 #ifdef USE_BEAUTY
     //初始化美颜管理器
-    m_beautyManager = std::make_shared<NEBeautyManager>(Q_NULLPTR);
+    m_beautyManager = std::make_shared<NEBeautyManager>(this);
 #endif
 
     m_bInit = true;
@@ -78,15 +78,11 @@ bool NERtcEngine::getIsInit() {
     return m_bInit;
 }
 
-int NERtcEngine::joinChannel(const QString& token, const QString& roomid, const QString& uid, unsigned int video_resolution) {
+int NERtcEngine::joinChannel(const QString& token, const QString& roomid, const QString& uid) {
     int ret = kNERtcNoError;
 
-    //设置分辨率
-    setCurrentVideoProfile(video_resolution);
-
-    qInfo() << "token: " << token;
-
-    qInfo() << "token.toUtf8().data(): " << token.toUtf8().data();
+    m_rtcEngine->enableLocalAudio(false);
+    m_rtcEngine->enableLocalVideo(false);
 
     //加入频道
     ret = m_rtcEngine->joinChannel(token.toUtf8().data(), roomid.toUtf8().data(), uid.toULongLong());
@@ -121,18 +117,38 @@ int NERtcEngine::leaveChannel() {
     return ret;
 }
 
-void NERtcEngine::setCurrentVideoProfile(unsigned int index) {
-    current_video_profile = (NERtcVideoProfileType)index;
+void NERtcEngine::setCurrentVideoProfile(unsigned int profile) {
+    NERtcVideoProfileType current_video_profile = (NERtcVideoProfileType)profile;
     NERtcVideoConfig videoConfig;
     videoConfig.max_profile = current_video_profile;
     videoConfig.crop_mode_ = kNERtcVideoCropModeDefault;
+    videoConfig.width = 0;
+    videoConfig.height = 0;
     m_rtcEngine->setVideoConfig(videoConfig);
 }
 
+void NERtcEngine::setCustomVideoProfile(unsigned int profile, int framerate)
+{
+    NERtcVideoConfig videoConfig;
+    videoConfig.max_profile =(NERtcVideoProfileType)profile;
+    videoConfig.framerate = (NERtcVideoFramerateType)framerate;
+    videoConfig.crop_mode_ = kNERtcVideoCropModeDefault;
+    videoConfig.width = 0;
+    videoConfig.height = 0;
+    m_rtcEngine->setVideoConfig(videoConfig);
+}
+
+void NERtcEngine::setCurrentAudioProfile(unsigned int profile, unsigned int sence)
+{
+     NERtcAudioProfileType audioProfile = (NERtcAudioProfileType)profile;
+     NERtcAudioScenarioType scenarioType = (NERtcAudioScenarioType)sence;
+     m_rtcEngine->setAudioProfile(audioProfile, scenarioType);
+}
+
 void NERtcEngine::enableBeauty(bool enabled) {
-    m_bBeauty = enabled;
 
 #ifdef USE_BEAUTY
+    m_bBeauty = enabled;
 
     m_beautyManager->initBeauty();
 
@@ -141,7 +157,6 @@ void NERtcEngine::enableBeauty(bool enabled) {
     } else {
         disconnect(this, &NERtcEngine::sigRenderFrame, 0, 0);
     }
-
 #endif
 }
 
@@ -187,8 +202,6 @@ int NERtcEngine::setupRemoteVideo(quint64 uid, void* hwnd) {
     if (ret) {
         qDebug("[ERROR] Can not setup remote video canvas! ERROR CODE: %d", ret);
     }
-
-    qInfo() << "uid: " << uid;
 
     int ret_temp = m_rtcEngine->subscribeRemoteVideoStream(uid, kNERtcRemoteVideoStreamTypeHigh, true);
     if (ret_temp) {

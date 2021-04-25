@@ -54,6 +54,8 @@ public:
     static NERequest* saveSuggest(const NERoomSuggestInfo& info);
 
     static NERequest* getUserInfo(const QString& roomid, const QString& uid);
+
+    static QString getBaseUrl();
 };
 
 #endif  // UPCLASSHTTPAPI_H

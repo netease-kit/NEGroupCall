@@ -5,12 +5,12 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.netease.yunxin.nertc.demo"
+        applicationId "com.netease.yunxin.app.groupCall"
 
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode Integer.parseInt(VERSION_CODE)
+        versionName VERSION_NAME
 
         ndk {
             rootProject.ext.ndkAbis.each { abi ->
@@ -21,11 +21,22 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
+
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'netease-im'
+            keyPassword 'yunxin163'
+            storeFile file('release.jks')
+            storePassword 'yunxin163'
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -39,20 +50,21 @@ android {
         buildConfigField "String", "VERSION_IM", "\"${rootProject.ext.nimVersion}\""
         buildConfigField "String", "VERSION_NERTC", "\"${rootProject.ext.nertcVersion}\""
     }
+    packagingOptions{
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
-//    implementation 'com.netease.yunxin.android.lib:picture:1.0.0-SNAPSHOT'
     implementation project(':biz-user')
-    implementation project(':biz-live')
     implementation project(':lib-basic')
-    implementation project(':base-config')
     implementation project(":biz-video-group")
-
     implementation (name: 'netease-network', ext: 'aar')
     implementation (name: 'netease-picture', ext: 'aar')
+    implementation 'com.netease.yunxin.kit:alog:0.0.1-SNAPSHOT'
     implementation "com.google.code.gson:gson:2.8.6"
     implementation 'com.squareup.okhttp3:logging-interceptor:3.14.7'
     implementation 'com.squareup.okhttp3:okhttp:3.14.9'
@@ -68,4 +80,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.android.material:material:1.2.1'
+
+    //仅在debug包启用BlockCanary进行卡顿监控和提示的话，可以这么用
+    debugImplementation 'com.github.markzhai:blockcanary-android:1.5.0'
+    releaseImplementation 'com.github.markzhai:blockcanary-no-op:1.5.0'
 }

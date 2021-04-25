@@ -1,0 +1,173 @@
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f2f3f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.joinWrapper {
+  width: 960px;
+  height: 500px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.joinTextWrapper {
+  width: 380px;
+}
+
+.joinTextHeader {
+  color: #222;
+  font-size: 40px;
+  line-height: 1.5;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.joinTextDesc {
+  color: #666;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.downloadTitle {
+  color: #999;
+  font-size: 16px;
+  text-align: center;
+  margin: 84px 0 16px;
+}
+
+.downloadContent {
+  display: flex;
+}
+
+.downloadItem {
+  width: 68px;
+  height: 100px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.3s;
+  .downloadItemDesc {
+    color: #222;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .downloadItemDescTxt {
+    display: none;
+  }
+  .qrCode {
+    width: 140px;
+    height: 140px;
+    position: absolute;
+    bottom: 110px;
+    display: none;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0px 4px 16px 0px #2f386f;
+    image-rendering: -webkit-optimize-contrast;
+    img {
+      width: 120px;
+      height: 120px;
+      margin: 10px;
+    }
+  }
+  .macIcon {
+    color: #00aaff;
+  }
+  .winIcon {
+    color: #337eff;
+  }
+  .iosIcon {
+    color: #000;
+  }
+  .aosIcon {
+    color: #4da621;
+  }
+  .miniIcon {
+    color: #21a64d;
+  }
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+  &:hover {
+    background-color: #337eff;
+    .downloadItemDesc {
+      display: none;
+    }
+    .downloadItemDescTxt {
+      color: #fff;
+      font-size: 14px;
+      margin-top: 8px;
+      display: inline;
+    }
+    .macIcon {
+      color: #fff;
+    }
+    .winIcon {
+      color: #fff;
+    }
+    .iosIcon {
+      color: #fff;
+    }
+    .aosIcon {
+      color: #fff;
+    }
+    .miniIcon {
+      color: #fff;
+    }
+    .qrCode {
+      display: block;
+    }
+    & > span {
+      color: #fff;
+    }
+  }
+}
+
+.joinFormWrapper {
+  width: 460px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: 0 10px 30px 0 rgba(47, 56, 111, 0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.title {
+  font-size: 24px;
+  color: #333333;
+  margin-bottom: 24px;
+  margin-top: 80px;
+}
+
+.optLabel {
+  align-self: flex-start;
+  margin-left: 70px;
+  margin-bottom: 8px;
+}
+
+.optText {
+  margin-left: 8px;
+}
+
+.option {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  cursor: pointer;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 12px;
+  margin-top: 10px;
+}

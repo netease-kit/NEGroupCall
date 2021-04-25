@@ -34,10 +34,10 @@
 
     <!-- 下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
     <permission
-        android:name="com.netease.yunxin.nertc.demo.permission.RECEIVE_MSG"
+        android:name="${applicationId}.permission.RECEIVE_MSG"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.netease.yunxin.nertc.demo.permission.RECEIVE_MSG" />
+    <uses-permission android:name="${applicationId}.permission.RECEIVE_MSG" />
 
     <application
         android:name=".DemoApplication"
@@ -49,10 +49,6 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
-        <service
-            android:name="com.netease.yunxin.nertc.nertcvideocalldemo.service.CallService"
-            android:enabled="true"
-            android:exported="false" />
 
         <activity
             android:name=".SplashActivity"
@@ -73,7 +69,7 @@
             android:launchMode="singleTask">
 
             <intent-filter>
-                <action android:name="com.nertc.g2.action.main" />
+                <action android:name="com.nertc.groupcall.action.main" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
@@ -145,7 +141,7 @@
         <!-- android:authorities="{包名}.ipc.provider", 请将com.netease.nim.demo替换为自己的包名 -->
         <provider
             android:name="com.netease.nimlib.ipc.NIMContentProvider"
-            android:authorities="com.netease.yunxin.nertc.demo.ipc.provider"
+            android:authorities="${applicationId}.ipc.provider"
             android:exported="false"
             android:process=":core" />
     </application>

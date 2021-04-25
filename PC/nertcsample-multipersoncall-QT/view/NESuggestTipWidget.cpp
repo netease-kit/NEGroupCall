@@ -5,10 +5,13 @@
 #include "NESuggestTipWidget.h"
 #include "Toast.h"
 #include "http/NEHttpApi.h"
+#include "rtc/NERtcEngine.h"
 #include "ui_NESuggestTipWidget.h"
 #include "utils/NERoomLiveConfig.h"
 
-NESuggestTipWidget::NESuggestTipWidget(QWidget* parent) : QDialog(parent), ui(new Ui::NESuggestTipWidget) {
+NESuggestTipWidget::NESuggestTipWidget(QWidget* parent)
+    : QDialog(parent)
+    , ui(new Ui::NESuggestTipWidget) {
     ui->setupUi(this);
 
     Qt::WindowFlags flags = Qt::Dialog;
@@ -63,7 +66,7 @@ void NESuggestTipWidget::onBtnSaveClicked() {
     info.cid = roomInfo.avRoomCid;
     info.uid = roomInfo.avRoomUid;
     info.content = ui->textEdit->toPlainText();
-    info.appkey = roomInfo.nrtcAppKey;
+    info.appkey = APP_KEY;
     info.conetent_type = getCaseTypeJsonString();
 
     NEHttpApi::saveSuggest(info);

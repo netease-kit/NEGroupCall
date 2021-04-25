@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@android:color/holo_red_light"
+    android:paddingBottom="30dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="设置"
+        android:textColor="#222222"
+        android:textSize="@dimen/dp_16" />
+
+    <View
+        android:id="@+id/line0"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/video_group_line_color" />
+
+    <com.netease.biz_video_group.yunxin.voideoGroup.widget.OptionSwitchWidget
+        android:id="@+id/option_switch"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        tools:background="@android:color/holo_blue_dark" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.netease.biz_video_group.yunxin.voideoGroup.widget.VideoSettingOptionView
+            android:id="@+id/video_option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_height="90dp" />
+
+        <com.netease.biz_video_group.yunxin.voideoGroup.widget.AudioSettingOptionView
+            android:id="@+id/audio_option"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_height="90dp" />
+
+
+    </FrameLayout>
+
+</LinearLayout>

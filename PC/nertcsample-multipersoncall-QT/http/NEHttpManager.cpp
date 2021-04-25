@@ -4,6 +4,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 
+#include "utils/log_instance.h"
 #include "NEHttpManager.h"
 
 NEHttpManager::NEHttpManager()
@@ -39,7 +40,7 @@ NERequest *NEHttpManager::get(const QString &urlString, const QMap<QString,QStri
 
     if(networkAccessManager->networkAccessible() == QNetworkAccessManager::NotAccessible)
     {
-        qInfo() << "networkaccess change !";
+        LOG(INFO) << "networkaccess change !";
 
         networkAccessManager->setNetworkAccessible(QNetworkAccessManager::Accessible);
     }
@@ -79,13 +80,13 @@ NERequest *NEHttpManager::post(const QString &urlString, const QMap<QString,QStr
 
     QString postData = QJsonDocument(obj).toJson(QJsonDocument::Compact);
 
-    qInfo() << "postData:" << postData;
+    LOG(INFO) << "postData:" << postData.toStdString();
 
     QNetworkReply *reply = networkAccessManager->post(request, postData.toUtf8());
 
     if(networkAccessManager->networkAccessible() == QNetworkAccessManager::NotAccessible)
     {
-        qInfo() << "networkaccess change !";
+        LOG(INFO) << "networkaccess change !";
 
         networkAccessManager->setNetworkAccessible(QNetworkAccessManager::Accessible);
     }

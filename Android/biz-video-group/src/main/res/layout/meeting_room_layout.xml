@@ -1,66 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.netease.biz_video_group.yunxin.voideoGroup.widget.VideoGroupMainView
         android:id="@+id/rcv_video_view"
+        android:background="@android:color/black"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
+    <!--    演讲者模式的View-->
+    <com.netease.biz_video_group.yunxin.voideoGroup.widget.VideoGroupSpeakerView
+        android:id="@+id/speaker_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_86" />
+
 
     <LinearLayout
         android:id="@+id/lly_dialog_operation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/calling_control_bg"
-        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dp_38"
+        android:layout_marginRight="@dimen/dp_38"
+        android:layout_height="@dimen/dp_60"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:paddingStart="@dimen/dp_20"
-        android:paddingEnd="@dimen/dp_20"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
-        android:orientation="horizontal">
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:background="@drawable/calling_control_bg"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/dp_30"
+        android:paddingEnd="@dimen/dp_30"
+       >
 
         <ImageView
             android:id="@+id/iv_audio_control"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
             android:src="@drawable/src_mute_control" />
 
         <ImageView
             android:id="@+id/iv_video_control"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="@dimen/dp_20"
-            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
             android:src="@drawable/src_cam_control" />
 
         <ImageView
-            android:id="@+id/iv_switch_camera"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="@dimen/dp_20"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/camera_switch" />
+            android:id="@+id/iv_leave"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/hungup" />
 
         <ImageView
+            android:id="@+id/iv_switch_camera"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/camera_switch" />
+
+
+        <ImageView
+            android:id="@+id/iv_setting"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/video_group_icon_setting_dot" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:id="@+id/ll_extra_setting"
+        android:layout_width="128dp"
+        android:layout_height="68dp"
+        android:layout_alignRight="@+id/lly_dialog_operation"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_80"
+        android:background="@drawable/video_group_setting_extra_bg"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_marginLeft="@dimen/dp_4"
             android:id="@+id/iv_beauty_control"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="@dimen/dp_20"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:scaleType="centerInside"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:src="@drawable/src_beauty_control" />
 
         <ImageView
-            android:id="@+id/iv_leave"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="@dimen/dp_20"
+            android:id="@+id/iv_real_time_data"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_4"
+            android:scaleType="centerInside"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/hungup" />
+            android:src="@drawable/video_group_icon_real_time_data" />
     </LinearLayout>
-
-
 </RelativeLayout>

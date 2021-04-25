@@ -3,13 +3,14 @@
 #include "NEEventHandler.h"
 #include "NERtcEngine.h"
 #include "utils/macxhelper.h"
+#include "include/base_type_defines.h"
 
 NEEventHandler::NEEventHandler(NERtcEngine* engine) : m_engine(engine) {
-    qDebug() << "NEEventHandler";
+
 }
 
 NEEventHandler::~NEEventHandler() {
-    qDebug() << "~NEEventHandler";
+
 }
 
 void NEEventHandler::onUserVideoProfileUpdate(nertc::uid_t uid, NERtcVideoProfileType max_profile) {}
@@ -19,9 +20,6 @@ void NEEventHandler::onUserAudioMute(nertc::uid_t uid, bool mute) {
         return;
     }
 
-    qInfo() << "onUserAudioMute: "
-            << "uid: " << uid << "mute: " << mute;
-
     Q_EMIT m_engine->sigUserAudioMute(uid, mute);
 }
 
@@ -29,9 +27,6 @@ void NEEventHandler::onUserVideoMute(nertc::uid_t uid, bool mute) {
     if (m_engine.isNull()) {
         return;
     }
-
-    qInfo() << "onUserVideoMute: "
-            << "uid: " << uid << "mute: " << mute;
 
     Q_EMIT m_engine->sigUserVideoMute(uid, mute);
 }
@@ -73,7 +68,7 @@ void NEEventHandler::onCaptureVideoFrame(void* data,
             int h = 0;
             Macxhelper::getCVPixelbufferInfo(data, buf, w, h);
 
-            qInfo() << "getCVPixelbufferInfo w: " << w;
+            //LOG(INFO) << "getCVPixelbufferInfo w: " << w;
 
             Q_EMIT m_engine->sigRenderFrame(type, buf, w, h, 0);
         }
@@ -96,22 +91,18 @@ void NEEventHandler::onRemoteAudioVolumeIndication(const NERtcAudioVolumeInfo* s
 }
 
 void NEEventHandler::onUserVideoStop(nertc::uid_t uid) {
-    qInfo() << "onUserVideoStop";
     Q_EMIT m_engine->sigUserVideoMute(uid, true);
 }
 
 void NEEventHandler::onUserVideoStart(nertc::uid_t uid, NERtcVideoProfileType max_profile) {
-    qInfo() << "onUserVideoStart";
     Q_EMIT m_engine->sigUserVideoMute(uid, false);
 }
 
 void NEEventHandler::onUserAudioStop(nertc::uid_t uid) {
-    qInfo() << "onUserAudioStop";
     Q_EMIT m_engine->sigUserAudioMute(uid, true);
 }
 
 void NEEventHandler::onUserAudioStart(nertc::uid_t uid) {
-    qInfo() << "onUserAudioStart";
     m_engine->startRemoteAudio(uid);
     Q_EMIT m_engine->sigUserAudioMute(uid, false);
 }
@@ -126,12 +117,10 @@ void NEEventHandler::onJoinChannel(nertc::channel_id_t cid, nertc::uid_t uid, NE
     } else {
         Q_EMIT m_engine->sigJoinChannelFail(QString::number(result));
     }
-
-    qInfo() << "onJoinChannel: " << result;
 }
 
 void NEEventHandler::onRejoinChannel(nertc::channel_id_t cid, nertc::uid_t uid, NERtcErrorCode result, uint64_t elapsed) {
-    qInfo() << "uid: " << uid << "result: " << result << "elapsed" << elapsed;
+
 }
 
 void NEEventHandler::onLeaveChannel(NERtcErrorCode result) {
@@ -168,22 +157,39 @@ void NEEventHandler::onDisconnect(NERtcErrorCode reason) {
     }
 
     //可根据此回调，在ui界面展示断开连接
-
-    qInfo() << "NEEventHandler::onDisconnect reason: " << reason;
-
     Q_EMIT m_engine->sigDisconnected(reason);
 }
 
 void NEEventHandler::onError(int error_code, const char* msg) {
     //可根据此回调，在ui界面展示相应错误提示，或者进行日志打点。
-
-    qInfo() << "NEEventHandler::onError: "
-            << "error_code: " << error_code << "msg: " << msg;
 }
 
 void NEEventHandler::onWarning(int warn_code, const char* msg) {
     //可根据此回调，在ui界面展示相应警告提示，或者进行日志打点。
+}
 
-    qInfo() << "NEEventHandler::onWarning: "
-            << "warn_code: " << warn_code << "msg: " << msg;
+void NEEventHandler::onNetworkQuality(const NERtcNetworkQualityInfo *infos, unsigned int user_count) {
+    //可根据此回调，在ui界面展示用户网络质量
+
+    for (unsigned int i = 0; i < user_count; i++) {
+        Q_EMIT m_engine->sigNetworkQuality(infos[i].uid, infos[i].tx_quality, infos[i].rx_quality);
+    }
+}
+
+void NEEventHandler::onRtcStats(const NERtcStats &stats) {
+   NERoomStats stats_;
+   stats_.up_rtt = stats.up_rtt;
+   stats_.down_rtt = stats.down_rtt;
+   stats_.cpu_app_usage = stats.cpu_app_usage;
+   stats_.cpu_total_usage = stats.cpu_total_usage;
+   stats_.rx_audio_kbitrate = stats.rx_audio_kbitrate;
+   stats_.rx_video_kbitrate = stats.rx_video_kbitrate;
+   stats_.tx_audio_kbitrate = stats.tx_audio_kbitrate;
+   stats_.tx_video_kbitrate = stats.tx_video_kbitrate;
+   stats_.rx_audio_packet_loss_rate = stats.rx_audio_packet_loss_rate;
+   stats_.rx_video_packet_loss_rate = stats.rx_video_packet_loss_rate;
+   stats_.tx_audio_packet_loss_rate = stats.tx_audio_packet_loss_rate;
+   stats_.tx_video_packet_loss_rate = stats.tx_video_packet_loss_rate;
+
+   Q_EMIT m_engine->sigRtcStats(stats_);
 }

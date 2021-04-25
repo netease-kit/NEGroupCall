@@ -130,7 +130,20 @@ typedef enum
 {
     kNERtcAudioMixingErrorOK            = 0,      			/**< 没有错误。*/
     kNERtcAudioMixingErrorFatal         = 1,      			/**< 通用错误。*/
-    kNERtcAudioMixingErrorCanNotOpen    = 100,      		/**< 音乐文件打开出错。*/
+	kNERtcAudioMixingErrorCanNotOpen,						/**< 伴音不能正常打开*/
+	kNERtcAudioMixingErrorDecode,							/**<音频解码错误*/
+	kNERtcAudioMixingErrorInterrupt,						/**<操作中断码*/
+	kNERtcAudioMixingErrorHttpNotFound,						/**<404 file not found，only for http / https*/
+	kNERtcAudioMixingErrorOpen,								/**<打开流 / 文件失败*/
+	kNERtcAudioMixingErrorNInfo,							/**<获取解码信息失败 / 超时*/
+	kNERtcAudioMixingErrorNStream,							/**<无音频流*/
+	kNERtcAudioMixingErrorNCodec,							/**<无解码器*/
+	kNERtcAudioMixingErrorNMem,								/**<无内存*/
+	kNERtcAudioMixingErrorCodecOpen,						/**<解码器打开失败 / 超时*/
+	kNERtcAudioMixingErrorInvalidInfo,						/**<无效音频参数（声道、采样率）*/
+	kNERtcAudioMixingErrorOpenTimeout,						/**<打开流 / 文件超时*/
+	kNERtcAudioMixingErrorIoTimeout,						/**<网络io超时*/
+	kNERtcAudioMixingErrorIo,								/**<网络io错误*/
     //kNERtcAudioMixingErrorTooFrequentCall = 101,      	/**< 音乐文件打开太频繁。*/
     //kNERtcAudioMixingErrorInterruptedEOF= 102,      		/**< 音乐文件播放中断。*/
 } NERtcAudioMixingErrorCode;
@@ -142,6 +155,9 @@ typedef enum
 typedef enum
 {
     //ADM
+    kNERtcErrADMInitPlayout             = 1008,     /**< 音频设备模块：初始化播放设备出现错误。请检查播放设备是否异常或者权限限制，或者尝试重新进入频道。*/
+    kNERtcErrADMStartPlayout            = 1009,     /**< 音频设备模块：启动播放设备出现错误。请检查播放设备是否正常，或者尝试重新进入频道。*/
+    kNERtcErrADMInitRecording           = 1011,     /**< 音频设备模块：初始化录音设备时出现错误。请检查录音设备是否正常或者权限限制，或者尝试重新进入频道。*/
     kNERtcErrADMStartRecording          = 1012,     /**< 音频设备模块：启动录音设备出现错误。请检查录音设备是否正常，或者尝试重新进入频道。*/
     kNERtcErrADMRuntimePlayoutError     = 1015,     /**< 音频设备模块：运行时播放出现错误。请检查播放设备是否正常，或者尝试重新进入频道。*/
     kNERtcErrADMRuntimeRecordingError   = 1017,     /**< 音频设备模块：运行时录音错误。请检查录音设备是否正常，或者尝试重新进入频道。*/

@@ -17,6 +17,10 @@ allprojects {
         google()
         jcenter()
 
+        maven{
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+
         flatDir {
             dirs '../aars'
         }
@@ -33,17 +37,43 @@ ext {
     minSdkVersion = 19
     targetSdkVersion = 30
 
-    nertcVersion = "3.8.1"
-    nimVersion = '8.1.0'
+    nertcVersion = "4.0.1"
+    nimVersion = '8.3.0'
+    playerVersion = '2.7.1'
+    playerGslbVersion = '1.0.0'
 
     nertcSdk = "com.netease.yunxin:nertc:$nertcVersion"
     imSdk = "com.netease.nimlib:basesdk:$nimVersion"
     avsignallingSdk = "com.netease.nimlib:avsignalling:$nimVersion"
     chatRoomSdk = "com.netease.nimlib:chatroom:$nimVersion"
     utilcodex = "com.blankj:utilcodex:1.30.5"
+    playerSdk = "com.netease.nimlib:neliveplayer:$playerVersion"
+    playerGslbSdk = "com.netease:gslb:$playerGslbVersion"
 
     ndkAbis = [
             'armeabi-v7a',
             'arm64-v8a',
     ]
 }
+
+ext {
+    AppKey = ''
+    BaseUrl = ''
+}
+
+def loadLocalConfig() {
+    String env = System.getProperty("env", "test")
+    if (env != "test") env = "online"
+    println "env=$env"
+    def propertiesFile = file("config/${env}.properties")
+    if (!propertiesFile.exists()) {
+        println "Local properties don't exist."
+        return
+    }
+    Properties config = new Properties()
+    config.load(propertiesFile.newInputStream())
+    this.AppKey = config.getProperty('APP_KEY')
+    this.BaseUrl = config.getProperty('BASE_URL')
+}
+
+loadLocalConfig()

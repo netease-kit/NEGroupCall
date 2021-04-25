@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public enum FilterEnum {
 
-    origin(BeautificationParam.ORIGIN, R.drawable.demo_icon_cancel, R.string.origin),
+    origin(BeautificationParam.ORIGIN, R.drawable.demo_icon_origin, R.string.origin),
 
     ziran_1(BeautificationParam.ZIRAN_1, R.drawable.demo_icon_natural_1, R.string.ziran_1),
     ziran_2(BeautificationParam.ZIRAN_2, R.drawable.demo_icon_natural_2, R.string.ziran_2),
