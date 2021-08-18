@@ -144,6 +144,14 @@
     NERtcEngineContext *context = [[NERtcEngineContext alloc] init];
     context.engineDelegate = self;
     context.appKey = self.task.nrtcAppKey;
+    
+    NERtcLogSetting *setting = [[NERtcLogSetting alloc] init];
+    #if DEBUG
+         setting.logLevel = kNERtcLogLevelInfo;
+    #else
+         setting.logLevel = kNERtcLogLevelWarning;
+    #endif
+    context.logSetting = setting;
     int res = [coreEngine setupEngineWithContext:context];
     YXAlogInfo(@"初始化音视频引擎结果, res: %d", res);
     
