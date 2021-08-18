@@ -139,7 +139,8 @@
     config.frameRate = [self getFrameRateValue];
     config.maxProfile = [self getResolutionRatioValue];
     [coreEngine setAudioProfile:[self getSoundQuality] scenario:[NEChannelSetupService sharedService].scenarioType];
-
+    [coreEngine setChannelProfile:kNERtcChannelProfileCommunication];
+    
     [coreEngine setLocalVideoConfig:config];
     NERtcEngineContext *context = [[NERtcEngineContext alloc] init];
     context.engineDelegate = self;
