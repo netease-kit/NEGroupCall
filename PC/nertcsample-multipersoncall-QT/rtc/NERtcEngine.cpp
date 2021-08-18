@@ -86,6 +86,7 @@ bool NERtcEngine::getIsInit() {
 int NERtcEngine::joinChannel(const QString& token, const QString& roomid, const QString& uid) {
     int ret = kNERtcNoError;
 
+    m_rtcEngine->setChannelProfile(kNERtcChannelProfileCommunication);
     m_rtcEngine->enableLocalAudio(false);
     m_rtcEngine->enableLocalVideo(false);
 
