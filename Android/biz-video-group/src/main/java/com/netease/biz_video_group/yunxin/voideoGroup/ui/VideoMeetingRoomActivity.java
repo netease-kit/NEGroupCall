@@ -372,7 +372,6 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
         try {
             long begin = System.currentTimeMillis();
             neRtcEx.init(getApplicationContext(), appKey, neRtcCallback, option);
-            neRtcEx.setChannelProfile(NERtcConstants.RTCChannelProfile.COMMUNICATION);
             long cost = System.currentTimeMillis() - begin;
             TempLogUtil.log("neRtcEx init method first Cost:"+cost);
             initRtcParams();
@@ -403,6 +402,7 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
 
     private void initRtcParams() {
         if (rtcSetting != null) {
+            neRtcEx.setChannelProfile(NERtcConstants.RTCChannelProfile.COMMUNICATION);
             long begin = System.currentTimeMillis();
             //摄像头和麦克风
             neRtcEx.enableLocalAudio(rtcSetting.enableMicphone);
