@@ -35,7 +35,12 @@ bool NERtcEngine::init(const char* app_key, const char* log_dir_path) {
     //LOG(INFO) << "app_key:" << app_key;
     rtcEngineContext.app_key = app_key;
     rtcEngineContext.log_dir_path = log_dir_path;
+#ifdef QT_NO_DEBUG
+    rtcEngineContext.log_level = kNERtcLogLevelWarning;
+#else
     rtcEngineContext.log_level = kNERtcLogLevelInfo;
+#endif
+
     rtcEngineContext.log_file_max_size_KBytes = 1024 * 10;
     rtcEngineContext.event_handler = m_rtcEngineHandler.get();
     rtcEngineContext.video_use_exnternal_render = false;
