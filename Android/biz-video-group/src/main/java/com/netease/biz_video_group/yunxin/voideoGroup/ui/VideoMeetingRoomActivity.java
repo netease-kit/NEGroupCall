@@ -368,9 +368,11 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
         }else {
             option.logLevel = NERtcConstants.LogLevel.WARNING;
         }
+
         try {
             long begin = System.currentTimeMillis();
             neRtcEx.init(getApplicationContext(), appKey, neRtcCallback, option);
+            neRtcEx.setChannelProfile(NERtcConstants.RTCChannelProfile.COMMUNICATION);
             long cost = System.currentTimeMillis() - begin;
             TempLogUtil.log("neRtcEx init method first Cost:"+cost);
             initRtcParams();
