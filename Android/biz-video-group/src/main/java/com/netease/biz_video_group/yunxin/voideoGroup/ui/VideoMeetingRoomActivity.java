@@ -173,7 +173,6 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
 
         @Override
         public void onUserAudioStart(long userId) {
-            neRtcEx.subscribeRemoteAudioStream(userId, true);
             videoGroupSpeakerView.enableMicphone(true, userId, false);
             videoGroupMainView.enableMicphone(true, userId, false);
         }
