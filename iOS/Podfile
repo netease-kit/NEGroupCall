@@ -4,7 +4,7 @@
 target 'NEGroupCall-iOS' do
   use_frameworks!
 
-pod 'NERtcSDK', '4.0.3'
+pod 'NERtcSDK', '4.2.102'
 pod 'Nama-lite', '7.1.2'
 pod 'NIMSDK_LITE', '7.8.4'
 pod 'Masonry'
