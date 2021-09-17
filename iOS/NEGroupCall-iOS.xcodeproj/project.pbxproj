@@ -1837,7 +1837,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Sources/NELivePlayerFramework.framework",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.yunxin.app.groupCall;
 				PRODUCT_NAME = "云信多人通话";
 				PROVISIONING_PROFILE_SPECIFIER = "Wildcard Dev";
@@ -1872,7 +1872,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Sources/NELivePlayerFramework.framework",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.yunxin.app.groupCall;
 				PRODUCT_NAME = "云信多人通话";
 				PROVISIONING_PROFILE_SPECIFIER = "Wildcard Dev";

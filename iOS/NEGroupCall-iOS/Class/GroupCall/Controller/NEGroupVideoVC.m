@@ -128,36 +128,14 @@
 - (void)initRTCSDK {
     NERtcEngine *coreEngine = [NERtcEngine sharedEngine];
     
-    NSDictionary *params = @{
-        kNERtcKeyVideoCaptureObserverEnabled: @YES  // 将摄像头采集的数据回调给用户 用于美颜
-    };
-    [coreEngine setParameters:params];
     [coreEngine addEngineMediaStatsObserver:self];
-
-    NERtcVideoEncodeConfiguration *config = [[NERtcVideoEncodeConfiguration alloc] init];
-    config.maxProfile = kNERtcVideoProfileHD720P;
-    config.frameRate = [self getFrameRateValue];
-    config.maxProfile = [self getResolutionRatioValue];
-    [coreEngine setAudioProfile:[self getSoundQuality] scenario:[NEChannelSetupService sharedService].scenarioType];
-    [coreEngine setChannelProfile:kNERtcChannelProfileCommunication];
     
-    [coreEngine setLocalVideoConfig:config];
     NERtcEngineContext *context = [[NERtcEngineContext alloc] init];
     context.engineDelegate = self;
     context.appKey = self.task.nrtcAppKey;
-    
-    NERtcLogSetting *setting = [[NERtcLogSetting alloc] init];
-    #if DEBUG
-         setting.logLevel = kNERtcLogLevelInfo;
-    #else
-         setting.logLevel = kNERtcLogLevelWarning;
-    #endif
-    context.logSetting = setting;
     int res = [coreEngine setupEngineWithContext:context];
     YXAlogInfo(@"初始化音视频引擎结果, res: %d", res);
     
-    [coreEngine enableLocalAudio:self.isMicrophoneOpen];
-    [coreEngine enableLocalVideo:self.isCameraOpen];
 }
 
 - (void)addOritationObserver {
@@ -297,6 +275,20 @@
 }
 
 - (void)joinCurrentRoom {
+    NERtcEngine *coreEngine = NERtcEngine.sharedEngine;
+    NSDictionary *params = @{
+        kNERtcKeyVideoCaptureObserverEnabled: @YES  // 将摄像头采集的数据回调给用户 用于美颜
+    };
+    [coreEngine setParameters:params];
+    NERtcVideoEncodeConfiguration *config = [[NERtcVideoEncodeConfiguration alloc] init];
+    config.maxProfile = kNERtcVideoProfileHD720P;
+    config.frameRate = [self getFrameRateValue];
+    config.maxProfile = [self getResolutionRatioValue];
+    [coreEngine setAudioProfile:[self getSoundQuality] scenario:[NEChannelSetupService sharedService].scenarioType];
+
+    [coreEngine setLocalVideoConfig:config];
+    [coreEngine enableLocalAudio:self.isMicrophoneOpen];
+    [coreEngine enableLocalVideo:self.isCameraOpen];
     [NERtcEngine.sharedEngine joinChannelWithToken:self.task.avRoomCheckSum channelName:self.task.avRoomCName myUid:self.task.avRoomUid completion:^(NSError * _Nullable error, uint64_t channelId, uint64_t elapesd) {
         YXAlogError(@"joinChannel error:%@",error)
     }];
