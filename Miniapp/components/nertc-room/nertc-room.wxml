@@ -22,6 +22,8 @@
       video-width="{{pusher.videoWidth}}"
       video-height="{{pusher.videoHeight}}"
       beauty="{{pusher.beautyLevel}}"
+      beauty-style="{{pusher.beautyStyle}}"
+      filter="{{pusher.filter}}"
       whiteness="{{pusher.whitenessLevel}}"
       orientation="{{pusher.videoOrientation}}"
       aspect="{{pusher.videoAspect}}"
@@ -63,7 +65,7 @@
     data-index="{{item.listenerIndex}}"
   >
     <live-player
-      wx:if="{{item.stream && !item.stream.muteVideo}}"
+      wx:if="{{item.stream}}"
       class="player"
       data-nickname="{{item.nickName}}"
       data-uid="{{item.uid}}"
@@ -71,6 +73,7 @@
       src="{{item.url}}"
       mode="RTC"
       autoplay= "{{item.stream.autoplay}}"
+      muted= "{{item.stream.muteAudio}}"
       mute-audio= "{{item.stream.muteAudio}}"
       mute-video= "{{item.stream.muteVideo}}"
       orientation= "{{item.stream.orientation}}"
@@ -89,7 +92,7 @@
       bindaudiovolumenotify  ="_playerAudioVolumeNotify"
     ></live-player>
     <cover-view class="nickName-container">
-      <cover-image wx:if="{{item.stream.muteAudio}}" class="user-audio" src="./resources/images/mic-off.png" />
+      <cover-image wx:if="{{!item.stream || item.stream.muteAudio}}" class="user-audio" src="./resources/images/mic-off.png" />
       <cover-view class="text">{{item.nickName}}</cover-view>
     </cover-view>
     <cover-image

@@ -1,4 +1,4 @@
-import YunXinMiniappSDK from './resources/sdk/NERTC_Miniapp_SDK_for_WeChat_v4.1.0'
+import YunXinMiniappSDK from './resources/sdk/NERTC_Miniapp_SDK_for_WeChat_v4.4.1'
 import UserController from './controllers/user-controller.js'
 import Pusher from './model/pusher.js'
 import { EVENT, DEFAULT_COMPONENT_CONFIG } from './common/constants.js'
@@ -68,7 +68,7 @@ Component({
 
     playerVideoBitrate: null,
     playerAudioBitrate: null,
-    beautyIndex: 0,
+    beautyIndex: 2,
     beautyStyleArray: [
       { value: 'smooth', label: '光滑' },
       { value: 'nature', label: '自然' },
@@ -168,11 +168,11 @@ Component({
       this._beforeLastTapTime = 0 // 点击时间戳 用于判断双击事件
       this._lastTapCoordinate = { x: 0, y: 0 } // 点击时的坐标
     },
-    _initRtc({ debug, appkey }) {
-      logger.log(TAG_NAME, '_initRtc')
+    _initRtc(params) {
+      logger.log(TAG_NAME, '_initRtc', params)
       const client = YunXinMiniappSDK.Client({
-        debug,
-        appkey,
+        debug: params.debug,
+        appkey: params.appkey,
       })
       client.init()
 
@@ -225,7 +225,7 @@ Component({
           minBitrate: config.minBitrate,
           maxBitrate: config.maxBitrate,
           videoWidth: config.videoWidth,
-          videoHeight: config.videoHeight,
+          videoHeight: config.videoHeight
         })
        }
      },
@@ -524,6 +524,7 @@ Component({
         logger.log(TAG_NAME, '_onStreamAdded', 'subscribe success', res)
         const { url } = res
         const user = this.userController.addUser({ uid, url })
+
         if (user && user.stream && mediaType) {
           const streamParams = mediaType === 'audio' ? {
             muteAudio: false
@@ -551,7 +552,7 @@ Component({
           logger.log(TAG_NAME, '_onStreamAdded play success', user)
         }
       } catch (error) {
-        logger.error(TAG_NAME, '_onStreamAdded fail: ', err)
+        logger.error(TAG_NAME, '_onStreamAdded fail: ', error)
       }
     },
     _onStreamRemoved(data) {
@@ -792,7 +793,7 @@ Component({
       }
     },
     _pusherNetStatusHandler(event) {
-      logger.log(TAG_NAME, '_pusherNetStatusHandler', event)
+      // logger.log(TAG_NAME, '_pusherNetStatusHandler', event)
       const {
         videoFPS,
         videoBitrate,
@@ -846,7 +847,7 @@ Component({
       // logger.log(TAG_NAME, '_playerFullscreenChange', event)
     },
     _playerNetStatus(event) {
-      logger.log(TAG_NAME, '_playerNetStatus', event)
+      logger.log(TAG_NAME, '_playerNetStatus', event.detail.info)
       if (this.data.statusVisible) {
         const uid = Number(event.currentTarget.dataset.uid)
         const user = this.userController.getUser(uid)

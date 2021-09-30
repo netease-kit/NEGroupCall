@@ -56,7 +56,7 @@ export const DEFAULT_PUSHER_CONFIG = {
   videoAspect: '9:16', // 宽高比，可选值有 3:4,9:16
   frontCamera: 'front', // 前置或后置摄像头，可选值：front，back
   enableRemoteMirror: false, // 设置推流画面是否镜像，产生的效果会表现在 live-player
-  localMirror: 'disable', // auto:前置摄像头镜像，后置摄像头不镜像（系统相机的表现）enable:前置摄像头和后置摄像头都镜像 disable: 前置摄像头和后置摄像头都不镜像
+  localMirror: 'auto', // auto:前置摄像头镜像，后置摄像头不镜像（系统相机的表现）enable:前置摄像头和后置摄像头都镜像 disable: 前置摄像头和后置摄像头都不镜像
   enableBackgroundMute: false, // 进入后台时是否静音
   audioQuality: 'high', // 高音质(48KHz)或低音质(16KHz)，可选值：high，low
   audioVolumeType: 'voicecall', // 声音类型 可选值： media: 媒体音量，voicecall: 通话音量
