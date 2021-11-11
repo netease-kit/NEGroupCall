@@ -3,7 +3,8 @@ import { Input, Button, message, Checkbox } from 'antd';
 import Icon from '@/components/Icon';
 import { history } from 'umi';
 import { checkBrowser } from '@/utils';
-import RtcOptModal, { Quality } from '@/components/RtcOptModal';
+import RtcOptModal from '@/components/RtcOptModal';
+import { AudioQuality } from '@/utils/rtc/base';
 import styled from 'styled-components';
 import { sessionIns } from '@/utils/storage';
 import logger from '@/utils/logger';
@@ -49,7 +50,7 @@ const platforms = [
     desc: 'macOS',
     descHover: '点击下载',
     downloadLink:
-      'https://yx-web-nosdn.netease.im/quickhtml/assets/yunxin/default/多人视频通话_b715cbb_v1.1.0.dmg',
+      'https://yx-web-nosdn.netease.im/quickhtml/assets/yunxin/default/多人视频通话_b05e818_v1.3.0.dmg',
   },
   {
     icon: (
@@ -63,7 +64,7 @@ const platforms = [
     desc: 'Windows',
     descHover: '点击下载',
     downloadLink:
-      'https://yx-web-nosdn.netease.im/quickhtml/assets/yunxin/default/多人视频通话_b715cbb_v1.1.0.exe',
+      'https://yx-web-nosdn.netease.im/quickhtml/assets/yunxin/default/多人视频通话_b05e818_v1.3.0.exe',
   },
   {
     icon: (
@@ -127,7 +128,7 @@ export default () => {
   }: {
     resolution: number;
     frameRate: number;
-    audioQuality: Quality;
+    audioQuality: AudioQuality;
   }) => {
     sessionIns.set('globalState', {
       ...(sessionIns.get('globalState') || {}),

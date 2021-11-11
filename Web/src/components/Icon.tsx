@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { createFromIconfontCN } from '@ant-design/icons';
 
 const MyIcon = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_2183559_fne9nxzeyb.js',
+  scriptUrl: 'https://at.alicdn.com/t/font_2183559_fne9nxzeyb.js',
 });
 
 const Icon = styled(MyIcon)`

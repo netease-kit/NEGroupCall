@@ -1,6 +1,13 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { history } from 'umi';
-import RTC, { UserInfo, FeedbackParams, Stat, Evts } from '@/utils/rtc';
+import Rtc from '@/utils/rtc';
+import {
+  UserInfo,
+  FeedbackParams,
+  Stat,
+  VideoQuality,
+  VideoFrame,
+} from '@/utils/rtc/base';
 import { Button, message } from 'antd';
 import Icon from '@/components/Icon';
 import DeviceList, { IProps as DeviceListProps } from '@/components/DeviceList';
@@ -27,13 +34,13 @@ let clickFlag = false;
 
 export default () => {
   const {
+    resolution = VideoQuality.VIDEO_QUALITY_720p,
+    frameRate = VideoFrame.CHAT_VIDEO_FRAME_RATE_20,
+    audioQuality = 'speech_standard',
     channelName,
     nickName,
-    resolution,
-    frameRate,
-    audioQuality,
-    openCamera,
-    openMic,
+    openCamera = true,
+    openMic = true,
   } = sessionIns.get('globalState') || {};
 
   const [localStream, setLocalStream] = useState<any>(null);
@@ -57,9 +64,8 @@ export default () => {
   const [largeOne, setLargeOne] = useState<string | number>('');
 
   const rtc = useMemo(() => {
-    logger.log('SDKVersion：', '4.1.0');
     clickFlag = false;
-    return new RTC({
+    return new Rtc({
       appkey: config.appKey,
       // appSecret: config.appSecret,
       channelName,
@@ -78,6 +84,7 @@ export default () => {
         playLocalVideo();
       },
       onRemoteStreamUpdate: () => {
+        logger.log('onRemoteStreamUpdate', rtc.remoteUsers, rtc.remoteStreams);
         setRemoteUsers(rtc.remoteUsers);
         setRemoteStreams(rtc.remoteStreams);
       },
@@ -86,23 +93,17 @@ export default () => {
         div && rtc.setupRemoteView(userId, div as HTMLElement);
       },
       onNetworkQuality: (stats) => {
-        logger.log('网络质量: ', stats);
+        // logger.log('网络质量: ', stats);
         setStats(stats);
       },
       onDisconnect: () => {
         setFeedbackVisible(true);
       },
-      onConnectionState: (evt: Evts) => {
-        logger.log('网络连接状态: ', evt);
-        if (
-          evt.prevState === 'DISCONNECTING' &&
-          evt.curState === 'DISCONNECTED'
-        ) {
-          if (!clickFlag) {
-            message.error('网络连接断开', 1, returnJoin);
-          } else {
-            returnJoin();
-          }
+      onConnectionDisconnected: () => {
+        if (!clickFlag) {
+          message.error('网络连接断开', 1, returnJoin);
+        } else {
+          returnJoin();
         }
       },
     });
@@ -394,11 +395,7 @@ export default () => {
           )}
           {nickName}
         </div>
-        {localStream ? (
-          ''
-        ) : (
-          <div className={styles['userNick']}>{nickName}</div>
-        )}
+        {!localStream && <div className={styles['userNick']}>{nickName}</div>}
         {stats.some(
           (item) => !remoteUsers.map((item2) => item2.uid).includes(item.uid),
         ) && (

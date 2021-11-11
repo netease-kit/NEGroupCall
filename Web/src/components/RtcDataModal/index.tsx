@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Modal, message } from 'antd';
-import { DataInfo } from '@/utils/rtc';
+import { DataInfo } from '@/utils/rtc/base';
 import useInterval from '@/hooks/useInterval';
 
 import styles from './index.less';

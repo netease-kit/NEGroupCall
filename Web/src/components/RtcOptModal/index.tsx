@@ -1,16 +1,8 @@
 import React, { FC, useState } from 'react';
 import { Modal, Select, Radio, Divider } from 'antd';
-import * as WebRTC2 from '@/assets/NIM_Web_WebRTC2_v4.1.0.js';
+import { AudioQuality, VideoQuality, VideoFrame } from '@/utils/rtc/base';
 
 import styles from './index.less';
-
-export type Quality =
-  | 'speech_low_quality'
-  | 'speech_standard'
-  | 'music_standard'
-  | 'standard_stereo'
-  | 'high_quality'
-  | 'high_quality_stereo';
 
 export type AudioScene = 'music' | 'chat';
 
@@ -19,7 +11,7 @@ interface IProps {
   onOk?: (params: {
     resolution: number;
     frameRate: number;
-    audioQuality: Quality;
+    audioQuality: AudioQuality;
   }) => void;
   onCancel?: () => void;
 }
@@ -27,42 +19,42 @@ interface IProps {
 const resolutionOptions = [
   {
     label: '320x180',
-    value: WebRTC2.VIDEO_QUALITY_180p as number,
+    value: VideoQuality.VIDEO_QUALITY_180p as number,
   },
   {
     label: '640x480',
-    value: WebRTC2.VIDEO_QUALITY_480p as number,
+    value: VideoQuality.VIDEO_QUALITY_480p as number,
   },
   {
     label: '1280x720',
-    value: WebRTC2.VIDEO_QUALITY_720p as number,
+    value: VideoQuality.VIDEO_QUALITY_720p as number,
   },
   {
     label: '1920x1080',
-    value: WebRTC2.VIDEO_QUALITY_1080p as number,
+    value: VideoQuality.VIDEO_QUALITY_1080p as number,
   },
 ];
 
 const frameRateOptions = [
   {
     label: '5',
-    value: WebRTC2.CHAT_VIDEO_FRAME_RATE_5 as number,
+    value: VideoFrame.CHAT_VIDEO_FRAME_RATE_5 as number,
   },
   {
     label: '10',
-    value: WebRTC2.CHAT_VIDEO_FRAME_RATE_10 as number,
+    value: VideoFrame.CHAT_VIDEO_FRAME_RATE_10 as number,
   },
   {
     label: '15',
-    value: WebRTC2.CHAT_VIDEO_FRAME_RATE_15 as number,
+    value: VideoFrame.CHAT_VIDEO_FRAME_RATE_15 as number,
   },
   {
     label: '20',
-    value: WebRTC2.CHAT_VIDEO_FRAME_RATE_20 as number,
+    value: VideoFrame.CHAT_VIDEO_FRAME_RATE_20 as number,
   },
   {
     label: '25',
-    value: WebRTC2.CHAT_VIDEO_FRAME_RATE_25 as number,
+    value: VideoFrame.CHAT_VIDEO_FRAME_RATE_25 as number,
   },
 ];
 
@@ -109,13 +101,15 @@ const musicQualityOptions = [
 
 const RtcOptModal: FC<IProps> = ({ visible, onOk, onCancel }) => {
   const [resolution, setResolution] = useState<number>(
-    WebRTC2.VIDEO_QUALITY_720p,
+    VideoQuality.VIDEO_QUALITY_720p,
   );
   const [frameRate, setFrameRate] = useState<number>(
-    WebRTC2.CHAT_VIDEO_FRAME_RATE_20,
+    VideoFrame.CHAT_VIDEO_FRAME_RATE_20,
   );
   const [audioScene, setAudioScene] = useState<AudioScene>('chat');
-  const [audioQuality, setAudioQuality] = useState<Quality>('speech_standard');
+  const [audioQuality, setAudioQuality] = useState<AudioQuality>(
+    'speech_standard',
+  );
 
   const okHandler = () => {
     onOk?.({
