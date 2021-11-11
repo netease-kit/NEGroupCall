@@ -32,10 +32,16 @@ bool NERtcEngine::init(const char* app_key, const char* log_dir_path) {
     m_rtcEngine = dynamic_cast<IRtcEngineEx*>(createNERtcEngine());
 
     NERtcEngineContext rtcEngineContext;
+    memset(&rtcEngineContext, 0x00, sizeof(rtcEngineContext));
     //LOG(INFO) << "app_key:" << app_key;
     rtcEngineContext.app_key = app_key;
     rtcEngineContext.log_dir_path = log_dir_path;
+#ifdef QT_NO_DEBUG
+    rtcEngineContext.log_level = kNERtcLogLevelWarning;
+#else
     rtcEngineContext.log_level = kNERtcLogLevelInfo;
+#endif
+
     rtcEngineContext.log_file_max_size_KBytes = 1024 * 10;
     rtcEngineContext.event_handler = m_rtcEngineHandler.get();
     rtcEngineContext.video_use_exnternal_render = false;
@@ -81,6 +87,7 @@ bool NERtcEngine::getIsInit() {
 int NERtcEngine::joinChannel(const QString& token, const QString& roomid, const QString& uid) {
     int ret = kNERtcNoError;
 
+    m_rtcEngine->setChannelProfile(kNERtcChannelProfileCommunication);
     m_rtcEngine->enableLocalAudio(false);
     m_rtcEngine->enableLocalVideo(false);
 

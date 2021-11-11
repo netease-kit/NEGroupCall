@@ -23,7 +23,7 @@ public:
     //美颜初始化
     void initBeauty();
     //加载资源包
-    bool LoadBundleInner(const std::string& filepath, std::vector<char>& data);
+    bool LoadBundleInner(const std::wstring& filepath, std::vector<char>& data);
     //计算文件大小
     size_t FileSize(std::ifstream &file);
 

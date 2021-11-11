@@ -1,5 +1,6 @@
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <utils/log_instance.h>
 
 #include "NEFeedbackButton.h"
 #include "NESuggestTipWidget.h"
@@ -45,7 +46,11 @@ void NESuggestTipWidget::onBtnGoodClicked() {
 
     Q_EMIT sigCallQuality(true);
 
-    QTimer::singleShot(800, [this]() -> void { accept(); });
+    QTimer::singleShot(800, [this]() -> void {
+        if(!m_bClose) {
+            accept();
+        }
+    });
 }
 
 void NESuggestTipWidget::onBtnPoorClicked() {
@@ -56,6 +61,11 @@ void NESuggestTipWidget::onBtnPoorClicked() {
     repaint();
 
     Q_EMIT sigCallQuality(false);
+}
+
+void NESuggestTipWidget::closeEvent(QCloseEvent *event) {
+    m_bClose = true;
+    return QDialog::closeEvent(event);
 }
 
 void NESuggestTipWidget::onBtnSaveClicked() {
@@ -75,7 +85,11 @@ void NESuggestTipWidget::onBtnSaveClicked() {
 
     ui->btnSave->setEnabled(false);
 
-    QTimer::singleShot(1500, [this]() -> void { accept(); });
+    QTimer::singleShot(1500, [this]() -> void {
+        if(!m_bClose) {
+            accept();
+        }
+    });
 }
 
 QString NESuggestTipWidget::getCaseTypeJsonString() {

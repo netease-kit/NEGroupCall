@@ -169,6 +169,9 @@ QPushButton:open{
           <property name="text">
            <string/>
           </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
        </layout>
@@ -208,6 +211,9 @@ QPushButton:open{
            <string/>
           </property>
           <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="flat">
            <bool>true</bool>
           </property>
          </widget>
@@ -252,6 +258,9 @@ QPushButton:open{
           <property name="text">
            <string/>
           </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
        </layout>
@@ -292,6 +301,9 @@ QPushButton:checked{
         <property name="checkable">
          <bool>true</bool>
         </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
@@ -316,6 +328,9 @@ QPushButton:checked{
         </property>
         <property name="text">
          <string/>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -345,6 +360,9 @@ background-color: transparent;</string>
         </property>
         <property name="checkable">
          <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

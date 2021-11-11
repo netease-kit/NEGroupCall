@@ -19,6 +19,9 @@ public:
 Q_SIGNALS:
     void sigCallQuality(bool good);
 
+protected:
+    virtual void closeEvent(QCloseEvent *event) override;
+
 private:
     void onBtnGoodClicked();
     void onBtnPoorClicked();
@@ -29,6 +32,7 @@ private:
 
 private:
     Ui::NESuggestTipWidget *ui;
+    bool m_bClose = false;;
 };
 
 #endif // NESUGGESTTIPWIDGET_H
