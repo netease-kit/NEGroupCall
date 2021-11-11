@@ -91,6 +91,7 @@ void NECallWidget::onJoinChannel() {
     setWindowFlags(Qt::Window);
     this->showNormal();
     this->resize(1184, 666);
+    // move((QApplication::desktop()->width() - this->width()) / 2, (QApplication::desktop()->height() - this->height()) / 2);
     m_userCount = 1;
 
     //设置自己的渲染窗口
@@ -117,7 +118,9 @@ void NECallWidget::onVideoEnable(bool bEnable) {
     if (bottomTool->getIsBeutyOpen()) {
         m_engine->enableBeauty(bEnable);
         //延迟操作摄像头，先让美颜数据走完
-        QTimer::singleShot(100, [this, bEnable]() -> void { m_engine->enableVideo(bEnable); });
+        QTimer::singleShot(100, [this, bEnable]() -> void {
+            m_engine->enableVideo(bEnable);
+        });
     } else {
         m_engine->enableVideo(bEnable);
     }

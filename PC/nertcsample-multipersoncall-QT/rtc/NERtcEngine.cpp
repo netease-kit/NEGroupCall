@@ -32,6 +32,7 @@ bool NERtcEngine::init(const char* app_key, const char* log_dir_path) {
     m_rtcEngine = dynamic_cast<IRtcEngineEx*>(createNERtcEngine());
 
     NERtcEngineContext rtcEngineContext;
+    memset(&rtcEngineContext, 0x00, sizeof(rtcEngineContext));
     //LOG(INFO) << "app_key:" << app_key;
     rtcEngineContext.app_key = app_key;
     rtcEngineContext.log_dir_path = log_dir_path;

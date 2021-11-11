@@ -59,7 +59,7 @@ void NEBeautyManager::initBeauty()
     LOG(INFO) << "beautyBundlePath: " << beautyBundlePath.toStdString();
 
     std::vector<char> propData;
-    if (false == LoadBundleInner(beautyBundlePath.toStdString(), propData))
+    if (false == LoadBundleInner(beautyBundlePath.toStdWString(), propData))
     {
         LOG(INFO) << "load face beautification data failed";
         return;
@@ -110,9 +110,14 @@ size_t NEBeautyManager::FileSize(std::ifstream& file)
     return static_cast<size_t>(end - beg);
 }
 
-bool NEBeautyManager::LoadBundleInner(const std::string &filepath, std::vector<char> &data)
+bool NEBeautyManager::LoadBundleInner(const std::wstring &filepath, std::vector<char> &data)
 {
+#ifdef Q_OS_MAC
+    QString strFilePath = QString::fromStdWString(filepath) ;
+    std::ifstream fin(strFilePath.toStdString(), std::ios::binary);
+#else
     std::ifstream fin(filepath, std::ios::binary);
+#endif
     if (false == fin.good())
     {
         fin.close();

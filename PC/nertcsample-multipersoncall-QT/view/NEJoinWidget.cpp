@@ -50,6 +50,7 @@ void NEJoinWidget::onBtnJoinChannelClicked() {
 
     if (roomid.isEmpty()) {
         Toast::showTip("请填写房间号", this);
+        ui->joinChannel->setEnabled(true);
         return;
     }
 
@@ -57,6 +58,7 @@ void NEJoinWidget::onBtnJoinChannelClicked() {
     QRegExpValidator* validator = new QRegExpValidator(rx, this);
     if (QRegExpValidator::Invalid == validator->validate(roomid, pos)) {
         Toast::showTip("房间号错误，仅支持12位及以下纯数字", this);
+        ui->joinChannel->setEnabled(true);
         return;
     }
 
@@ -70,6 +72,7 @@ void NEJoinWidget::onBtnJoinChannelClicked() {
         QRegExpValidator* validator2 = new QRegExpValidator(rx2, this);
         if (QRegExpValidator::Invalid == validator2->validate(nickname, pos)) {
             Toast::showTip("昵称错误，仅支持12位及以下文本、字母及数字组合", this);
+            ui->joinChannel->setEnabled(true);
             return;
         }
     }

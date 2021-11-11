@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		JnlQ5sJvLDcese1qvlsysF6/kBc=
+		hPiOXZ/PKpJfIbTC3Kmq6n3eXhk=
 		</data>
 		<key>Resources/NetEaseWEShader.metallib</key>
 		<data>
@@ -19,11 +19,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			HUFuKaOXlr2YsMd+8RygVsX01Dw=
+			//k0WoApEVh8BmYVNbh6ApxbDNg=
 			</data>
 			<key>hash2</key>
 			<data>
-			OgPdy5hIBnF8fM4awFDNczPBggExwqGrspSUk2FAS5A=
+			ljzPkZXQrJB3IihmEYA6jlo5zWZO2ONri2Xv3RYKAxY=
 			</data>
 		</dict>
 		<key>Headers/nertc_base.h</key>
@@ -52,99 +52,99 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			1rSrCi2rv3zw/B3vzP2NTqG82RU=
+			fv+wCjO39SCrU8RpojwoJGb19io=
 			</data>
 			<key>hash2</key>
 			<data>
-			PA1T5uflw83qLaaeDgFpZZSjAs8CiYhquKmepqAGDXQ=
+			O9h7ycAHGyWSP/DLHGz+czEzV9AhOez4XvLueCOAKZw=
 			</data>
 		</dict>
 		<key>Headers/nertc_engine.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			2xLYsnp2M/rcpO2LS+d0CdGx4vo=
+			+qdoWQoMEBYkVLfOV6YPR6P36CU=
 			</data>
 			<key>hash2</key>
 			<data>
-			UMyvW1fBZErFUlnGVYgZuRvkp9O2FqJUsqhYtnVvPRA=
+			tJKt0xYtiSLK6o45FckYhAbUiMTflqMFifuQBlxipFU=
 			</data>
 		</dict>
 		<key>Headers/nertc_engine_defines.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Z2+jTdVHfu1hrLpTPdJ7LLx1s+k=
+			RxEgHn1lkw/IBfWleA4hzPTO+NI=
 			</data>
 			<key>hash2</key>
 			<data>
-			z5ljniNB/FEs5KsFrYKLdY+cVmF/OS4VTJjt4xzX48o=
+			Qzr+lUFCWB6FkChv7ZfJoz2NVWB7YsXhkHTsK1/lmO4=
 			</data>
 		</dict>
 		<key>Headers/nertc_engine_event_handler.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			hnebtfeTIAoQhUJkFzFaDP6+8zo=
+			yvlw09B64xfERjH6C60nEZgGjRA=
 			</data>
 			<key>hash2</key>
 			<data>
-			B4e+MEcHgg+VGLwVKPBU1/KOQpkwwTxjA1R/vpOzu0A=
+			TVqGQyxbQG3yjnlrC6OQDFe4FbM36hdIcVHuI5rBy6I=
 			</data>
 		</dict>
 		<key>Headers/nertc_engine_event_handler_ex.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			cERaDjpbXvTPNfP4IPqZoKZvPB0=
+			145rFKy4g7fdCaPYzihoVqZaltY=
 			</data>
 			<key>hash2</key>
 			<data>
-			3WkvWofPTV+QLwuq4DgiiIOq+phCjFRuUVXzLthbYW0=
+			ZmZDpRkzwxjsmoDnZWR8okMTkv+/U0s1AURZwM6No6g=
 			</data>
 		</dict>
 		<key>Headers/nertc_engine_ex.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			aX8xaWzQuq3dwnfY0k6WmYx3ZSI=
+			v98HEUMDNgSGYwNPJe7cFw9dd5o=
 			</data>
 			<key>hash2</key>
 			<data>
-			JGimU/XDX55HC1doMirSslZS8objchFQNLRGt55GJM8=
+			E/+YD6yaFQ8Eci4FZpNvaVqoOOvU9PoJ/vVqpaqtpEg=
 			</data>
 		</dict>
 		<key>Headers/nertc_engine_media_stats_observer.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			6fx9KMlJDP0B/Ub/BuK7UZWMXwY=
+			YVQqqXfSI8iwC8h/JfSpAn5ID4Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			zGB2gfU+TJ8RJOO/C4zK66bA74VDFNgp74fc5/xrYo0=
+			gGLBwBtHNSDR1mDifOxFRy5ytOXMT92jeYWLo21y924=
 			</data>
 		</dict>
 		<key>Headers/nertc_error_code.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			S/O3OI79/VaV9ahxqelvY/HyP2A=
+			Pd5ehDMMY75FUD4fpZIeG7gSPX4=
 			</data>
 			<key>hash2</key>
 			<data>
-			JWCGaRHmMEdM0WmplIj14hsb1G9MSIwZFNYD84TETG0=
+			Ok/9h/Nmgv5bquMVIkaG841lHel0imLWMPOX1f8DUTQ=
 			</data>
 		</dict>
 		<key>Headers/nertc_video_device_manager.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+MJdRo0Wgq9fQ4hT+JfDTDnoYE0=
+			5uJHZUtIBDTstadAxd+Y0dIs6J4=
 			</data>
 			<key>hash2</key>
 			<data>
-			pRiG8ix7zPHNcBw1eWwBNJCe1+Lg34qiUK1Il4hL/lE=
+			G4AtR7Qy/nXOh3utBgc5S9pSrN6slFMKpvVEE1Yzrss=
 			</data>
 		</dict>
 		<key>Headers/nertc_warn_code.h</key>
@@ -173,11 +173,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JnlQ5sJvLDcese1qvlsysF6/kBc=
+			hPiOXZ/PKpJfIbTC3Kmq6n3eXhk=
 			</data>
 			<key>hash2</key>
 			<data>
-			naNstxH1x4mkDKrDYDlLNfK+l2eGbbQEMea3dnOcaJ0=
+			0KG4ZCycwEM+zAPUtE2wit2xNrVLUGLWl9YM5tJlyvg=
 			</data>
 		</dict>
 		<key>Resources/NetEaseWEShader.metallib</key>
