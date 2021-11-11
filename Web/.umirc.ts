@@ -4,12 +4,21 @@ import * as path from 'path';
 export default defineConfig({
   title: '网易 | 多人通话',
   favicon: `${
-    process.env.NODE_ENV === 'production' ? '/webdemo/groupCall/' : '/'
+    process.env.PLATFORM === 'electron'
+      ? './'
+      : process.env.NODE_ENV === 'production'
+      ? '/webdemo/groupCall/'
+      : '/'
   }favicon.ico`,
   publicPath:
-    process.env.NODE_ENV === 'production' ? '/webdemo/groupCall/' : '/',
+    process.env.PLATFORM === 'electron'
+      ? './'
+      : process.env.NODE_ENV === 'production'
+      ? '/webdemo/groupCall/'
+      : '/',
   define: {
     'process.env.ENV': process.env.ENV,
+    'process.env.PLATFORM': process.env.PLATFORM,
   },
   hash: true,
   history: {

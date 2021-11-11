@@ -3,7 +3,7 @@ import { Modal, Radio, Input, Button, Checkbox } from 'antd';
 import Icon from '@/components/Icon';
 import styled from 'styled-components';
 import styles from './index.less';
-import { FeedbackParams } from '@/utils/rtc';
+import { FeedbackParams } from '@/utils/rtc/base';
 
 interface IProps {
   onOk: (params: FeedbackParams) => void;

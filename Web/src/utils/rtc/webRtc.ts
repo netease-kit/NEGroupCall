@@ -1,135 +1,46 @@
-import * as WebRTC2 from '@/assets/NIM_Web_WebRTC2_v4.1.0.js';
-import axios from 'axios';
-import config from '@/config';
+import NERTC from 'nertc-web-sdk';
+import Rtc, {
+  InitOptions,
+  Stat,
+  Devices,
+  DataInfo,
+  DeviceRes,
+  ConnectionState,
+} from './base';
 import logger from '@/utils/logger';
-import { Quality } from '@/components/RtcOptModal';
 import { checkBrowser } from '@/utils';
+import sdkPackageJson from 'nertc-web-sdk/package.json';
+import { Client } from 'nertc-web-sdk/types/client';
+import { Stream } from 'nertc-web-sdk/types/stream';
 // import { getToken } from '@/utils'
 
-type ChannelInfo = {
-  avRoomUid: number;
-  avRoomCid: string;
-  avRoomCheckSum: string;
-  avRoomCName: string;
-};
+interface IWebConnectionState {
+  prevState: ConnectionState;
+  curState: ConnectionState;
+}
 
-type RoomMember = {
-  nickName: string;
-};
+class WebRtcImpl extends Rtc {
+  public remoteStreams: Stream[] = [];
+  private client: Client;
 
-type RTCEvent = {
-  uid: number;
-  stream: any;
-};
-
-type Devices = {
-  microphoneId?: string;
-  cameraId?: string;
-  speakerId?: string;
-};
-
-export type DataInfo = {
-  rtt: string;
-  audioSendBitrate: number;
-  videoSendBitrate: number;
-  audioRecvBitrate: number;
-  videoRecvBitrate: number;
-};
-
-export type Stat = {
-  uid: number;
-  uplinkNetworkQuality: 0 | 1 | 2 | 3 | 4 | 5;
-  downlinkNetworkQuality: 0 | 1 | 2 | 3 | 4 | 5;
-};
-
-export type Evts = {
-  prevState: 'DISCONNECTED' | 'CONNECTING' | 'CONNECTED' | 'DISCONNECTING';
-  curState: 'DISCONNECTED' | 'CONNECTING' | 'CONNECTED' | 'DISCONNECTING';
-};
-
-export type FeedbackParams = {
-  feedback_type: number;
-  content_type: number[];
-  content: string;
-};
-
-export type UserInfo = {
-  uid: number;
-  nickName: string;
-};
-
-class RTC {
-  public client: any = null;
-  public remoteUsers: UserInfo[] = [];
-  public localStream: any = null;
-  public remoteStreams: any[] = [];
-  public microphoneId = '';
-  public cameraId = '';
-  public speakerId = '';
-
-  private uid?: number;
-  private nickName: string = '';
-  private options: {
-    resolution: number;
-    frameRate: number;
-    audioQuality: Quality;
-    openCamera: boolean;
-    openMic: boolean;
-  } = {
-    resolution: WebRTC2.VIDEO_QUALITY_720p,
-    frameRate: WebRTC2.CHAT_VIDEO_FRAME_RATE_15,
-    audioQuality: 'speech_low_quality',
-    openCamera: true,
-    openMic: true,
-  };
-  private appkey: string = '';
-  // private appSecret: string = ''
-  // private token: string = ''
-  private channelName: string = '';
-  private channelId: string = '';
-  private max: number = 4;
-  private onLocalStreamUpdate = () => {};
-  private onRemoteStreamUpdate = () => {};
-  private onRemoteStreamSubscribed = (userId: number) => {};
-  private onDisconnect = () => {};
-  private onNetworkQuality = (stats: Stat[]) => {};
-  private onConnectionState = (evt: Evts) => {};
-
-  constructor(options: {
-    appkey: string;
-    // appSecret: string;
-    channelName: string;
-    nickName: string;
-    options?: {
-      resolution: number;
-      frameRate: number;
-      audioQuality: Quality;
-      openCamera: boolean;
-      openMic: boolean;
-    };
-    max?: number;
-    onLocalStreamUpdate(): void;
-    onRemoteStreamUpdate(): void;
-    onRemoteStreamSubscribed(userId: number): void;
-    onDisconnect(): void;
-    onNetworkQuality(stats: Stat[]): void;
-    onConnectionState(evt: Evts): void;
-  }) {
-    for (const key in options) {
-      if (options.hasOwnProperty(key)) {
-        this[key] = options[key];
-      }
-    }
-    this.client = WebRTC2.createClient({
+  constructor(options: InitOptions) {
+    super(options);
+    this.client = NERTC.createClient({
       appkey: this.appkey,
       debug: true,
     });
     logger.log('createClient');
+    logger.log('SDKVersion：', sdkPackageJson.version);
 
+    this.addRtcListener();
+  }
+
+  public addRtcListener() {
     // 加入房间
-    this.client.on('peer-online', async (event: RTCEvent) => {
+    this.client.on('peer-online', async (event) => {
+      logger.log('peer-online', event);
       try {
-        const userId = event.uid;
+        const userId = event.uid as number;
         if (
           this.remoteUsers.every((item) => item.uid !== userId) &&
           this.remoteUsers.length < this.max - 1
@@ -157,7 +68,8 @@ class RTC {
     });
 
     // 离开房间
-    this.client.on('peer-leave', (event: RTCEvent) => {
+    this.client.on('peer-leave', (event) => {
+      logger.log('peer-leave', event);
       const userId = event.uid;
       logger.log(`[nrtc]: ${userId} 离开房间`);
       this.remoteUsers = this.remoteUsers.filter(
@@ -170,7 +82,8 @@ class RTC {
     });
 
     // 收到远端订阅的通知
-    this.client.on('stream-added', async (event: RTCEvent) => {
+    this.client.on('stream-added', async (event) => {
+      logger.log('stream-added', event);
       const stream = event.stream;
       const userId = stream.getId();
       if (this.remoteStreams.some((item) => item.getId() === userId)) {
@@ -191,10 +104,11 @@ class RTC {
     });
 
     // 收到远端停止订阅的通知
-    this.client.on('stream-removed', (event: RTCEvent) => {
-      const stream = event.stream;
+    this.client.on('stream-removed', (event) => {
+      logger.log('stream-removed', event);
+      const { stream, mediaType } = event;
       const userId = stream.getId();
-      stream.stop();
+      stream.stop(mediaType);
       this.remoteStreams = this.remoteStreams.map((item) =>
         item.getId() === userId ? stream : item,
       );
@@ -203,7 +117,8 @@ class RTC {
     });
 
     // 收到远端的流，准备播放
-    this.client.on('stream-subscribed', (event: RTCEvent) => {
+    this.client.on('stream-subscribed', async (event) => {
+      logger.log('stream-subscribed', event);
       const stream = event.stream;
       const userId = stream.getId();
       logger.log(
@@ -213,24 +128,40 @@ class RTC {
         this.remoteUsers,
         this.remoteStreams,
       );
-      this.onRemoteStreamSubscribed(userId);
+      this.onRemoteStreamSubscribed(userId as number);
+      if (this.speakerId) {
+        // @ts-ignore
+        await stream.setAudioOutput(this.speakerId);
+      }
     });
 
     // 监听上下行网络质量
-    this.client.on('network-quality', (stats: Stat[]) => {
-      this.onNetworkQuality(stats);
+    this.client.on('network-quality', (stats) => {
+      // logger.log('network-quality', stats);
+      this.onNetworkQuality(stats as Stat[]);
     });
 
     // 收到房间关闭的消息
     this.client.on('channel-closed', () => {
+      logger.log('channel-closed');
       this.onDisconnect();
     });
 
     // 监听与服务器的连接状态
-    this.client.on('connection-state-change', (evt: Evts) => {
-      this.onConnectionState(evt);
-      logger.log(evt.prevState, evt.curState);
+    this.client.on('connection-state-change', (evt: IWebConnectionState) => {
+      // logger.log('connection-state-change: ', evt);
+      if (
+        evt.prevState === 'DISCONNECTING' &&
+        evt.curState === 'DISCONNECTED'
+      ) {
+        this.onConnectionDisconnected();
+      }
     });
+  }
+
+  public removeRtcListener() {
+    // @ts-ignore
+    this.client.removeAllListeners();
   }
 
   public async join() {
@@ -285,7 +216,7 @@ class RTC {
       return Promise.reject('内部错误：remoteStream is null');
     }
     try {
-      await remoteStream.play(view);
+      await remoteStream.play?.(view);
       this.setRemoteVideoSize(userId, view);
     } catch (error) {
       return Promise.reject('播放远端视频失败：' + error);
@@ -311,7 +242,7 @@ class RTC {
     if (!remoteStream) {
       throw '内部错误：remoteStream is null';
     }
-    remoteStream.setRemoteRenderMode({
+    remoteStream.setRemoteRenderMode?.({
       // 设置视频窗口大小
       width: view.clientWidth,
       height: view.clientHeight,
@@ -332,13 +263,14 @@ class RTC {
       return Promise.resolve();
     }
     try {
-      await this.localStream[enabled ? 'open' : 'close']({
-        type: 'video',
-        deviceId,
-      });
+      logger.log('enableLocalVideo', enabled, deviceId, this.cameraId);
       if (deviceId) {
         this.cameraId = deviceId;
       }
+      await this.localStream[enabled ? 'open' : 'close']({
+        type: 'video',
+        deviceId: this.cameraId,
+      });
       // if (!enabled) {
       //   this.cameraId = ''
       // } else {
@@ -362,13 +294,14 @@ class RTC {
       return Promise.resolve();
     }
     try {
-      await this.localStream[enabled ? 'open' : 'close']({
-        type: 'audio',
-        deviceId,
-      });
+      logger.log('enableLocalAudio', enabled, deviceId, this.microphoneId);
       if (deviceId) {
         this.microphoneId = deviceId;
       }
+      await this.localStream[enabled ? 'open' : 'close']({
+        type: 'audio',
+        deviceId: this.microphoneId,
+      });
       // if (!mute) {
       //   this.microphoneId = ''
       // } else {
@@ -379,9 +312,9 @@ class RTC {
     }
   }
 
-  public async getDevices() {
+  public async getDevices(): Promise<DeviceRes> {
     try {
-      const deviceMap = await WebRTC2.getDevices();
+      const deviceMap = await NERTC.getDevices();
       const res: { audioIn?: any; audioOut?: any; video?: any } = {};
       for (const key in deviceMap) {
         if (deviceMap.hasOwnProperty(key)) {
@@ -426,7 +359,12 @@ class RTC {
             return Promise.reject('无效切换');
           }
           // await this.selectSpeakers(deviceId);
-          await this.localStream.setAudioOutput(deviceId);
+          // @ts-ignore
+          Object.values(this.client.adapterRef.remoteStreamMap).forEach(
+            async (item: any) => {
+              await item.setAudioOutput(deviceId);
+            },
+          );
           this.speakerId = deviceId;
           this.onLocalStreamUpdate();
           break;
@@ -498,27 +436,6 @@ class RTC {
     }
   }
 
-  public sendFeedbackRequest(params: FeedbackParams) {
-    return axios.post(
-      'https://statistic.live.126.net/statics/report/feedback/demoSuggest',
-      {
-        data: JSON.stringify({
-          ...params,
-          feedback_source: '多人视频通话Demo',
-          type: 1,
-          uid: this.uid,
-          cid: this.channelId,
-          appkey: this.appkey,
-        }),
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-      },
-    );
-  }
-
   public destroy() {
     try {
       this.localStream.destroy();
@@ -526,8 +443,9 @@ class RTC {
     } catch (error) {
       //
     }
-    this.client.removeAllListeners();
-    this.client = null;
+    this.removeRtcListener();
+    // @ts-ignore
+    this.client = undefined;
     this.remoteUsers = [];
     this.localStream = null;
     this.remoteStreams = [];
@@ -539,14 +457,14 @@ class RTC {
     this.nickName = '';
     this.appkey = '';
     this.options = {
-      resolution: WebRTC2.VIDEO_QUALITY_720p,
-      frameRate: WebRTC2.CHAT_VIDEO_FRAME_RATE_15,
-      audioQuality: 'speech_low_quality',
-      openCamera: true,
-      openMic: true,
+      resolution: undefined,
+      frameRate: undefined,
+      audioQuality: undefined,
+      openCamera: false,
+      openMic: false,
     };
-    // private appSecret: string = ''
-    // private token: string = ''
+    // appSecret: string = ''
+    // token: string = ''
     this.channelName = '';
     this.channelId = '';
     this.max = 4;
@@ -555,7 +473,7 @@ class RTC {
     this.onRemoteStreamSubscribed = (userId: number) => {};
     this.onNetworkQuality = (stats: Stat[]) => {};
     this.onDisconnect = () => {};
-    this.onConnectionState = (evt: Evts) => {};
+    this.onConnectionDisconnected = () => {};
   }
 
   private async initAndPlayLocalStream(params: {
@@ -564,8 +482,8 @@ class RTC {
   }) {
     try {
       // 初始化本地的Stream实例，用于管理本端的音视频流
-      this.localStream = WebRTC2.createStream({
-        uid: this.uid,
+      this.localStream = NERTC.createStream({
+        uid: this.uid as number,
         audio: params.audio,
         video: params.video,
         screen: false,
@@ -618,41 +536,6 @@ class RTC {
       return Promise.reject(error);
     }
   }
-
-  private sendJoinChannelRequest() {
-    return this.sendRequest<ChannelInfo>('/mpVideoCall/room/anonymousJoin', {
-      mpRoomId: this.channelName,
-      nickName: this.nickName,
-      clientType: 6,
-    });
-  }
-
-  private getUserInfoRequest(userId: number) {
-    return this.sendRequest<{ members: RoomMember[] }>(
-      '/mpVideoCall/room/info',
-      {
-        mpRoomId: this.channelName,
-        avRoomUid: userId,
-      },
-    );
-  }
-
-  private async sendRequest<T = any>(url: string, data: any): Promise<T> {
-    try {
-      const baseUrl = config.baseUrl;
-      const res = await axios.post(`${baseUrl}${url}`, data, {
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-      });
-      if (res.data.code === 200) {
-        return res.data.data;
-      }
-      return Promise.reject(res.data);
-    } catch (error) {
-      return Promise.reject(error);
-    }
-  }
 }
 
-export default RTC;
+export default WebRtcImpl;
