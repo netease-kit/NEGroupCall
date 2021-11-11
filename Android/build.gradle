@@ -37,18 +37,11 @@ ext {
     minSdkVersion = 19
     targetSdkVersion = 30
 
-    nertcVersion = "4.0.1"
+    nertcVersion = "4.2.112"
     nimVersion = '8.3.0'
-    playerVersion = '2.7.1'
-    playerGslbVersion = '1.0.0'
-
     nertcSdk = "com.netease.yunxin:nertc:$nertcVersion"
     imSdk = "com.netease.nimlib:basesdk:$nimVersion"
-    avsignallingSdk = "com.netease.nimlib:avsignalling:$nimVersion"
-    chatRoomSdk = "com.netease.nimlib:chatroom:$nimVersion"
     utilcodex = "com.blankj:utilcodex:1.30.5"
-    playerSdk = "com.netease.nimlib:neliveplayer:$playerVersion"
-    playerGslbSdk = "com.netease:gslb:$playerGslbVersion"
 
     ndkAbis = [
             'armeabi-v7a',

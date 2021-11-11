@@ -30,10 +30,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation rootProject.ext.nertcSdk
-    implementation 'com.netease.yunxin:report:2.0.3'
 
     api rootProject.ext.imSdk
-    api rootProject.ext.avsignallingSdk
     api project(':lib-beauty-faceunity')
     api project(':lib-utils')
 

@@ -45,5 +45,4 @@ dependencies {
     implementation project(':lib-utils')
 
     api rootProject.ext.imSdk
-    api rootProject.ext.avsignallingSdk
 }
