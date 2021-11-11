@@ -37,8 +37,8 @@ public class DemoApplication extends Application {
         BasicInfo basicInfo = new BasicInfo.Builder()
                 .packageName(this)
                 .name("多人通话")
-                .nertcVersion("4.0.1")
-                .version("1.0.0")
+                .nertcVersion(com.netease.yunxin.nertc.demo.BuildConfig.VERSION_NERTC)
+                .version(com.netease.yunxin.nertc.demo.BuildConfig.VERSION_NAME)
                 .deviceId(this)
                 .build();
         ALog.logFirst(basicInfo);

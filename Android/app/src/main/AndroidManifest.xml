@@ -2,35 +2,34 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.netease.yunxin.nertc.demo">
 
-    <!-- 访问网络状态-->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <!-- 外置存储存取权限 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--    //网络相关-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <!--    //防止通话过程中锁屏-->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!--    //视频权限-->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!--    //录音权限-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!--    //修改音频设置-->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <!--    //蓝牙权限-->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <!--    //外置存储卡写入权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--    //蓝牙 startBluetoothSco 会用到此权限-->
+    <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
 
-    <!-- 多媒体相关 -->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
-    <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <!--    //允许应用程序使用camera硬件资源-->
+    <uses-feature android:name="android.hardware.camera"/>
+    <!--    //自动对焦-->
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
 
-    <!--    蓝牙-->
-    <uses-permission android:name="android.permission.BLUETOOTH" />
 
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-
-    <!-- 8.0+系统需要-->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <!-- 下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
     <permission
@@ -49,7 +48,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
-
+        <meta-data android:name="android.max_aspect" android:value="3.0" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/LaunchTheme"

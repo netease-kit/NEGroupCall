@@ -1,8 +1,10 @@
 package com.netease.biz_video_group.yunxin.voideoGroup.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,6 +22,7 @@ import androidx.annotation.Nullable;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.faceunity.FURenderer;
+import com.netease.biz_video_group.BuildConfig;
 import com.netease.biz_video_group.R;
 import com.netease.biz_video_group.yunxin.voideoGroup.NERtcStatsDelegateManager;
 import com.netease.biz_video_group.yunxin.voideoGroup.constant.AudioConstant;
@@ -34,6 +37,7 @@ import com.netease.lava.nertc.sdk.NERtc;
 import com.netease.lava.nertc.sdk.NERtcCallback;
 import com.netease.lava.nertc.sdk.NERtcConstants;
 import com.netease.lava.nertc.sdk.NERtcEx;
+import com.netease.lava.nertc.sdk.NERtcOption;
 import com.netease.lava.nertc.sdk.NERtcParameters;
 import com.netease.lava.nertc.sdk.video.NERtcEncodeConfig;
 import com.netease.lava.nertc.sdk.video.NERtcRemoteVideoStreamType;
@@ -109,7 +113,7 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
      */
     private NERtcCallback neRtcCallback = new NERtcCallback() {
         @Override
-        public void onJoinChannel(int result, long channelId, long elapsed) {
+        public void onJoinChannel(int result, long channelId, long elapsed,long uid) {
             if (result!=0){
                 //https://dev.yunxin.163.com/docs/interface/%E9%9F%B3%E8%A7%86%E9%A2%912.0Android%E7%AB%AF/com/netease/lava/nertc/sdk/NERtcCallback.html#onJoinChannel-int-long-long-
                 // 走到这里的表现是黑屏，需要让用户退出房间重进下
@@ -216,8 +220,9 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.meeting_room_layout);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        hideNavKey(this);
+        setContentView(R.layout.meeting_room_layout);
         requestPermissionsIfNeeded();
     }
 
@@ -360,9 +365,15 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
         }
         NERtcParameters parameters = new NERtcParameters();
         neRtcEx.setParameters(parameters); //先设置参数，后初始化
+        NERtcOption option = new NERtcOption();
+        if(BuildConfig.DEBUG){
+            option.logLevel = NERtcConstants.LogLevel.INFO;
+        }else {
+            option.logLevel = NERtcConstants.LogLevel.WARNING;
+        }
         try {
             long begin = System.currentTimeMillis();
-            neRtcEx.init(getApplicationContext(), appKey, neRtcCallback, null);
+            neRtcEx.init(getApplicationContext(), appKey, neRtcCallback, option);
             long cost = System.currentTimeMillis() - begin;
             TempLogUtil.log("neRtcEx init method first Cost:"+cost);
             initRtcParams();
@@ -375,7 +386,7 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
             long cost = end - begin;
             TempLogUtil.log("release Cost:"+cost);
             try {
-                neRtcEx.init(getApplicationContext(), appKey, neRtcCallback, null);
+                neRtcEx.init(getApplicationContext(), appKey, neRtcCallback, option);
                 long cost2 = System.currentTimeMillis() - end;
                 TempLogUtil.log("neRtcEx init method second Cost:"+cost2);
                 initRtcParams();
@@ -393,6 +404,7 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
 
     private void initRtcParams() {
         if (rtcSetting != null) {
+            neRtcEx.setChannelProfile(NERtcConstants.RTCChannelProfile.COMMUNICATION);
             long begin = System.currentTimeMillis();
             //摄像头和麦克风
             neRtcEx.enableLocalAudio(rtcSetting.enableMicphone);
@@ -665,6 +677,22 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
         return videoGroupMainView.getVideoViewAdapter().userStatusInfoList != null
                 && !videoGroupMainView.getVideoViewAdapter().userStatusInfoList.isEmpty()
                 && !videoGroupSpeakerView.getSpeakerAdapter().list.isEmpty();
+    }
+
+    public static void hideNavKey(Context context) {
+
+        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) {
+
+            View v = ((Activity) context).getWindow().getDecorView();
+            v.setSystemUiVisibility(View.GONE);
+        } else if (Build.VERSION.SDK_INT >= 19) {
+
+            //for new api versions.
+            View decorView = ((Activity) context).getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+            decorView.setSystemUiVisibility(uiOptions);
+        }
     }
 
 }
