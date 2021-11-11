@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.faceunity.FURenderer;
+import com.netease.biz_video_group.BuildConfig;
 import com.netease.biz_video_group.R;
 import com.netease.biz_video_group.yunxin.voideoGroup.NERtcStatsDelegateManager;
 import com.netease.biz_video_group.yunxin.voideoGroup.constant.AudioConstant;
@@ -34,6 +35,7 @@ import com.netease.lava.nertc.sdk.NERtc;
 import com.netease.lava.nertc.sdk.NERtcCallback;
 import com.netease.lava.nertc.sdk.NERtcConstants;
 import com.netease.lava.nertc.sdk.NERtcEx;
+import com.netease.lava.nertc.sdk.NERtcOption;
 import com.netease.lava.nertc.sdk.NERtcParameters;
 import com.netease.lava.nertc.sdk.video.NERtcEncodeConfig;
 import com.netease.lava.nertc.sdk.video.NERtcRemoteVideoStreamType;
@@ -171,7 +173,6 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
 
         @Override
         public void onUserAudioStart(long userId) {
-            neRtcEx.subscribeRemoteAudioStream(userId, true);
             videoGroupSpeakerView.enableMicphone(true, userId, false);
             videoGroupMainView.enableMicphone(true, userId, false);
         }
@@ -360,9 +361,16 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
         }
         NERtcParameters parameters = new NERtcParameters();
         neRtcEx.setParameters(parameters); //先设置参数，后初始化
+        NERtcOption option = new NERtcOption();
+        if(BuildConfig.DEBUG){
+            option.logLevel = NERtcConstants.LogLevel.INFO;
+        }else {
+            option.logLevel = NERtcConstants.LogLevel.WARNING;
+        }
+
         try {
             long begin = System.currentTimeMillis();
-            neRtcEx.init(getApplicationContext(), appKey, neRtcCallback, null);
+            neRtcEx.init(getApplicationContext(), appKey, neRtcCallback, option);
             long cost = System.currentTimeMillis() - begin;
             TempLogUtil.log("neRtcEx init method first Cost:"+cost);
             initRtcParams();
@@ -375,7 +383,7 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
             long cost = end - begin;
             TempLogUtil.log("release Cost:"+cost);
             try {
-                neRtcEx.init(getApplicationContext(), appKey, neRtcCallback, null);
+                neRtcEx.init(getApplicationContext(), appKey, neRtcCallback, option);
                 long cost2 = System.currentTimeMillis() - end;
                 TempLogUtil.log("neRtcEx init method second Cost:"+cost2);
                 initRtcParams();
@@ -393,6 +401,7 @@ public class VideoMeetingRoomActivity extends BaseActivity implements View.OnCli
 
     private void initRtcParams() {
         if (rtcSetting != null) {
+            neRtcEx.setChannelProfile(NERtcConstants.RTCChannelProfile.COMMUNICATION);
             long begin = System.currentTimeMillis();
             //摄像头和麦克风
             neRtcEx.enableLocalAudio(rtcSetting.enableMicphone);
