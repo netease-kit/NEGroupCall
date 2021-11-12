@@ -53,7 +53,7 @@ Demo跑通之后，可以修改GroupCall/Controller文件夹下的类文件以�
 2. 编辑Podfile文件并执行`pod install`：
 
    ```objc
-   pod 'NERtcSDK', '~> 4.0.3'
+   pod 'NERtcSDK', '4.2.112'
    ```
 
 

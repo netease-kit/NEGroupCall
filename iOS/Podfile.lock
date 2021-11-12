@@ -5,7 +5,7 @@ PODS:
   - MJRefresh (3.5.0)
   - Nama-lite (7.1.2)
   - NELivePlayer (2.7.1)
-  - NERtcSDK (4.0.3)
+  - NERtcSDK (4.2.112)
   - NIMSDK_LITE (7.8.4)
   - Reachability (3.2)
   - ReactiveObjC (3.1.1)
@@ -23,7 +23,7 @@ DEPENDENCIES:
   - MJRefresh
   - Nama-lite (= 7.1.2)
   - NELivePlayer (~> 2.7.1)
-  - NERtcSDK (= 4.0.3)
+  - NERtcSDK (= 4.2.112)
   - NIMSDK_LITE (= 7.8.4)
   - Reachability
   - ReactiveObjC (~> 3.1.0)
@@ -56,7 +56,7 @@ SPEC CHECKSUMS:
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
   Nama-lite: c159bac674153b9031259db0a4ac055a960526a8
   NELivePlayer: b034c4a3ece73fb32ca18198e1ba8ab10617423d
-  NERtcSDK: 3e756ff8bf1221104b5dc6812aad2f4e8496900d
+  NERtcSDK: c39498a3d4fab1440a449cfcee46d8122d3e9366
   NIMSDK_LITE: 7648e6c96addbc932bc60dc89e66785cb4412f58
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
@@ -65,6 +65,6 @@ SPEC CHECKSUMS:
   YXAlog_iOS: 13d51bd17616f312262a11e91925967bebc80ef5
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 6b8b40c41e07db62b8d983c2bac74be27a2d9646
+PODFILE CHECKSUM: 984a9c43131701cd00a367f9cb91591742301332
 
 COCOAPODS: 1.7.1
