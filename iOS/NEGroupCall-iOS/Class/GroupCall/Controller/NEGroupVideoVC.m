@@ -127,13 +127,13 @@
 
 - (void)initRTCSDK {
     NERtcEngine *coreEngine = [NERtcEngine sharedEngine];
-    
     NSDictionary *params = @{
         kNERtcKeyVideoCaptureObserverEnabled: @YES  // 将摄像头采集的数据回调给用户 用于美颜
     };
     [coreEngine setParameters:params];
     [coreEngine addEngineMediaStatsObserver:self];
-
+    
+    
     NERtcVideoEncodeConfiguration *config = [[NERtcVideoEncodeConfiguration alloc] init];
     config.maxProfile = kNERtcVideoProfileHD720P;
     config.frameRate = [self getFrameRateValue];
@@ -141,9 +141,17 @@
     [coreEngine setAudioProfile:[self getSoundQuality] scenario:[NEChannelSetupService sharedService].scenarioType];
 
     [coreEngine setLocalVideoConfig:config];
+    
     NERtcEngineContext *context = [[NERtcEngineContext alloc] init];
     context.engineDelegate = self;
     context.appKey = self.task.nrtcAppKey;
+    NERtcLogSetting *setting = [[NERtcLogSetting alloc] init];
+     #if DEBUG
+          setting.logLevel = kNERtcLogLevelInfo;
+     #else
+          setting.logLevel = kNERtcLogLevelWarning;
+     #endif
+     context.logSetting = setting;
     int res = [coreEngine setupEngineWithContext:context];
     YXAlogInfo(@"初始化音视频引擎结果, res: %d", res);
     
@@ -288,8 +296,10 @@
 }
 
 - (void)joinCurrentRoom {
-    [NERtcEngine.sharedEngine joinChannelWithToken:self.task.avRoomCheckSum channelName:self.task.avRoomCName myUid:self.task.avRoomUid completion:^(NSError * _Nullable error, uint64_t channelId, uint64_t elapesd) {
+
+    [NERtcEngine.sharedEngine joinChannelWithToken:self.task.avRoomCheckSum channelName:self.task.avRoomCName myUid:self.task.avRoomUid completion:^(NSError * _Nullable error, uint64_t channelId, uint64_t elapesd, uint64_t uid) {
         YXAlogError(@"joinChannel error:%@",error)
+
     }];
 }
 
@@ -431,14 +441,20 @@
     for (NERtcNetworkQualityStats *networkQuality in stats) {
         
         for (NEGroupVideoView *groupView in self.views) {
-            if (groupView.userId == self.task.avRoomUid && networkQuality.userId == groupView.userId) {
+            if (groupView.userId == self.task.avRoomUid ) {
                 //自己
-                groupView.signalQuality = networkQuality.txQuality;
+                if (networkQuality.userId == groupView.userId) {
+                    groupView.signalQuality = networkQuality.txQuality;
+                    YXAlogInfo(@"自身信号质量:%d",networkQuality.txQuality);
+                }
             }else {
-                groupView.signalQuality = networkQuality.rxQuality;
+                if (networkQuality.userId == groupView.userId) {
+                    groupView.signalQuality = networkQuality.rxQuality;
+                }
             }
         }
     }
+
 }
 
 #pragma mark - NERtcEngineDelegate
